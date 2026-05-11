@@ -37,7 +37,7 @@ extension _TabFeaturesBarbarianWizardBardDecorators on _TabFeaturesDecorator {
     final barbarianSaveDc = 8 + strengthModifier + proficiencyBonus;
 
     return entries.map((entry) {
-      final features = entry.features.map((feature) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (character.subclass == BarbarianChoiceService.berserkerSubclass) {
           if (feature.name == 'Frenzy') {
             return withExtraDescription(
@@ -185,7 +185,7 @@ extension _TabFeaturesBarbarianWizardBardDecorators on _TabFeaturesDecorator {
                 : null);
 
     return entries.map((entry) {
-      final features = entry.features.map((feature) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (feature.name == savantFeatureName) {
           final selectedSpells = WizardChoiceService.selectedSavantSpells(
             character.levelAdvancements,
