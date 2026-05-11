@@ -1,0 +1,377 @@
+[
+  {
+    "index": "dragonborn",
+    "name": "Dragonborn",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [{ "name": "Common" }, { "name": "Draconic" }],
+    "traits": [
+      { "index": "draconic-ancestry", "name": "Draconic Ancestry" },
+      { "index": "breath-weapon", "name": "Breath Weapon" },
+      { "index": "damage-resistance", "name": "Damage Resistance" },
+      { "index": "darkvision", "name": "Darkvision" },
+      { "index": "draconic-flight", "name": "Draconic Flight" }
+    ],
+    "description": "Descendants of dragons who carry elemental breath and draconic resilience.",
+    "trait_details": {
+      "draconic-ancestry": "You choose a type of dragon as your ancestor: Black (Acid), Blue (Lightning), Brass (Fire), Bronze (Lightning), Copper (Acid), Gold (Fire), Green (Poison), Red (Fire), Silver (Cold), or White (Cold). This choice determines the damage type of your Breath Weapon and your Damage Resistance.",
+      "breath-weapon": "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of elemental energy in either a 15-foot Cone or a 30-foot Line that is 5 feet wide. Each creature in that area must make a Dexterity saving throw (DC = 8 + your Constitution modifier + your Proficiency Bonus). On a failed save, the creature takes 1d10 damage of the type linked to your Draconic Ancestry. On a successful save, it takes half as much damage. This damage increases to 2d10 at 5th level, 3d10 at 11th level, and 4d10 at 17th level. You can use this a number of times equal to your Proficiency Bonus, regaining all uses after a Long Rest.",
+      "damage-resistance": "You have Resistance to the damage type determined by your Draconic Ancestry.",
+      "darkvision": "You have Darkvision with a range of 60 feet. You can see in Dim Light as if Bright Light, and in Darkness as if Dim Light.",
+      "draconic-flight": "Starting at 5th level, as a Bonus Action you sprout spectral wings, gaining a Fly Speed equal to your Speed for 10 minutes. You can use this a number of times equal to your Proficiency Bonus, regaining all uses after a Long Rest."
+    },
+    "option_groups": [
+      {
+        "id": "ancestry",
+        "label": "Draconic Ancestry",
+        "help_text": "Choose the dragon ancestry that shapes your Damage Resistance and Breath Weapon damage type.",
+        "options": [
+          {
+            "id": "black",
+            "name": "Black",
+            "summary": "Acid, 30-ft Line, Dex save.",
+            "details": "Black Dragonborn: Breath Weapon is a 30-foot Line (5 ft. wide). Damage Type: Acid. Saving Throw: Dexterity. Resistance: Acid."
+          },
+          {
+            "id": "blue",
+            "name": "Blue",
+            "summary": "Lightning, 30-ft Line, Dex save.",
+            "details": "Blue Dragonborn: Breath Weapon is a 30-foot Line (5 ft. wide). Damage Type: Lightning. Saving Throw: Dexterity. Resistance: Lightning."
+          },
+          {
+            "id": "brass",
+            "name": "Brass",
+            "summary": "Fire, 30-ft Line, Dex save.",
+            "details": "Brass Dragonborn: Breath Weapon is a 30-foot Line (5 ft. wide). Damage Type: Fire. Saving Throw: Dexterity. Resistance: Fire."
+          },
+          {
+            "id": "bronze",
+            "name": "Bronze",
+            "summary": "Lightning, 30-ft Line, Dex save.",
+            "details": "Bronze Dragonborn: Breath Weapon is a 30-foot Line (5 ft. wide). Damage Type: Lightning. Saving Throw: Dexterity. Resistance: Lightning."
+          },
+          {
+            "id": "copper",
+            "name": "Copper",
+            "summary": "Acid, 30-ft Line, Dex save.",
+            "details": "Copper Dragonborn: Breath Weapon is a 30-foot Line (5 ft. wide). Damage Type: Acid. Saving Throw: Dexterity. Resistance: Acid."
+          },
+          {
+            "id": "gold",
+            "name": "Gold",
+            "summary": "Fire, 15-ft Cone, Dex save.",
+            "details": "Gold Dragonborn: Breath Weapon is a 15-foot Cone. Damage Type: Fire. Saving Throw: Dexterity. Resistance: Fire."
+          },
+          {
+            "id": "green",
+            "name": "Green",
+            "summary": "Poison, 15-ft Cone, Con save.",
+            "details": "Green Dragonborn: Breath Weapon is a 15-foot Cone. Damage Type: Poison. Saving Throw: Constitution. Resistance: Poison."
+          },
+          {
+            "id": "red",
+            "name": "Red",
+            "summary": "Fire, 15-ft Cone, Dex save.",
+            "details": "Red Dragonborn: Breath Weapon is a 15-foot Cone. Damage Type: Fire. Saving Throw: Dexterity. Resistance: Fire."
+          },
+          {
+            "id": "silver",
+            "name": "Silver",
+            "summary": "Cold, 15-ft Cone, Con save.",
+            "details": "Silver Dragonborn: Breath Weapon is a 15-foot Cone. Damage Type: Cold. Saving Throw: Constitution. Resistance: Cold."
+          },
+          {
+            "id": "white",
+            "name": "White",
+            "summary": "Cold, 15-ft Cone, Con save.",
+            "details": "White Dragonborn: Breath Weapon is a 15-foot Cone. Damage Type: Cold. Saving Throw: Constitution. Resistance: Cold."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": "dwarf",
+    "name": "Dwarf",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [{ "name": "Common" }, { "name": "Dwarvish" }],
+    "traits": [
+      { "index": "darkvision", "name": "Darkvision" },
+      { "index": "dwarven-resilience", "name": "Dwarven Resilience" },
+      { "index": "dwarven-toughness", "name": "Dwarven Toughness" },
+      { "index": "stonecunning", "name": "Stonecunning" }
+    ],
+    "description": "Stout folk with deep roots, keen senses, and enduring resilience.",
+    "trait_details": {
+      "darkvision": "You have Darkvision with a range of 120 feet. You can see in Dim Light as if Bright Light, and in Darkness as if Dim Light.",
+      "dwarven-resilience": "You have Resistance to Poison damage. You also have Advantage on saving throws you make to avoid or end the Poisoned condition.",
+      "dwarven-toughness": "Your Hit Point maximum increases by 1, and it increases by 1 again whenever you gain a level.",
+      "stonecunning": "As a Bonus Action, you gain Tremorsense with a range of 60 feet for 10 minutes. You must be on or touching a stone surface (natural or worked). You can use this a number of times equal to your Proficiency Bonus, regaining all uses after a Long Rest."
+    }
+  },
+  {
+    "index": "elf",
+    "name": "Elf",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [{ "name": "Common" }, { "name": "Elvish" }],
+    "traits": [
+      { "index": "darkvision", "name": "Darkvision" },
+      { "index": "elven-lineage", "name": "Elven Lineage" },
+      { "index": "fey-ancestry", "name": "Fey Ancestry" },
+      { "index": "keen-senses", "name": "Keen Senses" },
+      { "index": "trance", "name": "Trance" }
+    ],
+    "description": "Graceful people touched by fey magic and long-lived perspective.",
+    "trait_details": {
+      "darkvision": "You have Darkvision with a range of 60 feet. You can see in Dim Light as if Bright Light, and in Darkness as if Dim Light.",
+      "elven-lineage": "Choose a lineage: Drow, High Elf, or Wood Elf. You gain the level 1 benefit of that lineage. At 3rd level and 5th level you gain the ability to cast a lineage spell once per Long Rest (or using spell slots you have). Choose Intelligence, Wisdom, or Charisma as your spellcasting ability for these spells when you select your lineage.",
+      "fey-ancestry": "You have Advantage on saving throws you make to avoid or end the Charmed condition.",
+      "keen-senses": "You have proficiency in the Perception skill.",
+      "trance": "You don't need to sleep and magic can't put you to sleep. You can finish a Long Rest in 4 hours if you spend those hours in a trancelike meditation, during which you retain consciousness."
+    },
+    "option_groups": [
+      {
+        "id": "lineage",
+        "label": "Elven Lineage",
+        "help_text": "Choose the elven lineage that defines your supernatural abilities and bonus spells.",
+        "options": [
+          {
+            "id": "drow",
+            "name": "Drow",
+            "summary": "Superior Darkvision (120 ft), Faerie Fire, Darkness.",
+            "details": "Drow Lineage — Level 1: Darkvision range becomes 120 feet and you know the Dancing Lights cantrip. Level 3: Cast Faerie Fire once per Long Rest. Level 5: Cast Darkness once per Long Rest. Spellcasting ability: Intelligence, Wisdom, or Charisma (chosen at character creation)."
+          },
+          {
+            "id": "high-elf",
+            "name": "High Elf",
+            "summary": "Wizard cantrip, Detect Magic, Misty Step.",
+            "details": "High Elf Lineage — Level 1: You know one cantrip of your choice from the Wizard spell list. Level 3: Cast Detect Magic once per Long Rest. Level 5: Cast Misty Step once per Long Rest. Spellcasting ability: Intelligence, Wisdom, or Charisma (chosen at character creation)."
+          },
+          {
+            "id": "wood-elf",
+            "name": "Wood Elf",
+            "summary": "Speed 35 ft, Druidcraft, Longstrider, Pass Without Trace.",
+            "details": "Wood Elf Lineage — Level 1: Your Speed becomes 35 feet and you know the Druidcraft cantrip. Level 3: Cast Longstrider once per Long Rest. Level 5: Cast Pass without Trace once per Long Rest. Spellcasting ability: Intelligence, Wisdom, or Charisma (chosen at character creation)."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": "gnome",
+    "name": "Gnome",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Small",
+    "languages": [{ "name": "Common" }, { "name": "Gnomish" }],
+    "traits": [
+      { "index": "darkvision", "name": "Darkvision" },
+      { "index": "gnomish-cunning", "name": "Gnomish Cunning" },
+      { "index": "gnomish-lineage", "name": "Gnomish Lineage" }
+    ],
+    "description": "Curious inventors and illusionists with quick minds and nimble spirits.",
+    "trait_details": {
+      "darkvision": "You have Darkvision with a range of 60 feet. You can see in Dim Light as if Bright Light, and in Darkness as if Dim Light.",
+      "gnomish-cunning": "You have Advantage on Intelligence, Wisdom, and Charisma saving throws against spells and other magical effects.",
+      "gnomish-lineage": "Choose a lineage: Forest Gnome or Rock Gnome. Forest Gnomes know the Minor Illusion cantrip and can communicate simple concepts to Small or smaller beasts. Rock Gnomes know the Mending and Prestidigitation cantrips and can craft Tiny clockwork devices."
+    },
+    "option_groups": [
+      {
+        "id": "gnomish-lineage",
+        "label": "Gnomish Lineage",
+        "help_text": "Choose the gnomish lineage that grants your magical or inventive abilities.",
+        "options": [
+          {
+            "id": "forest",
+            "name": "Forest Gnome",
+            "summary": "Minor Illusion cantrip and beast communication.",
+            "details": "Forest Gnome Lineage: You know the Minor Illusion cantrip (spellcasting ability: Intelligence, Wisdom, or Charisma — your choice). You can also communicate simple concepts with Small or smaller beasts and Tiny nonmagical plants. These creatures can understand you, though you have no special ability to understand them in return."
+          },
+          {
+            "id": "rock",
+            "name": "Rock Gnome",
+            "summary": "Mending + Prestidigitation cantrips and clockwork crafting.",
+            "details": "Rock Gnome Lineage: You know the Mending and Prestidigitation cantrips (spellcasting ability: Intelligence, Wisdom, or Charisma — your choice). You can spend 1 hour and 10 gp to craft a Tiny clockwork device (Clockwork Toy, Fire Starter, or Music Box) with tinker's tools. The device functions for 24 hours, then ceases working unless repaired. You can have devices equal to your Proficiency Bonus functioning at once."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": "goliath",
+    "name": "Goliath",
+    "speed": 35,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [{ "name": "Common" }, { "name": "Giant" }],
+    "traits": [
+      { "index": "giant-ancestry", "name": "Giant Ancestry" },
+      { "index": "large-form", "name": "Large Form" },
+      { "index": "powerful-build", "name": "Powerful Build" },
+      { "index": "mountain-born", "name": "Mountain Born" }
+    ],
+    "description": "Towering descendants of giants who express ancestral giant power.",
+    "trait_details": {
+      "giant-ancestry": "You descend from Giants. Choose one supernatural boon linked to your ancestry: Cloud, Fire, Frost, Hill, Stone, or Storm. Each grants a unique activated ability. The saving throw DC for these abilities is 8 + your Constitution modifier + your Proficiency Bonus. Each is usable a number of times equal to your Proficiency Bonus per Long Rest.",
+      "large-form": "Starting at 5th level, as a Bonus Action you temporarily grow to Large size (if space allows) for 10 minutes. During this time you have Advantage on Strength checks and your Speed increases by 10 feet. Once used, you can't use it again until you finish a Long Rest.",
+      "powerful-build": "You have Advantage on saving throws to end the Grappled condition on yourself. You also count as one size larger when determining carrying capacity and the weight you can push, drag, or lift.",
+      "mountain-born": "You have Resistance to Cold damage and are naturally adapted to high altitudes, including elevations above 20,000 feet."
+    },
+    "option_groups": [
+      {
+        "id": "giant-ancestry",
+        "label": "Giant Ancestry",
+        "help_text": "Choose the giant legacy that gives your goliath a unique power, usable a number of times equal to your Proficiency Bonus per Long Rest.",
+        "options": [
+          {
+            "id": "cloud",
+            "name": "Cloud Giant",
+            "summary": "Teleport up to 30 feet (Magic action).",
+            "details": "Cloud Giant Ancestry — Misty Movement: As a Magic action, you teleport up to 30 feet to an unoccupied space you can see. Usable a number of times equal to your Proficiency Bonus, regaining all uses after a Long Rest."
+          },
+          {
+            "id": "fire",
+            "name": "Fire Giant",
+            "summary": "Deal +1d10 Fire damage on a hit.",
+            "details": "Fire Giant Ancestry — Ember's Might: When you hit a creature with an attack roll, you can cause the attack to deal an extra 1d10 Fire damage to the target. Usable a number of times equal to your Proficiency Bonus, regaining all uses after a Long Rest."
+          },
+          {
+            "id": "frost",
+            "name": "Frost Giant",
+            "summary": "15-ft Cone, 2d6 Cold, Con save, slows target.",
+            "details": "Frost Giant Ancestry — Frost's Embrace: As an action, exhale frost in a 15-foot Cone. Each creature must make a Constitution saving throw (DC = 8 + Con mod + PB) or take 2d6 Cold damage and have its Speed reduced by 10 feet until the start of your next turn. On a success, half damage, Speed not reduced. Usable a number of times equal to your Proficiency Bonus per Long Rest."
+          },
+          {
+            "id": "hill",
+            "name": "Hill Giant",
+            "summary": "Push a creature 10 ft. and gain Temp HP as a Reaction.",
+            "details": "Hill Giant Ancestry — Stone's Might: When you hit a creature with an attack roll, you can push it up to 10 feet straight away (if Large or smaller). Once per Long Rest when you take damage, you can use a Reaction to gain Temporary Hit Points equal to twice your Proficiency Bonus."
+          },
+          {
+            "id": "stone",
+            "name": "Stone Giant",
+            "summary": "Restrain a creature within 60 ft. (Str save).",
+            "details": "Stone Giant Ancestry — Stone's Aegis: As a Bonus Action, target a creature within 60 feet. It must succeed on a Strength saving throw (DC = 8 + Str mod + PB) or have the Restrained condition until the start of your next turn. Usable a number of times equal to your Proficiency Bonus per Long Rest."
+          },
+          {
+            "id": "storm",
+            "name": "Storm Giant",
+            "summary": "Deal 1d8 Lightning as a Reaction when hit.",
+            "details": "Storm Giant Ancestry — Storm's Thunder: When you take damage from a creature within 60 feet, you can use your Reaction to deal 1d8 Lightning damage to that creature. Usable a number of times equal to your Proficiency Bonus, regaining all uses after a Long Rest."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": "halfling",
+    "name": "Halfling",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Small",
+    "languages": [{ "name": "Common" }, { "name": "Halfling" }],
+    "traits": [
+      { "index": "brave", "name": "Brave" },
+      { "index": "halfling-nimbleness", "name": "Halfling Nimbleness" },
+      { "index": "luck", "name": "Luck" }
+    ],
+    "description": "Small wanderers known for courage, agility, and uncanny good fortune.",
+    "trait_details": {
+      "brave": "You have Advantage on saving throws you make to avoid or end the Frightened condition.",
+      "halfling-nimbleness": "You can move through the space of any creature that is a size larger than you, but you can't stop there.",
+      "luck": "When you roll a 1 on the d20 for a D20 Test, you can reroll the die, and you must use the new roll."
+    }
+  },
+  {
+    "index": "human",
+    "name": "Human",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [
+      { "name": "Common" },
+      { "name": "One Extra Language of your choice" }
+    ],
+    "traits": [
+      { "index": "resourceful", "name": "Resourceful" },
+      { "index": "skillful", "name": "Skillful" },
+      { "index": "versatile", "name": "Versatile" }
+    ],
+    "description": "Adaptable people whose drive and versatility show in every walk of life.",
+    "trait_details": {
+      "resourceful": "You gain Heroic Inspiration whenever you finish a Long Rest.",
+      "skillful": "You gain proficiency in one skill of your choice.",
+      "versatile": "You gain one Origin Feat of your choice. Origin Feats are: Alert, Crafter, Healer, Lucky, Magic Initiate, Musician, Savage Attacker, Skilled, Tavern Brawler, or Tough. Consult your DM before selecting a feat not in the Player's Handbook."
+    }
+  },
+  {
+    "index": "orc",
+    "name": "Orc",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [{ "name": "Common" }, { "name": "Orc" }],
+    "traits": [
+      { "index": "adrenaline-rush", "name": "Adrenaline Rush" },
+      { "index": "darkvision", "name": "Darkvision" },
+      { "index": "relentless-endurance", "name": "Relentless Endurance" }
+    ],
+    "description": "Powerful adventurers with deep endurance, speed, and fierce resolve.",
+    "trait_details": {
+      "adrenaline-rush": "You can take the Dash action as a Bonus Action. When you do, you gain Temporary Hit Points equal to your Proficiency Bonus. You can use this trait a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Short or Long Rest.",
+      "darkvision": "You have Darkvision with a range of 120 feet. You can see in Dim Light as if Bright Light, and in Darkness as if Dim Light.",
+      "relentless-endurance": "When you are reduced to 0 Hit Points but not killed outright, you can drop to 1 Hit Point instead. Once you use this trait, you can't do so again until you finish a Long Rest."
+    }
+  },
+  {
+    "index": "tiefling",
+    "name": "Tiefling",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [{ "name": "Common" }, { "name": "Infernal" }],
+    "traits": [
+      { "index": "darkvision", "name": "Darkvision" },
+      { "index": "fiendish-legacy", "name": "Fiendish Legacy" },
+      { "index": "otherworldly-presence", "name": "Otherworldly Presence" }
+    ],
+    "description": "Mortals touched by fiendish power, marked by strange magic and strong presence.",
+    "trait_details": {
+      "darkvision": "You have Darkvision with a range of 60 feet. You can see in Dim Light as if Bright Light, and in Darkness as if Dim Light.",
+      "fiendish-legacy": "Choose a fiendish legacy: Abyssal, Chthonic, or Infernal. You gain the level 1 benefit of that legacy. At 3rd level and 5th level you gain the ability to cast a legacy spell once per Long Rest (or using spell slots you have). Choose Intelligence, Wisdom, or Charisma as your spellcasting ability for these spells when you select your legacy.",
+      "otherworldly-presence": "You know the Thaumaturgy cantrip. When you cast it with this trait, it uses the same spellcasting ability you chose for your Fiendish Legacy."
+    },
+    "option_groups": [
+      {
+        "id": "fiendish-legacy",
+        "label": "Fiendish Legacy",
+        "help_text": "Choose the fiendish legacy that defines your magical heritage and spell progression.",
+        "options": [
+          {
+            "id": "abyssal",
+            "name": "Abyssal",
+            "summary": "Poison resistance, Poison Spray, Ray of Sickness, Hold Person.",
+            "details": "Abyssal Legacy — Level 1: Resistance to Poison damage; know Poison Spray cantrip. Level 3: Cast Ray of Sickness once per Long Rest. Level 5: Cast Hold Person once per Long Rest. Spellcasting ability: Intelligence, Wisdom, or Charisma (chosen at creation)."
+          },
+          {
+            "id": "chthonic",
+            "name": "Chthonic",
+            "summary": "Necrotic resistance, Chill Touch, False Life, Ray of Enfeeblement.",
+            "details": "Chthonic Legacy — Level 1: Resistance to Necrotic damage; know Chill Touch cantrip. Level 3: Cast False Life once per Long Rest. Level 5: Cast Ray of Enfeeblement once per Long Rest. Spellcasting ability: Intelligence, Wisdom, or Charisma (chosen at creation)."
+          },
+          {
+            "id": "infernal",
+            "name": "Infernal",
+            "summary": "Fire resistance, Fire Bolt, Hellish Rebuke, Darkness.",
+            "details": "Infernal Legacy — Level 1: Resistance to Fire damage; know Fire Bolt cantrip. Level 3: Cast Hellish Rebuke once per Long Rest. Level 5: Cast Darkness once per Long Rest. Spellcasting ability: Intelligence, Wisdom, or Charisma (chosen at creation)."
+          }
+        ]
+      }
+    ]
+  }
+]

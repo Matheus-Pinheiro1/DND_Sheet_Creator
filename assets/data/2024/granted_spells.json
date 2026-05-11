@@ -1,0 +1,727 @@
+{
+  "subclass_granted_spells": {
+    "artificer-alchemist": {
+      "3": [
+        "Healing Word",
+        "Ray of Sickness"
+      ],
+      "5": [
+        "Flaming Sphere",
+        "Melf's Acid Arrow"
+      ],
+      "9": [
+        "Gaseous Form",
+        "Mass Healing Word"
+      ],
+      "13": [
+        "Death Ward",
+        "Vitriolic Sphere"
+      ],
+      "17": [
+        "Cloudkill",
+        "Raise Dead"
+      ]
+    },
+    "artificer-armorer": {
+      "3": [
+        "Magic Missile",
+        "Thunderwave"
+      ],
+      "5": [
+        "Mirror Image",
+        "Shatter"
+      ],
+      "9": [
+        "Hypnotic Pattern",
+        "Lightning Bolt"
+      ],
+      "13": [
+        "Fire Shield",
+        "Greater Invisibility"
+      ],
+      "17": [
+        "Passwall",
+        "Wall of Force"
+      ]
+    },
+    "artificer-artillerist": {
+      "3": [
+        "Shield",
+        "Thunderwave"
+      ],
+      "5": [
+        "Scorching Ray",
+        "Shatter"
+      ],
+      "9": [
+        "Fireball",
+        "Wind Wall"
+      ],
+      "13": [
+        "Ice Storm",
+        "Wall of Fire"
+      ],
+      "17": [
+        "Cone of Cold",
+        "Wall of Force"
+      ]
+    },
+    "artificer-battle-smith": {
+      "3": [
+        "Heroism",
+        "Shield"
+      ],
+      "5": [
+        "Shining Smite",
+        "Warding Bond"
+      ],
+      "9": [
+        "Aura of Vitality",
+        "Conjure Barrage"
+      ],
+      "13": [
+        "Aura of Purity",
+        "Fire Shield"
+      ],
+      "17": [
+        "Banishing Smite",
+        "Mass Cure Wounds"
+      ]
+    },
+    "artificer-cartographer": {
+      "3": [
+        "Healing Word",
+        "Faerie Fire",
+        "Guiding Bolt"
+      ],
+      "5": [
+        "Locate Object",
+        "Mind Spike"
+      ],
+      "9": [
+        "Call Lightning",
+        "Clairvoyance"
+      ],
+      "13": [
+        "Banishment",
+        "Locate Creature"
+      ],
+      "17": [
+        "Scrying",
+        "Teleportation Circle"
+      ]
+    },
+    "bard-glamour": {
+      "3": [
+        "Charm Person",
+        "Mirror Image"
+      ],
+      "6": [
+        "Command"
+      ]
+    },
+    "bard-moon": {
+      "6": [
+        "Moonbeam"
+      ]
+    },
+    "druid-moon": {
+      "3": [
+        "Cure Wounds",
+        "Moonbeam",
+        "Starry Wisp"
+      ],
+      "5": [
+        "Conjure Animals"
+      ],
+      "7": [
+        "Fount of Moonlight"
+      ],
+      "9": [
+        "Mass Cure Wounds"
+      ]
+    },
+    "druid-sea": {
+      "3": [
+        "Fog Cloud",
+        "Gust of Wind",
+        "Ray of Frost",
+        "Thunderwave"
+      ],
+      "5": [
+        "Lightning Bolt",
+        "Water Breathing"
+      ],
+      "7": [
+        "Control Water",
+        "Ice Storm"
+      ],
+      "9": [
+        "Conjure Elemental",
+        "Hold Monster"
+      ]
+    },
+    "druid-stars": {
+      "3": [
+        "Guidance",
+        "Guiding Bolt"
+      ]
+    },
+    "monk-shadow": {
+      "3": [
+        "Darkness",
+        "Minor Illusion"
+      ]
+    },
+    "monk-elements": {
+      "3": [
+        "Elementalism"
+      ]
+    },
+    "barbarian-wild-heart": {
+      "3": [
+        "Beast Sense",
+        "Speak with Animals"
+      ],
+      "10": [
+        "Commune with Nature"
+      ]
+    },
+    "wizard-abjurer": {
+      "10": [
+        "Counterspell",
+        "Dispel Magic"
+      ]
+    },
+    "wizard-illusionist": {
+      "6": [
+        "Summon Beast",
+        "Summon Fey"
+      ]
+    },
+    "cleric-knowledge": {
+      "3": [
+        "Command",
+        "Comprehend Languages",
+        "Detect Magic",
+        "Detect Thoughts",
+        "Identify",
+        "Mind Spike"
+      ],
+      "5": [
+        "Dispel Magic",
+        "Nondetection",
+        "Tongues"
+      ],
+      "7": [
+        "Arcane Eye",
+        "Banishment",
+        "Confusion"
+      ],
+      "9": [
+        "Legend Lore",
+        "Scrying",
+        "Synaptic Static"
+      ]
+    },
+    "cleric-life": {
+      "3": [
+        "Aid",
+        "Bless",
+        "Cure Wounds",
+        "Lesser Restoration"
+      ],
+      "5": [
+        "Mass Healing Word",
+        "Revivify"
+      ],
+      "7": [
+        "Aura of Life",
+        "Death Ward"
+      ],
+      "9": [
+        "Greater Restoration",
+        "Mass Cure Wounds"
+      ]
+    },
+    "cleric-light": {
+      "3": [
+        "Burning Hands",
+        "Faerie Fire",
+        "Scorching Ray",
+        "See Invisibility"
+      ],
+      "5": [
+        "Daylight",
+        "Fireball"
+      ],
+      "7": [
+        "Arcane Eye",
+        "Wall of Fire"
+      ],
+      "9": [
+        "Flame Strike",
+        "Scrying"
+      ]
+    },
+    "cleric-trickery": {
+      "3": [
+        "Charm Person",
+        "Disguise Self",
+        "Invisibility",
+        "Pass without Trace"
+      ],
+      "5": [
+        "Hypnotic Pattern",
+        "Nondetection"
+      ],
+      "7": [
+        "Confusion",
+        "Dimension Door"
+      ],
+      "9": [
+        "Dominate Person",
+        "Modify Memory"
+      ]
+    },
+    "cleric-war": {
+      "3": [
+        "Guiding Bolt",
+        "Magic Weapon",
+        "Shield of Faith",
+        "Spiritual Weapon"
+      ],
+      "5": [
+        "Crusader's Mantle",
+        "Spirit Guardians"
+      ],
+      "7": [
+        "Fire Shield",
+        "Freedom of Movement"
+      ],
+      "9": [
+        "Hold Monster",
+        "Steel Wind Strike"
+      ]
+    },
+    "paladin-devotion": {
+      "3": [
+        "Protection from Evil and Good",
+        "Shield of Faith"
+      ],
+      "5": [
+        "Aid",
+        "Zone of Truth"
+      ],
+      "9": [
+        "Beacon of Hope",
+        "Dispel Magic"
+      ],
+      "13": [
+        "Freedom of Movement",
+        "Guardian of Faith"
+      ],
+      "17": [
+        "Commune",
+        "Flame Strike"
+      ]
+    },
+    "paladin-glory": {
+      "3": [
+        "Guiding Bolt",
+        "Heroism"
+      ],
+      "5": [
+        "Enhance Ability",
+        "Magic Weapon"
+      ],
+      "9": [
+        "Haste",
+        "Protection from Energy"
+      ],
+      "13": [
+        "Compulsion",
+        "Freedom of Movement"
+      ],
+      "17": [
+        "Legend Lore",
+        "Yolande's Regal Presence"
+      ]
+    },
+    "paladin-ancients": {
+      "3": [
+        "Ensnaring Strike",
+        "Speak with Animals"
+      ],
+      "5": [
+        "Misty Step",
+        "Moonbeam"
+      ],
+      "9": [
+        "Plant Growth",
+        "Protection from Energy"
+      ],
+      "13": [
+        "Ice Storm",
+        "Stoneskin"
+      ],
+      "17": [
+        "Commune with Nature",
+        "Tree Stride"
+      ]
+    },
+    "paladin-vengeance": {
+      "3": [
+        "Bane",
+        "Hunter's Mark"
+      ],
+      "5": [
+        "Hold Person",
+        "Misty Step"
+      ],
+      "9": [
+        "Haste",
+        "Protection from Energy"
+      ],
+      "13": [
+        "Banishment",
+        "Dimension Door"
+      ],
+      "17": [
+        "Hold Monster",
+        "Scrying"
+      ]
+    },
+    "paladin-noble-genies": {
+      "3": [
+        "Chromatic Orb",
+        "Elementalism",
+        "Thunderous Smite"
+      ],
+      "5": [
+        "Mirror Image",
+        "Phantasmal Force"
+      ],
+      "9": [
+        "Fly",
+        "Gaseous Form"
+      ],
+      "13": [
+        "Conjure Minor Elementals",
+        "Summon Elemental"
+      ],
+      "17": [
+        "Banishing Smite",
+        "Contact Other Plane"
+      ]
+    },
+    "ranger-fey-wanderer": {
+      "3": [
+        "Charm Person"
+      ],
+      "5": [
+        "Misty Step"
+      ],
+      "9": [
+        "Summon Fey"
+      ],
+      "13": [
+        "Dimension Door"
+      ],
+      "17": [
+        "Mislead"
+      ]
+    },
+    "ranger-gloom-stalker": {
+      "3": [
+        "Disguise Self"
+      ],
+      "5": [
+        "Rope Trick"
+      ],
+      "9": [
+        "Fear"
+      ],
+      "13": [
+        "Greater Invisibility"
+      ],
+      "17": [
+        "Seeming"
+      ]
+    },
+    "ranger-winter-walker": {
+      "3": [
+        "Ice Knife"
+      ],
+      "5": [
+        "Hold Person"
+      ],
+      "9": [
+        "Remove Curse"
+      ],
+      "13": [
+        "Ice Storm"
+      ],
+      "17": [
+        "Cone of Cold"
+      ]
+    },
+    "sorcerer-aberrant-sorcery": {
+      "3": [
+        "Arms of Hadar",
+        "Calm Emotions",
+        "Detect Thoughts",
+        "Dissonant Whispers",
+        "Mind Sliver"
+      ],
+      "5": [
+        "Hunger of Hadar",
+        "Sending"
+      ],
+      "7": [
+        "Evard's Black Tentacles",
+        "Summon Aberration"
+      ],
+      "9": [
+        "Rary's Telepathic Bond",
+        "Telekinesis"
+      ]
+    },
+    "sorcerer-clockwork-sorcery": {
+      "3": [
+        "Aid",
+        "Alarm",
+        "Lesser Restoration",
+        "Protection from Evil and Good"
+      ],
+      "5": [
+        "Dispel Magic",
+        "Protection from Energy"
+      ],
+      "7": [
+        "Freedom of Movement",
+        "Summon Construct"
+      ],
+      "9": [
+        "Greater Restoration",
+        "Wall of Force"
+      ]
+    },
+    "sorcerer-draconic-sorcery": {
+      "3": [
+        "Alter Self",
+        "Chromatic Orb",
+        "Command",
+        "Dragon's Breath"
+      ],
+      "5": [
+        "Fear",
+        "Fly"
+      ],
+      "7": [
+        "Arcane Eye",
+        "Charm Monster"
+      ],
+      "9": [
+        "Legend Lore",
+        "Summon Dragon"
+      ]
+    },
+    "sorcerer-spellfire-sorcery": {
+      "3": [
+        "Cure Wounds",
+        "Guiding Bolt",
+        "Lesser Restoration",
+        "Scorching Ray"
+      ],
+      "5": [
+        "Aura of Vitality",
+        "Dispel Magic"
+      ],
+      "6": [
+        "Counterspell"
+      ],
+      "7": [
+        "Fire Shield",
+        "Wall of Fire"
+      ],
+      "9": [
+        "Greater Restoration",
+        "Flame Strike"
+      ]
+    },
+    "warlock-archfey": {
+      "3": [
+        "Calm Emotions",
+        "Faerie Fire",
+        "Misty Step",
+        "Phantasmal Force",
+        "Sleep"
+      ],
+      "5": [
+        "Blink",
+        "Plant Growth"
+      ],
+      "7": [
+        "Dominate Beast",
+        "Greater Invisibility"
+      ],
+      "9": [
+        "Dominate Person",
+        "Seeming"
+      ]
+    },
+    "warlock-celestial": {
+      "3": [
+        "Aid",
+        "Cure Wounds",
+        "Guiding Bolt",
+        "Lesser Restoration",
+        "Light",
+        "Sacred Flame"
+      ],
+      "5": [
+        "Daylight",
+        "Revivify"
+      ],
+      "7": [
+        "Guardian of Faith",
+        "Wall of Fire"
+      ],
+      "9": [
+        "Greater Restoration",
+        "Summon Celestial"
+      ]
+    },
+    "warlock-fiend": {
+      "3": [
+        "Burning Hands",
+        "Command",
+        "Scorching Ray",
+        "Suggestion"
+      ],
+      "5": [
+        "Fireball",
+        "Stinking Cloud"
+      ],
+      "7": [
+        "Fire Shield",
+        "Wall of Fire"
+      ],
+      "9": [
+        "Geas",
+        "Insect Plague"
+      ]
+    },
+    "warlock-great-old-one": {
+      "3": [
+        "Detect Thoughts",
+        "Dissonant Whispers",
+        "Phantasmal Force",
+        "Tasha's Hideous Laughter"
+      ],
+      "5": [
+        "Clairvoyance",
+        "Hunger of Hadar"
+      ],
+      "7": [
+        "Confusion",
+        "Summon Aberration"
+      ],
+      "9": [
+        "Modify Memory",
+        "Telekinesis"
+      ],
+      "10": [
+        "Hex"
+      ]
+    }
+  },
+  "species_granted_spells": {
+    "elf::lineage::drow": {
+      "1": [
+        "Dancing Lights"
+      ],
+      "3": [
+        "Faerie Fire"
+      ],
+      "5": [
+        "Darkness"
+      ]
+    },
+    "elf::lineage::high-elf": {
+      "3": [
+        "Detect Magic"
+      ],
+      "5": [
+        "Misty Step"
+      ]
+    },
+    "elf::lineage::wood-elf": {
+      "1": [
+        "Druidcraft"
+      ],
+      "3": [
+        "Longstrider"
+      ],
+      "5": [
+        "Pass without Trace"
+      ]
+    },
+    "gnome::gnomish-lineage::forest": {
+      "1": [
+        "Minor Illusion"
+      ]
+    },
+    "gnome::gnomish-lineage::rock": {
+      "1": [
+        "Mending",
+        "Prestidigitation"
+      ]
+    },
+    "tiefling::fiendish-legacy::abyssal": {
+      "1": [
+        "Poison Spray"
+      ],
+      "3": [
+        "Ray of Sickness"
+      ],
+      "5": [
+        "Hold Person"
+      ]
+    },
+    "tiefling::fiendish-legacy::chthonic": {
+      "1": [
+        "Chill Touch"
+      ],
+      "3": [
+        "False Life"
+      ],
+      "5": [
+        "Ray of Enfeeblement"
+      ]
+    },
+    "tiefling::fiendish-legacy::infernal": {
+      "1": [
+        "Fire Bolt"
+      ],
+      "3": [
+        "Hellish Rebuke"
+      ],
+      "5": [
+        "Darkness"
+      ]
+    }
+  },
+  "spell_index_aliases": {
+    "telepathic bond": "rary-s-telepathic-bond",
+    "rary's telepathic bond": "rary-s-telepathic-bond",
+    "dragon's breath": "dragon-s-breath",
+    "evard's black tentacles": "evard-s-black-tentacles",
+    "tasha's hideous laughter": "tashas-hideous-laughter",
+    "crusader's mantle": "crusader-s-mantle",
+    "yolande's regal presence": "yolande-s-regal-presence",
+    "flames of phlegethos": "",
+    "war cry": ""
+  }
+}

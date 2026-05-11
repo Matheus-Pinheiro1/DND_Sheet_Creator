@@ -1,0 +1,77 @@
+[
+  {
+    "index": "artificer",
+    "name": "Artificer",
+    "hit_die": 8,
+    "saving_throws": [
+      {
+        "index": "con",
+        "name": "CON"
+      },
+      {
+        "index": "int",
+        "name": "INT"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "int",
+        "name": "INT"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Medium Armor"
+      },
+      {
+        "name": "Shields"
+      },
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Thieves' Tools"
+      },
+      {
+        "name": "Tinker's Tools"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "ua2024",
+    "subclass_level": 3,
+    "description": "An inventive spellcaster who channels magic through tools and crafted objects."
+  },
+  {
+    "index": "psion",
+    "name": "Psion",
+    "hit_die": 6,
+    "saving_throws": [
+      {
+        "index": "int",
+        "name": "INT"
+      },
+      {
+        "index": "wis",
+        "name": "WIS"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "int",
+        "name": "INT"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Simple Weapons"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "ua2024",
+    "subclass_level": 3,
+    "description": "A mental adept who shapes reality through disciplined psionic power."
+  }
+]

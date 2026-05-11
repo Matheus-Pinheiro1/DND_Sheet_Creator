@@ -1,0 +1,880 @@
+[
+  {
+    "id": "alert",
+    "name": "Alert",
+    "description": "Add your proficiency bonus to Initiative rolls. After rolling Initiative, you may swap your Initiative with a willing ally.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "crafter",
+    "name": "Crafter",
+    "description": "You gain proficiency with 3 Artisan's Tools. You receive a 20% discount when you buy a nonmagical item. During a Long Rest you may craft a piece of gear given you are proficient in and have the appropriate tool. That piece of gear lasts until your next Long Rest. The gear you can build and what tool is required is shown in a table.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "healer",
+    "name": "Healer",
+    "description": "With a Utilize action, you can expend 1 use of a Healer's Kit on a creature within 5 ft. That creature can expend a hit die to heal by the roll of the hit die plus your proficiency bonus. You can reroll 1's you roll from healing someone with this feat or from a spell.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "lucky",
+    "name": "Lucky",
+    "description": "You have a number of Luck Points equal to your proficiency bonus. You can expend 1 to give yourself advantage on a d20 test or give someone else disadvantage on an attack roll against you. You regain your Luck Points with a Long Rest.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "magic-initiate-cleric",
+    "name": "Magic Initiate (Cleric)",
+    "description": "You learn two cantrips and a Level 1 Spell of your choice from the Cleric spell list. You cast these spells with INT, WIS, or CHA. You can cast the spell once per Long Rest without expending a spell slot. When you gain a level, you can swap out these spells for others on the same spell list. This feat is repeatable but you must learn from different spell lists.",
+    "tags": [
+      "Origin Feat",
+      "Spellcasting"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "magic-initiate-druid",
+    "name": "Magic Initiate (Druid)",
+    "description": "You learn two cantrips and a Level 1 Spell of your choice from the Druid spell list. You cast these spells with INT, WIS, or CHA. You can cast the spell once per Long Rest without expending a spell slot. When you gain a level, you can swap out these spells for others on the same spell list. This feat is repeatable but you must learn from different spell lists.",
+    "tags": [
+      "Origin Feat",
+      "Spellcasting"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "magic-initiate-wizard",
+    "name": "Magic Initiate (Wizard)",
+    "description": "You learn two cantrips and a Level 1 Spell of your choice from the Wizard spell list. You cast these spells with INT, WIS, or CHA. You can cast the spell once per Long Rest without expending a spell slot. When you gain a level, you can swap out these spells for others on the same spell list. This feat is repeatable but you must learn from different spell lists.",
+    "tags": [
+      "Origin Feat",
+      "Spellcasting"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "musician",
+    "name": "Musician",
+    "description": "You gain proficiency with 3 Musical Instruments. When finishing a Short or Long Rest, you can give a number of allies equal to your proficiency bonus Heroic Inspiration.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "savage-attacker",
+    "name": "Savage Attacker",
+    "description": "Once per turn when you deal damage with a weapon, you can roll damage twice and take the higher result.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "skilled",
+    "name": "Skilled",
+    "description": "You gain proficiency with 3 skills or tools. You can take this feat more than once.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "tavern-brawler",
+    "name": "Tavern Brawler",
+    "description": "Your Unarmed Strikes deal 1d4+STR damage and you can reroll 1's from damage rolls. You can also push a target 5 ft once per turn with an Unarmed Strike. You also gain proficiency with improvised weapons.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "tough",
+    "name": "Tough",
+    "description": "Your HP max increases by 2 times your character level when you gain this feat. Every time you level up you gain an extra 2 max HP.",
+    "tags": [
+      "Origin Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 1,
+    "prerequisite": ""
+  },
+  {
+    "id": "actor",
+    "name": "Actor",
+    "description": "+1 CHA. You have advantage on Deception and Performance checks to maintain your disguise. You can mimic creature sounds and speech which can be discerned with an Insight check against your CHA DC.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ CHA"
+  },
+  {
+    "id": "athlete",
+    "name": "Athlete",
+    "description": "+1 STR or DEX. You gain a Climb speed and can stand up from Prone with 5 ft of movement. You can make a running jump with only 5 ft of prior movement.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ STR or DEX"
+  },
+  {
+    "id": "charger",
+    "name": "Charger",
+    "description": "+1 STR or DEX. You gain +10 ft when Dashing. If you move at least 10 ft towards a target before hitting them with a melee attack, once per turn you can choose to either deal 1d8 extra damage or push the target up to 10 ft away as long as it's no more than 1 size larger than you.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ STR or DEX"
+  },
+  {
+    "id": "chef",
+    "name": "Chef",
+    "description": "+1 CON or WIS. You gain proficiency with Cook's Utensils. During a short rest, up to 4+PB number of creatures who expended hit dice regain an additional 1d8 HP. With 1 hour of work or during a Long Rest, you can create a number of treats equal to your Proficiency Bonus that last for 8 hours. Anyone can use a Bonus Action to eat a treat to gain PB number of temp. HP.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "con",
+      "wis"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "crossbow-expert",
+    "name": "Crossbow Expert",
+    "description": "+1 DEX. You ignore the Loading property of Crossbows and can load them without a free hand. Being in melee does not impose disadvantage and you can add your modifier to the offhand attack of a Hand Crossbow.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ DEX"
+  },
+  {
+    "id": "crusher",
+    "name": "Crusher",
+    "description": "+1 STR or CON. You can move a target up to 5 ft with a bludgeoning attack once per turn as long as they're not larger than one size larger than you. When you crit with a bludgeoning attack, attack rolls against that target have advantage until the start of your next turn.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "con"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "defensive-duelist",
+    "name": "Defensive Duelist",
+    "description": "+1 DEX. While holding a finesse weapon, you can use your Reaction to add your proficiency bonus to your AC when hit by a melee attack. This lasts until the start of your next turn but only for melee attacks.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ DEX"
+  },
+  {
+    "id": "dual-wielder",
+    "name": "Dual Wielder",
+    "description": "+1 STR or DEX. When you attack with a Light weapon, you can make an offhand attack with your Bonus Action (no modifiers) with a melee weapon without the Two-Handed property.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ STR or DEX"
+  },
+  {
+    "id": "durable",
+    "name": "Durable",
+    "description": "+1 CON. You have advantage on Death Saves. You can use your Bonus Action to expend and heal with a Hit Die.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "con"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "elemental-adept",
+    "name": "Elemental Adept",
+    "description": "+1 INT, WIS, or CHA. Choose one of the following damage types: Acid, Cold, Fire, Lightning, Thunder. Your spells ignore resistance to this damage type and any 1 you roll for damage becomes a 2. You may take this feat repeatedly but you must choose a different damage type.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "Spellcasting"
+  },
+  {
+    "id": "fey-touched",
+    "name": "Fey Touched",
+    "description": "+1 INT, WIS, or CHA. You learn Misty Step and one Level 1 Divination or Enchantment spell. You can cast either spell once per Long Rest without expending a spell slot.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "grappler",
+    "name": "Grappler",
+    "description": "+1 STR or DEX. Hitting with an Unarmed Strike can deal damage and grapple together (once per turn). You have advantage on Grappled targets and your speed isn't halved when you drag around grappled targets as long as they're your size or smaller.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ STR or DEX"
+  },
+  {
+    "id": "great-weapon-master",
+    "name": "Great Weapon Master",
+    "description": "+1 STR. When you hit a target with a Heavy weapon, you deal extra damage equal to your proficiency bonus. When you crit or reduce a target to 0 HP with a melee weapon, you can make another attack with your Bonus Action.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ STR"
+  },
+  {
+    "id": "heavily-armored",
+    "name": "Heavily Armored",
+    "description": "+1 STR. You gain proficiency in Heavy Armor.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "Medium Armor"
+  },
+  {
+    "id": "inspiring-leader",
+    "name": "Inspiring Leader",
+    "description": "+1 WIS or CHA. When finishing a Short or Long Rest, you can give up to 6 allies (including yourself) temp. HP equal to your level plus WIS or CHA.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ WIS or CHA"
+  },
+  {
+    "id": "keen-mind",
+    "name": "Keen Mind",
+    "description": "+1 INT. You gain proficiency in Arcana, History, Investigation, Nature, or Religion. If you already have proficiency you gain Expertise. You can also Study as a Bonus Action.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ INT"
+  },
+  {
+    "id": "lightly-armored",
+    "name": "Lightly Armored",
+    "description": "+1 STR or DEX. You gain proficiency with Light Armor and Shields.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "mage-slayer",
+    "name": "Mage Slayer",
+    "description": "+1 STR or DEX. When you damage a creature concentrating on a spell, they have disadvantage on their CON save. You can also choose to succeed an INT, WIS, or CHA save that you fail once per Short Rest.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "martial-weapon-training",
+    "name": "Martial Weapon Training",
+    "description": "+1 STR or DEX. You gain proficiency with Martial Weapons",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "medium-armor-master",
+    "name": "Medium Armor Master",
+    "description": "+1 STR or DEX. You can gain a +3 instead of a +2 to your AC while wearing medium armor.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "Medium Armor"
+  },
+  {
+    "id": "moderately-armored",
+    "name": "Moderately Armored",
+    "description": "+1 STR or DEX. You gain proficiency with Medium Armor.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "mounted-combatant",
+    "name": "Mounted Combatant",
+    "description": "+1 STR, DEX, or WIS. When mounted, you have advantage against targets smaller than your mount that are within 5 ft of your mount, your mount gains Evasion, and you can force an attack to hit you instead of your mount.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex",
+      "wis"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "observant",
+    "name": "Observant",
+    "description": "+1 INT or WIS. You gain proficiency in Insight, Investigation, or Perception. If you already have proficiency you gain Expertise. You can also Search as a Bonus Action.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ INT or WIS"
+  },
+  {
+    "id": "piercer",
+    "name": "Piercer",
+    "description": "+1 STR or DEX. You can reroll the damage you deal with a piercing attack once per turn. When you crit with a piercing attack, you roll one extra damage die and add it to the damage.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "poisoner",
+    "name": "Poisoner",
+    "description": "+1 DEX or INT. You ignore resistance to Poison damage. With 1 hour and 50 gp, you gain proficiency bonus doses of poison. You can use a Bonus Action to apply the poison to a weapon or piece of ammunition which lasts for 1 minute or until you hit. When you hit, the target must make a CON save against your DEX or INT DC and if they fail they take 2d8 Poison damage and gain the Poisoned condition.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "dex",
+      "con",
+      "int"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "polearm-master",
+    "name": "Polearm Master",
+    "description": "+1 STR or DEX. You can use your Bonus Action to make another attack after attacking with a Quarterstaff, Spear, or Heavy + Reach weapon. This attack deals 1d4 bludgeoning damage. You can also use your Reaction to make an attack with that weapon when an enemy moves into your range.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ STR or DEX"
+  },
+  {
+    "id": "resilient",
+    "name": "Resilient",
+    "description": "+1 to any score. You gain proficiency in the save of the ability score you increased.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "ritualist",
+    "name": "Ritualist",
+    "description": "(13+ INT, WIS, or CHA): +1 INT, WIS, or CHA. You learn a number of Level 1 ritual spells equal to your proficiency bonus (increasing as your PB increases). You can cast a ritual spell as a ritual without spending the extra 10 minutes once per Long Rest.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "sentinel",
+    "name": "Sentinel",
+    "description": "+1 STR or DEX. You can make an opportunity attack against a target within 5 ft that tries to Disengage or hits someone other than you. These and your normal opportunity attacks reduce the target's speed to 0 for the rest of that turn.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ STR or DEX"
+  },
+  {
+    "id": "shadow-touched",
+    "name": "Shadow Touched",
+    "description": "+1 INT, WIS, or CHA. You learn Invisibility and one Level 1 Illusion or Necromancy spell. You can cast either spell once per Long Rest without expending a spell slot.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "sharpshooter",
+    "name": "Sharpshooter",
+    "description": "+1 DEX. Your ranged weapon attacks ignore half and 3/4 cover, being in melee doesn't impose disadvantage, and your long range isn't at disadvantage.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ DEX"
+  },
+  {
+    "id": "shield-master",
+    "name": "Shield Master",
+    "description": "+1 STR. When hitting a target within 5 ft with a melee weapon, you can force a STR save vs. your STR DC once per turn. If failed, they are pushed back 5 ft and are Prone. You can also use your Reaction to take no damage from a successful DEX save that would normally deal half damage.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "Shields"
+  },
+  {
+    "id": "skill-expert",
+    "name": "Skill Expert",
+    "description": "+1 to any score. You gain proficiency in one skill. You also gain expertise in one skill.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "skulker",
+    "name": "Skulker",
+    "description": "+1 DEX. You have 10 ft Blindsight, have advantage on Stealth checks to Hide in battle, and if you miss while hidden you're still hidden.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ DEX"
+  },
+  {
+    "id": "slasher",
+    "name": "Slasher",
+    "description": "+1 STR or DEX. You can reduce the target's speed by 10 ft until the start of your next turn when you hit them with a slashing attack once per turn. When you crit with a slashing attack, the target has disadvantage on attack rolls until the start of your next turn.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "speedy",
+    "name": "Speedy",
+    "description": "+1 DEX or CON. You gain +10 ft speed, difficult terrain does not slow you down when Dashing, and opportunity attacks have disadvantage against you.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "dex",
+      "con"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "13+ DEX or CON"
+  },
+  {
+    "id": "spell-sniper",
+    "name": "Spell Sniper",
+    "description": "+1 INT, WIS, or CHA. Your spell attack rolls ignore half and 3/4 cover, being within melee does not impose disadvantage with ranged spell attack rolls, and spells with attack rolls with a range of at least 10 ft have their range increased by 60 ft.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "Spellcasting"
+  },
+  {
+    "id": "telekinetic",
+    "name": "Telekinetic",
+    "description": "+1 INT, WIS, or CHA. You learn Mage Hand and you can cast it without components and make it invisible. You can also use a Bonus Action to force a target within 30 ft to make a STR save vs. your INT/WIS/CHA DC or they are moved 5 ft towards or away from you.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "telepathic",
+    "name": "Telepathic",
+    "description": "+1 INT, WIS, or CHA. You can speak telepathically to someone within 60 ft as long as you share a language. They cannot respond back. You also learn Detect Thoughts which can be cast without components and without expending a spell slot once per Long Rest.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "war-caster",
+    "name": "War Caster",
+    "description": "+1 INT, WIS, or CHA. You have advantage on CON saves for concentration. You can cast a spell as an opportunity attack as long as it would normally require an action and only targets one creature. You can also perform Somatic components with weapons or shields in your hands.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 4,
+    "prerequisite": "Spellcasting"
+  },
+  {
+    "id": "weapon-master",
+    "name": "Weapon Master",
+    "description": "+1 STR or DEX. You gain the Weapon Mastery property of one weapon you are proficient with. You can switch which weapon with a Long Rest.",
+    "tags": [
+      "General Feat"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 4,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-combat-prowess",
+    "name": "Epic Boon of Combat Prowess",
+    "description": "+1 STR or DEX. Once per turn, you can choose to hit when you miss with a weapon.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-dimensional-travel",
+    "name": "Epic Boon of Dimensional Travel",
+    "description": "+1 INT, WIS, or CHA. Immediately after taking the Attack or Magic action, you can teleport up to 30 ft.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-energy-resistance",
+    "name": "Epic Boon of Energy Resistance",
+    "description": "+1 CON. You gain resistance to two elemental damage types except Force, which you can change with a Long Rest. When you're hit by one of these two damage types, you can use your Reaction to target someone within 60 ft. They must succeed on a DEX save against your CON DC or take 2d12+CON damage of that type.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "dex",
+      "con"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-fate",
+    "name": "Epic Boon of Fate",
+    "description": "+1 INT, WIS, or CHA. When you or anyone within 60 ft makes a d20 test, you can add or reduce that roll by 2d4. Can be used once until you roll Initiative or take a Short or Long Rest.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-fortitude",
+    "name": "Epic Boon of Fortitude",
+    "description": "+1 CON. Increase HP max by 40. Once per turn when you regain HP, you heal extra by your CON mod.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "con"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-irresistible-offense",
+    "name": "Epic Boon of Irresistible Offense",
+    "description": "+1 STR or DEX. The bludgeoning, piercing, and slashing damage you deal ignores resistance. When you roll a 20 on an attack roll, you deal extra damage equal to your STR or DEX score.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "str",
+      "dex"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-recovery",
+    "name": "Epic Boon of Recovery",
+    "description": "+1 CON. Once per Long Rest, if you drop to 0 HP you are instead brought up to half your max HP. You also gain a pool of 10 d10's which you can use with a Bonus Action to heal yourself. These come back with a Long Rest.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "con"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-skill",
+    "name": "Epic Boon of Skill",
+    "description": "+1 to any ability score. Gain proficiency in all skills and expertise in one.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-speed",
+    "name": "Epic Boon of Speed",
+    "description": "+1 DEX. You gain +30 ft speed and you can use your Bonus Action to Disengage, which also ends the Grappled condition.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "dex"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-spell-recall",
+    "name": "Epic Boon of Spell Recall",
+    "description": "+1 INT, WIS, or CHA. When you cast a Level 1-4 spell, roll 1d4. If the number you roll equals the spell slot expended, it's actually not expended.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-truesight",
+    "name": "Epic Boon of Truesight",
+    "description": "+1 INT, WIS, or CHA. You gain 60 ft Truesight.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  },
+  {
+    "id": "epic-boon-of-the-night-spirit",
+    "name": "Epic Boon of the Night Spirit",
+    "description": "+1 DEX, INT, WIS, or CHA. You can use your Bonus Action to become Invisible in Dim Light or Darkness until you use an Action, Bonus Action, or Reaction. While in Dim Light or Darkness you also have resistance to all damage except Psychic and Radiant.",
+    "tags": [
+      "Epic Boon"
+    ],
+    "optional_ability_bonuses": [
+      "dex",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "minimum_level": 19,
+    "prerequisite": ""
+  }
+]

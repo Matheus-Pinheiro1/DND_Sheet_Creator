@@ -1,0 +1,335 @@
+[
+  {
+    "name": "Club",
+    "damage_dice": "1d4",
+    "damage_type": "Bludgeoning",
+    "range": "5 ft",
+    "properties": "Light",
+    "category": "simple",
+    "mastery": "Slow"
+  },
+  {
+    "name": "Dagger",
+    "damage_dice": "1d4",
+    "damage_type": "Piercing",
+    "range": "20/60 ft",
+    "properties": "Finesse, Light, Thrown",
+    "category": "simple",
+    "mastery": "Nick"
+  },
+  {
+    "name": "Greatclub",
+    "damage_dice": "1d8",
+    "damage_type": "Bludgeoning",
+    "range": "5 ft",
+    "properties": "Two-Handed",
+    "category": "simple",
+    "mastery": "Push"
+  },
+  {
+    "name": "Handaxe",
+    "damage_dice": "1d6",
+    "damage_type": "Slashing",
+    "range": "20/60 ft",
+    "properties": "Light, Thrown",
+    "category": "simple",
+    "mastery": "Vex"
+  },
+  {
+    "name": "Javelin",
+    "damage_dice": "1d6",
+    "damage_type": "Piercing",
+    "range": "30/120 ft",
+    "properties": "Thrown",
+    "category": "simple",
+    "mastery": "Slow"
+  },
+  {
+    "name": "Light Hammer",
+    "damage_dice": "1d4",
+    "damage_type": "Bludgeoning",
+    "range": "20/60 ft",
+    "properties": "Light, Thrown",
+    "category": "simple",
+    "mastery": "Nick"
+  },
+  {
+    "name": "Mace",
+    "damage_dice": "1d6",
+    "damage_type": "Bludgeoning",
+    "range": "5 ft",
+    "properties": "-",
+    "category": "simple",
+    "mastery": "Sap"
+  },
+  {
+    "name": "Quarterstaff",
+    "damage_dice": "1d6",
+    "damage_type": "Bludgeoning",
+    "range": "5 ft",
+    "properties": "Versatile (1d8)",
+    "category": "simple",
+    "mastery": "Topple"
+  },
+  {
+    "name": "Sickle",
+    "damage_dice": "1d4",
+    "damage_type": "Slashing",
+    "range": "5 ft",
+    "properties": "Light",
+    "category": "simple",
+    "mastery": "Nick"
+  },
+  {
+    "name": "Spear",
+    "damage_dice": "1d6",
+    "damage_type": "Piercing",
+    "range": "20/60 ft",
+    "properties": "Thrown, Versatile (1d8)",
+    "category": "simple",
+    "mastery": "Sap"
+  },
+  {
+    "name": "Light Crossbow",
+    "damage_dice": "1d8",
+    "damage_type": "Piercing",
+    "range": "80/320 ft",
+    "properties": "Ammunition, Loading, Two-Handed",
+    "category": "simple",
+    "mastery": "Slow"
+  },
+  {
+    "name": "Dart",
+    "damage_dice": "1d4",
+    "damage_type": "Piercing",
+    "range": "20/60 ft",
+    "properties": "Finesse, Thrown",
+    "category": "simple",
+    "mastery": "Vex"
+  },
+  {
+    "name": "Shortbow",
+    "damage_dice": "1d6",
+    "damage_type": "Piercing",
+    "range": "80/320 ft",
+    "properties": "Ammunition, Two-Handed",
+    "category": "simple",
+    "mastery": "Vex"
+  },
+  {
+    "name": "Sling",
+    "damage_dice": "1d4",
+    "damage_type": "Bludgeoning",
+    "range": "30/120 ft",
+    "properties": "Ammunition",
+    "category": "simple",
+    "mastery": "Slow"
+  },
+  {
+    "name": "Battleaxe",
+    "damage_dice": "1d8",
+    "damage_type": "Slashing",
+    "range": "5 ft",
+    "properties": "Versatile (1d10)",
+    "category": "martial",
+    "mastery": "Topple"
+  },
+  {
+    "name": "Flail",
+    "damage_dice": "1d8",
+    "damage_type": "Bludgeoning",
+    "range": "5 ft",
+    "properties": "-",
+    "category": "martial",
+    "mastery": "Sap"
+  },
+  {
+    "name": "Glaive",
+    "damage_dice": "1d10",
+    "damage_type": "Slashing",
+    "range": "10 ft",
+    "properties": "Heavy, Reach, Two-Handed",
+    "category": "martial",
+    "mastery": "Graze"
+  },
+  {
+    "name": "Greataxe",
+    "damage_dice": "1d12",
+    "damage_type": "Slashing",
+    "range": "5 ft",
+    "properties": "Heavy, Two-Handed",
+    "category": "martial",
+    "mastery": "Cleave"
+  },
+  {
+    "name": "Greatsword",
+    "damage_dice": "2d6",
+    "damage_type": "Slashing",
+    "range": "5 ft",
+    "properties": "Heavy, Two-Handed",
+    "category": "martial",
+    "mastery": "Graze"
+  },
+  {
+    "name": "Halberd",
+    "damage_dice": "1d10",
+    "damage_type": "Slashing",
+    "range": "10 ft",
+    "properties": "Heavy, Reach, Two-Handed",
+    "category": "martial",
+    "mastery": "Cleave"
+  },
+  {
+    "name": "Lance",
+    "damage_dice": "1d12",
+    "damage_type": "Piercing",
+    "range": "10 ft",
+    "properties": "Reach, Special",
+    "category": "martial",
+    "mastery": "Topple"
+  },
+  {
+    "name": "Longsword",
+    "damage_dice": "1d8",
+    "damage_type": "Slashing",
+    "range": "5 ft",
+    "properties": "Versatile (1d10)",
+    "category": "martial",
+    "mastery": "Sap"
+  },
+  {
+    "name": "Maul",
+    "damage_dice": "2d6",
+    "damage_type": "Bludgeoning",
+    "range": "5 ft",
+    "properties": "Heavy, Two-Handed",
+    "category": "martial",
+    "mastery": "Topple"
+  },
+  {
+    "name": "Morningstar",
+    "damage_dice": "1d8",
+    "damage_type": "Piercing",
+    "range": "5 ft",
+    "properties": "-",
+    "category": "martial",
+    "mastery": "Sap"
+  },
+  {
+    "name": "Pike",
+    "damage_dice": "1d10",
+    "damage_type": "Piercing",
+    "range": "10 ft",
+    "properties": "Heavy, Reach, Two-Handed",
+    "category": "martial",
+    "mastery": "Push"
+  },
+  {
+    "name": "Rapier",
+    "damage_dice": "1d8",
+    "damage_type": "Piercing",
+    "range": "5 ft",
+    "properties": "Finesse",
+    "category": "martial",
+    "mastery": "Vex"
+  },
+  {
+    "name": "Scimitar",
+    "damage_dice": "1d6",
+    "damage_type": "Slashing",
+    "range": "5 ft",
+    "properties": "Finesse, Light",
+    "category": "martial",
+    "mastery": "Nick"
+  },
+  {
+    "name": "Shortsword",
+    "damage_dice": "1d6",
+    "damage_type": "Piercing",
+    "range": "5 ft",
+    "properties": "Finesse, Light",
+    "category": "martial",
+    "mastery": "Vex"
+  },
+  {
+    "name": "Trident",
+    "damage_dice": "1d6",
+    "damage_type": "Piercing",
+    "range": "20/60 ft",
+    "properties": "Thrown, Versatile (1d8)",
+    "category": "martial",
+    "mastery": "Topple"
+  },
+  {
+    "name": "War Pick",
+    "damage_dice": "1d8",
+    "damage_type": "Piercing",
+    "range": "5 ft",
+    "properties": "-",
+    "category": "martial",
+    "mastery": "Sap"
+  },
+  {
+    "name": "Warhammer",
+    "damage_dice": "1d8",
+    "damage_type": "Bludgeoning",
+    "range": "5 ft",
+    "properties": "Versatile (1d10)",
+    "category": "martial",
+    "mastery": "Push"
+  },
+  {
+    "name": "Whip",
+    "damage_dice": "1d4",
+    "damage_type": "Slashing",
+    "range": "10 ft",
+    "properties": "Finesse, Reach",
+    "category": "martial",
+    "mastery": "Slow"
+  },
+  {
+    "name": "Blowgun",
+    "damage_dice": "1",
+    "damage_type": "Piercing",
+    "range": "25/100 ft",
+    "properties": "Ammunition, Loading",
+    "category": "martial",
+    "mastery": "Vex"
+  },
+  {
+    "name": "Hand Crossbow",
+    "damage_dice": "1d6",
+    "damage_type": "Piercing",
+    "range": "30/120 ft",
+    "properties": "Ammunition, Light, Loading",
+    "category": "martial",
+    "mastery": "Vex"
+  },
+  {
+    "name": "Heavy Crossbow",
+    "damage_dice": "1d10",
+    "damage_type": "Piercing",
+    "range": "100/400 ft",
+    "properties": "Ammunition, Heavy, Loading, Two-Handed",
+    "category": "martial",
+    "mastery": "Push"
+  },
+  {
+    "name": "Longbow",
+    "damage_dice": "1d8",
+    "damage_type": "Piercing",
+    "range": "150/600 ft",
+    "properties": "Ammunition, Heavy, Two-Handed",
+    "category": "martial",
+    "mastery": "Slow"
+  },
+  {
+    "name": "Net",
+    "damage_dice": "-",
+    "damage_type": "Special",
+    "range": "5/15 ft",
+    "properties": "Special, Thrown",
+    "category": "martial",
+    "mastery": "Slow"
+  }
+]

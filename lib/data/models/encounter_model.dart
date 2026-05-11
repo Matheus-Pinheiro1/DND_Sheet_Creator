@@ -1,0 +1,118 @@
+// lib/data/models/encounter_model.dart
+
+import 'package:uuid/uuid.dart';
+
+import 'encounter_participant.dart';
+
+class EncounterModel {
+  final String id;
+  final String name;
+  final List<EncounterParticipant> participants;
+  final int currentTurnIndex;
+  final int currentRound;
+
+  const EncounterModel({
+    this.id = '',
+    this.name = 'Encounter',
+    this.participants = const [],
+    this.currentTurnIndex = 0,
+    this.currentRound = 1,
+  });
+
+  bool get isEmpty => participants.isEmpty;
+  bool get isStarted => currentRound > 1 || currentTurnIndex > 0;
+
+  List<EncounterParticipant> get sortedParticipants {
+    final list = [
+      for (var i = 0; i < participants.length; i++)
+        _IndexedParticipant(participants[i], i),
+    ];
+    list.sort((a, b) {
+      final cmp = b.participant.initiative.compareTo(a.participant.initiative);
+      if (cmp != 0) return cmp;
+      final acCmp =
+          b.participant.armorClass.compareTo(a.participant.armorClass);
+      if (acCmp != 0) return acCmp;
+      return a.index.compareTo(b.index);
+    });
+    return list.map((entry) => entry.participant).toList(growable: false);
+  }
+
+  EncounterParticipant? get currentParticipant {
+    final sorted = sortedParticipants;
+    if (sorted.isEmpty) return null;
+    final idx = currentTurnIndex.clamp(0, sorted.length - 1);
+    return sorted[idx];
+  }
+
+  EncounterModel copyWith({
+    String? id,
+    String? name,
+    List<EncounterParticipant>? participants,
+    int? currentTurnIndex,
+    int? currentRound,
+  }) {
+    return EncounterModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      participants: participants ?? this.participants,
+      currentTurnIndex: currentTurnIndex ?? this.currentTurnIndex,
+      currentRound: currentRound ?? this.currentRound,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'participants': participants.map((p) => p.toJson()).toList(),
+        'currentTurnIndex': currentTurnIndex,
+        'currentRound': currentRound,
+      };
+
+  factory EncounterModel.fromJson(Map<String, dynamic> json) => EncounterModel(
+        id: _string(json['id']),
+        name: _string(json['name'], fallback: 'Encounter'),
+        participants: _participants(json['participants']),
+        currentTurnIndex: _int(json['currentTurnIndex']),
+        currentRound: _int(json['currentRound'], fallback: 1),
+      );
+
+  static EncounterModel get empty => const EncounterModel();
+
+  factory EncounterModel.newEncounter({required String name}) {
+    return EncounterModel(
+      id: const Uuid().v4(),
+      name: name,
+    );
+  }
+
+  static List<EncounterParticipant> _participants(dynamic value) {
+    if (value is! List) return const [];
+    return value
+        .whereType<Map>()
+        .map(
+          (entry) => EncounterParticipant.fromJson(
+            Map<String, dynamic>.from(entry),
+          ),
+        )
+        .toList();
+  }
+
+  static int _int(dynamic value, {int fallback = 0}) {
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return int.tryParse(value?.toString() ?? '') ?? fallback;
+  }
+
+  static String _string(dynamic value, {String fallback = ''}) {
+    final text = value?.toString().trim() ?? '';
+    return text.isEmpty ? fallback : text;
+  }
+}
+
+class _IndexedParticipant {
+  final EncounterParticipant participant;
+  final int index;
+
+  const _IndexedParticipant(this.participant, this.index);
+}

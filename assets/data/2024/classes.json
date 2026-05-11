@@ -1,0 +1,500 @@
+[
+  {
+    "index": "barbarian",
+    "name": "Barbarian",
+    "hit_die": 12,
+    "saving_throws": [
+      {
+        "index": "str",
+        "name": "STR"
+      },
+      {
+        "index": "con",
+        "name": "CON"
+      }
+    ],
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Medium Armor"
+      },
+      {
+        "name": "Shields"
+      },
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Martial Weapons"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Fierce Warrior of Primal Rage Barbarians are mighty warriors who are powered by primal forces of the multiverse that manifest as a Rage ."
+  },
+  {
+    "index": "bard",
+    "name": "Bard",
+    "hit_die": 8,
+    "saving_throws": [
+      {
+        "index": "dex",
+        "name": "DEX"
+      },
+      {
+        "index": "cha",
+        "name": "CHA"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "cha",
+        "name": "CHA"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Hand Crossbows"
+      },
+      {
+        "name": "Longswords"
+      },
+      {
+        "name": "Rapiers"
+      },
+      {
+        "name": "Shortswords"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "An Inspiring Performer of Music, Dance, and Magic Invoking magic through music, dance, and verse, Bards are expert at inspiring others, soothing hurts, disheartening foes, and creating illusions."
+  },
+  {
+    "index": "cleric",
+    "name": "Cleric",
+    "hit_die": 8,
+    "saving_throws": [
+      {
+        "index": "wis",
+        "name": "WIS"
+      },
+      {
+        "index": "cha",
+        "name": "CHA"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "wis",
+        "name": "WIS"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Medium Armor"
+      },
+      {
+        "name": "Shields"
+      },
+      {
+        "name": "Simple Weapons"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Miraculous Priest of Divine Power Clerics draw power from the realms of the gods and harness it to work miracles."
+  },
+  {
+    "index": "druid",
+    "name": "Druid",
+    "hit_die": 8,
+    "saving_throws": [
+      {
+        "index": "int",
+        "name": "INT"
+      },
+      {
+        "index": "wis",
+        "name": "WIS"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "wis",
+        "name": "WIS"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Medium Armor"
+      },
+      {
+        "name": "Shields"
+      },
+      {
+        "name": "Clubs"
+      },
+      {
+        "name": "Daggers"
+      },
+      {
+        "name": "Darts"
+      },
+      {
+        "name": "Javelins"
+      },
+      {
+        "name": "Maces"
+      },
+      {
+        "name": "Quarterstaffs"
+      },
+      {
+        "name": "Scimitars"
+      },
+      {
+        "name": "Sickles"
+      },
+      {
+        "name": "Slings"
+      },
+      {
+        "name": "Spears"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Nature Priest of Primal Power Druids belong to ancient orders that call on the forces of nature."
+  },
+  {
+    "index": "fighter",
+    "name": "Fighter",
+    "hit_die": 10,
+    "saving_throws": [
+      {
+        "index": "str",
+        "name": "STR"
+      },
+      {
+        "index": "con",
+        "name": "CON"
+      }
+    ],
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Medium Armor"
+      },
+      {
+        "name": "Heavy Armor"
+      },
+      {
+        "name": "Shields"
+      },
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Martial Weapons"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Master of All Arms and Armor Fighters rule many battlefields."
+  },
+  {
+    "index": "monk",
+    "name": "Monk",
+    "hit_die": 8,
+    "saving_throws": [
+      {
+        "index": "str",
+        "name": "STR"
+      },
+      {
+        "index": "dex",
+        "name": "DEX"
+      }
+    ],
+    "proficiencies": [
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Shortswords"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Martial Artist of Supernatural Focus Monks use rigorous combat training and mental discipline to align themselves with the multiverse and focus their internal reservoirs of power."
+  },
+  {
+    "index": "paladin",
+    "name": "Paladin",
+    "hit_die": 10,
+    "saving_throws": [
+      {
+        "index": "wis",
+        "name": "WIS"
+      },
+      {
+        "index": "cha",
+        "name": "CHA"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "cha",
+        "name": "CHA"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Medium Armor"
+      },
+      {
+        "name": "Heavy Armor"
+      },
+      {
+        "name": "Shields"
+      },
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Martial Weapons"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Devout Warrior of Sacred Oaths Paladins are united by their oaths to stand against the forces of annihilation and corruption."
+  },
+  {
+    "index": "ranger",
+    "name": "Ranger",
+    "hit_die": 10,
+    "saving_throws": [
+      {
+        "index": "str",
+        "name": "STR"
+      },
+      {
+        "index": "dex",
+        "name": "DEX"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "wis",
+        "name": "WIS"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Medium Armor"
+      },
+      {
+        "name": "Shields"
+      },
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Martial Weapons"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Wandering Warrior Imbued with Primal Magic Far from bustling cities, amid the trees of trackless forests and across wide plains, Rangers keep their unending watch in the wilderness."
+  },
+  {
+    "index": "rogue",
+    "name": "Rogue",
+    "hit_die": 8,
+    "saving_throws": [
+      {
+        "index": "dex",
+        "name": "DEX"
+      },
+      {
+        "index": "int",
+        "name": "INT"
+      }
+    ],
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Simple Weapons"
+      },
+      {
+        "name": "Hand Crossbows"
+      },
+      {
+        "name": "Longswords"
+      },
+      {
+        "name": "Rapiers"
+      },
+      {
+        "name": "Shortswords"
+      },
+      {
+        "name": "Thieves' Tools"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Dexterous Expert in Stealth and Subterfuge Rogues rely on cunning, stealth, and their foes’ vulnerabilities to get the upper hand in any situation."
+  },
+  {
+    "index": "sorcerer",
+    "name": "Sorcerer",
+    "hit_die": 6,
+    "saving_throws": [
+      {
+        "index": "con",
+        "name": "CON"
+      },
+      {
+        "index": "cha",
+        "name": "CHA"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "cha",
+        "name": "CHA"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Daggers"
+      },
+      {
+        "name": "Darts"
+      },
+      {
+        "name": "Slings"
+      },
+      {
+        "name": "Quarterstaffs"
+      },
+      {
+        "name": "Light Crossbows"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Dazzling Mage Filled with Innate Magic Sorcerers wield innate magic that is stamped into their being."
+  },
+  {
+    "index": "warlock",
+    "name": "Warlock",
+    "hit_die": 8,
+    "saving_throws": [
+      {
+        "index": "wis",
+        "name": "WIS"
+      },
+      {
+        "index": "cha",
+        "name": "CHA"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "cha",
+        "name": "CHA"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Light Armor"
+      },
+      {
+        "name": "Simple Weapons"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "An Occultist Empowered by Otherworldly Pacts Warlocks quest for knowledge that lies hidden in the fabric of the multiverse."
+  },
+  {
+    "index": "wizard",
+    "name": "Wizard",
+    "hit_die": 6,
+    "saving_throws": [
+      {
+        "index": "int",
+        "name": "INT"
+      },
+      {
+        "index": "wis",
+        "name": "WIS"
+      }
+    ],
+    "spellcasting": {
+      "spellcasting_ability": {
+        "index": "int",
+        "name": "INT"
+      }
+    },
+    "proficiencies": [
+      {
+        "name": "Daggers"
+      },
+      {
+        "name": "Darts"
+      },
+      {
+        "name": "Slings"
+      },
+      {
+        "name": "Quarterstaffs"
+      },
+      {
+        "name": "Light Crossbows"
+      }
+    ],
+    "proficiency_choices": [],
+    "source": "phb2024",
+    "subclass_level": 3,
+    "description": "A Scholarly Magic-User of Arcane Power Wizards are defined by their exhaustive study of magic’s inner workings."
+  }
+]

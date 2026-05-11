@@ -1,0 +1,268 @@
+{
+  "artificer": [
+    {
+      "id": "A",
+      "gold": 16,
+      "items": [
+        { "id": "studded-leather-armor", "name": "Studded Leather Armor" },
+        { "id": "dagger", "name": "Dagger" },
+        { "id": "thieves-tools", "name": "Thieves' Tools" },
+        { "id": "tinkers-tools", "name": "Tinker's Tools" },
+        { "id": "dungeoneers-pack", "name": "Dungeoneer's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 150,
+      "items": []
+    }
+  ],
+  "barbarian": [
+    {
+      "id": "A",
+      "gold": 15,
+      "items": [
+        { "id": "greataxe", "name": "Greataxe" },
+        { "id": "handaxe", "name": "Handaxe", "quantity": 4 },
+        { "id": "explorers-pack", "name": "Explorer's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 75,
+      "items": []
+    }
+  ],
+  "bard": [
+    {
+      "id": "A",
+      "gold": 19,
+      "items": [
+        { "id": "leather-armor", "name": "Leather Armor" },
+        { "id": "dagger", "name": "Dagger", "quantity": 2 },
+        {
+          "id": "musical-instrument-choice",
+          "name": "Musical Instrument (of your choice)"
+        },
+        { "id": "entertainers-pack", "name": "Entertainer's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 90,
+      "items": []
+    }
+  ],
+  "cleric": [
+    {
+      "id": "A",
+      "gold": 7,
+      "items": [
+        { "id": "chain-shirt", "name": "Chain Shirt" },
+        { "id": "shield", "name": "Shield" },
+        { "id": "mace", "name": "Mace" },
+        { "id": "holy-symbol", "name": "Holy Symbol" },
+        { "id": "priests-pack", "name": "Priest's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 110,
+      "items": []
+    }
+  ],
+  "druid": [
+    {
+      "id": "A",
+      "gold": 9,
+      "items": [
+        { "id": "leather-armor", "name": "Leather Armor" },
+        { "id": "shield", "name": "Shield" },
+        { "id": "sickle", "name": "Sickle" },
+        {
+          "id": "druidic-focus-quarterstaff",
+          "name": "Druidic Focus (Quarterstaff)"
+        },
+        { "id": "explorers-pack", "name": "Explorer's Pack" },
+        { "id": "herbalism-kit", "name": "Herbalism Kit" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 50,
+      "items": []
+    }
+  ],
+  "fighter": [
+    {
+      "id": "A",
+      "gold": 4,
+      "items": [
+        { "id": "chain-mail", "name": "Chain Mail" },
+        { "id": "greatsword", "name": "Greatsword" },
+        { "id": "flail", "name": "Flail" },
+        { "id": "javelin", "name": "Javelin", "quantity": 8 },
+        { "id": "dungeoneers-pack", "name": "Dungeoneer's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 11,
+      "items": [
+        { "id": "studded-leather-armor", "name": "Studded Leather Armor" },
+        { "id": "scimitar", "name": "Scimitar" },
+        { "id": "shortsword", "name": "Shortsword" },
+        { "id": "longbow", "name": "Longbow" },
+        { "id": "arrow", "name": "Arrow", "quantity": 20 },
+        { "id": "quiver", "name": "Quiver" },
+        { "id": "dungeoneers-pack", "name": "Dungeoneer's Pack" }
+      ]
+    },
+    {
+      "id": "C",
+      "gold": 155,
+      "items": []
+    }
+  ],
+  "monk": [
+    {
+      "id": "A",
+      "gold": 11,
+      "items": [
+        { "id": "spear", "name": "Spear" },
+        { "id": "dagger", "name": "Dagger", "quantity": 5 },
+        {
+          "id": "artisan-tools-or-musical-instrument",
+          "name": "Artisan's Tools or Musical Instrument (same as above)"
+        },
+        { "id": "explorers-pack", "name": "Explorer's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 50,
+      "items": []
+    }
+  ],
+  "paladin": [
+    {
+      "id": "A",
+      "gold": 9,
+      "items": [
+        { "id": "chain-mail", "name": "Chain Mail" },
+        { "id": "shield", "name": "Shield" },
+        { "id": "longsword", "name": "Longsword" },
+        { "id": "javelin", "name": "Javelin", "quantity": 6 },
+        { "id": "holy-symbol", "name": "Holy Symbol" },
+        { "id": "priests-pack", "name": "Priest's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 150,
+      "items": []
+    }
+  ],
+  "ranger": [
+    {
+      "id": "A",
+      "gold": 7,
+      "items": [
+        { "id": "studded-leather-armor", "name": "Studded Leather Armor" },
+        { "id": "scimitar", "name": "Scimitar" },
+        { "id": "shortsword", "name": "Shortsword" },
+        { "id": "longbow", "name": "Longbow" },
+        { "id": "arrow", "name": "Arrow", "quantity": 20 },
+        { "id": "quiver", "name": "Quiver" },
+        {
+          "id": "druidic-focus-sprig-of-mistletoe",
+          "name": "Druidic Focus (sprig of mistletoe)"
+        },
+        { "id": "explorers-pack", "name": "Explorer's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 150,
+      "items": []
+    }
+  ],
+  "rogue": [
+    {
+      "id": "A",
+      "gold": 8,
+      "items": [
+        { "id": "leather-armor", "name": "Leather Armor" },
+        { "id": "dagger", "name": "Dagger", "quantity": 2 },
+        { "id": "shortsword", "name": "Shortsword" },
+        { "id": "shortbow", "name": "Shortbow" },
+        { "id": "arrow", "name": "Arrow", "quantity": 20 },
+        { "id": "quiver", "name": "Quiver" },
+        { "id": "thieves-tools", "name": "Thieves' Tools" },
+        { "id": "burglars-pack", "name": "Burglar's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 100,
+      "items": []
+    }
+  ],
+  "sorcerer": [
+    {
+      "id": "A",
+      "gold": 28,
+      "items": [
+        { "id": "spear", "name": "Spear" },
+        { "id": "dagger", "name": "Dagger", "quantity": 2 },
+        { "id": "arcane-focus-crystal", "name": "Arcane Focus (crystal)" },
+        { "id": "dungeoneers-pack", "name": "Dungeoneer's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 50,
+      "items": []
+    }
+  ],
+  "warlock": [
+    {
+      "id": "A",
+      "gold": 15,
+      "items": [
+        { "id": "leather-armor", "name": "Leather Armor" },
+        { "id": "sickle", "name": "Sickle" },
+        { "id": "dagger", "name": "Dagger", "quantity": 2 },
+        { "id": "arcane-focus-orb", "name": "Arcane Focus (orb)" },
+        { "id": "book-occult-lore", "name": "Book (occult lore)" },
+        { "id": "scholars-pack", "name": "Scholar's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 100,
+      "items": []
+    }
+  ],
+  "wizard": [
+    {
+      "id": "A",
+      "gold": 5,
+      "items": [
+        { "id": "dagger", "name": "Dagger", "quantity": 2 },
+        {
+          "id": "arcane-focus-quarterstaff",
+          "name": "Arcane Focus (Quarterstaff)"
+        },
+        { "id": "robe", "name": "Robe" },
+        { "id": "spellbook", "name": "Spellbook" },
+        { "id": "scholars-pack", "name": "Scholar's Pack" }
+      ]
+    },
+    {
+      "id": "B",
+      "gold": 55,
+      "items": []
+    }
+  ]
+}

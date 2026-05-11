@@ -1,0 +1,230 @@
+{
+  "_global": {
+    "Ability Score Improvement": {
+      "summary": "Choose a feat or improve ability scores.",
+      "description": "When you gain this feature, you can choose a feat or increase one ability score by 2, or increase two different ability scores by 1 each. Unless a rule says otherwise, this feature cannot raise an ability score above 20.",
+      "tags": ["ASI / Feat"],
+      "actionType": "Level Up Choice",
+      "mechanicalEffect": "Choose a feat or apply ability score increases during character creation or level up.",
+      "showInCombat": false
+    },
+    "Epic Boon": {
+      "summary": "Choose an Epic Boon feat.",
+      "description": "You gain an Epic Boon feat or another level 19 advancement option allowed by your table. This app treats this as a high-level feat choice during character creation or level up.",
+      "tags": ["ASI / Feat"],
+      "actionType": "Level Up Choice",
+      "mechanicalEffect": "Choose an Epic Boon or compatible high-level feat option.",
+      "showInCombat": false
+    },
+    "Subclass Feature": {
+      "summary": "Gain the next feature from your chosen subclass.",
+      "description": "You gain the next feature granted by your chosen subclass at this class level. The exact feature depends on the subclass selected for this character.",
+      "tags": ["Subclass"],
+      "actionType": "Passive",
+      "mechanicalEffect": "Unlocks the subclass feature for this class level.",
+      "showInCombat": false
+    }
+  },
+  "artificer": {
+    "Spellcasting": {
+      "summary": "Cast prepared Artificer spells using Intelligence.",
+      "description": "You channel magic through crafted objects and Artificer tools. Your spellcasting ability is Intelligence, and your prepared spells, cantrips, and spell slots follow the Artificer progression. This app uses the local Artificer table to set those limits during creation and level up.",
+      "tags": ["Spellcasting"],
+      "actionType": "Passive",
+      "mechanicalEffect": "Prepare Artificer spells using Intelligence. The spell picker follows the Artificer cantrip, prepared spell, and half-caster slot progression.",
+      "showInCombat": false
+    },
+    "Tinker's Magic": {
+      "summary": "Create temporary adventuring gear with Tinker's Tools and know Mending.",
+      "description": "You know the Mending cantrip. While holding Tinker's Tools, you can take a Magic Action to create a temporary piece of adventuring gear in an unoccupied space within 5 feet. The item lasts until your next Long Rest. You can use this feature a number of times equal to your Intelligence modifier, minimum once, and you regain all uses on a Long Rest.",
+      "tags": ["Magic Item"],
+      "actionType": "Magic Action / Passive",
+      "usage": "Uses equal to Intelligence modifier, minimum 1",
+      "resourceCost": "1 Tinker's Magic use",
+      "recharge": "Long Rest",
+      "mechanicalEffect": "You know Mending. As a Magic Action with Tinker's Tools in hand, create a temporary mundane adventuring item in an empty space within 5 feet. The item vanishes when you finish a Long Rest.",
+      "showInCombat": true
+    },
+    "Replicate Magic Item": {
+      "summary": "Create temporary magic items from plans after a Long Rest.",
+      "description": "You learn arcane plans for magic items. At the end of a Long Rest, you can create magic items from plans you know, with both plans known and active items scaling by Artificer level. If a replicated item would push you over your active item limit, your oldest replicated item vanishes.",
+      "tags": ["Magic Item"],
+      "actionType": "Long Rest",
+      "usage": "Plans known and active magic items scale by Artificer level",
+      "resourceCost": "One active replicated item slot per created item",
+      "recharge": "Long Rest",
+      "mechanicalEffect": "Learn magic item plans and create temporary magic items at the end of a Long Rest. Your known plans and active item limit scale by Artificer level. If you exceed the limit, the oldest replicated item vanishes.",
+      "showInCombat": false
+    },
+    "Artificer Subclass": {
+      "summary": "Choose your Artificer specialization and unlock its features.",
+      "description": "You choose an Artificer subclass. That choice grants immediate subclass features and later subclass features when you reach the listed Artificer levels.",
+      "tags": ["Subclass"],
+      "actionType": "Passive",
+      "mechanicalEffect": "Choose an Artificer specialization and gain its features at the listed subclass levels.",
+      "showInCombat": false
+    },
+    "Magic Item Tinker": {
+      "summary": "Recharge, drain, or transform your replicated magic items.",
+      "description": "Your Replicate Magic Item feature gains extra control. You can recharge one of your replicated items that uses charges by spending a spell slot, drain a replicated item to create a temporary low-level spell slot, or transform a replicated item into another item based on a plan you know. Drain and Transmute refresh on a Long Rest.",
+      "tags": ["Magic Item"],
+      "actionType": "Bonus Action / Magic Action",
+      "usage": "Charge costs a spell slot; Drain and Transmute each refresh on Long Rest",
+      "resourceCost": "Spell slot or replicated magic item, by option",
+      "recharge": "Long Rest for Drain and Transmute",
+      "mechanicalEffect": "Your replicated items gain three interactions: recharge an item with charges by spending a spell slot, drain a replicated item into a temporary spell slot, or transform a replicated item into another plan you know.",
+      "showInCombat": true
+    },
+    "Flash of Genius": {
+      "summary": "Use a Reaction to add Intelligence to a failed check or save nearby.",
+      "description": "When you or a creature you can see within 30 feet fails an ability check or saving throw, you can take a Reaction to add your Intelligence modifier to the roll. You can use this feature a number of times equal to your Intelligence modifier, minimum once, and regain all uses on a Long Rest.",
+      "tags": ["Combat"],
+      "actionType": "Reaction",
+      "usage": "Uses equal to Intelligence modifier, minimum 1",
+      "resourceCost": "1 Flash of Genius use",
+      "recharge": "Long Rest; Short Rest recovery after Advanced Artifice",
+      "mechanicalEffect": "When you or a creature you can see within 30 feet fails an ability check or saving throw, use your Reaction to add your Intelligence modifier and potentially turn the failure into a success.",
+      "showInCombat": true
+    },
+    "Magic Item Adept": {
+      "summary": "Attune to four magic items.",
+      "description": "Your command of magic items improves. You can attune to up to four magic items at the same time, and your Replicate Magic Item options continue expanding through higher-level plans.",
+      "tags": ["Magic Item"],
+      "actionType": "Passive",
+      "usage": "Attune to up to 4 magic items",
+      "mechanicalEffect": "You can attune to up to four magic items at once.",
+      "showInCombat": false
+    },
+    "Spell-Storing Item": {
+      "summary": "Store an Artificer spell in an item for repeated use.",
+      "description": "After a Long Rest, you can store a level 1-3 Artificer spell in a Simple or Martial weapon or in an item usable as a spellcasting focus. A creature holding the item can use it to produce the stored spell effect with your spellcasting ability. The stored magic lasts until its uses run out or you store a new spell.",
+      "tags": ["Magic Item", "Spellcasting"],
+      "actionType": "Long Rest / Magic Action",
+      "usage": "Stored spell can be produced twice your Intelligence modifier times, minimum 2",
+      "resourceCost": "One weapon or spellcasting focus chosen after a Long Rest",
+      "recharge": "Long Rest",
+      "mechanicalEffect": "After a Long Rest, store a level 1-3 Artificer spell with a Magic Action casting time in a weapon or spellcasting focus. A creature holding the item can use it to produce the spell effect.",
+      "showInCombat": true
+    },
+    "Advanced Artifice": {
+      "summary": "Attune to five items and recover Flash of Genius on Short Rest.",
+      "description": "You can attune to up to five magic items at once. In addition, whenever you finish a Short Rest, you regain one expended use of Flash of Genius.",
+      "tags": ["Magic Item"],
+      "actionType": "Passive",
+      "usage": "Attune to up to 5 magic items and recover one Flash of Genius use on Short Rest",
+      "recharge": "Short Rest for Refreshed Genius",
+      "mechanicalEffect": "You can attune to up to five magic items. When you finish a Short Rest, regain one expended use of Flash of Genius.",
+      "showInCombat": false
+    },
+    "Magic Item Master": {
+      "summary": "Attune to six magic items.",
+      "description": "Your bond with magic items reaches its peak. You can attune to up to six magic items at once.",
+      "tags": ["Magic Item"],
+      "actionType": "Passive",
+      "usage": "Attune to up to 6 magic items",
+      "mechanicalEffect": "You can attune to up to six magic items at once.",
+      "showInCombat": false
+    },
+    "Soul of Artifice": {
+      "summary": "Sacrifice replicated items to avoid dropping, and refresh Flash of Genius faster.",
+      "description": "Your replicated magic items can keep you alive and sharpen your genius. If you would drop to 0 Hit Points without dying outright, you can disintegrate one or more replicated Uncommon or Rare items and remain at 20 Hit Points per item destroyed. If you are attuned to at least one magic item, finishing a Short Rest restores all expended uses of Flash of Genius.",
+      "tags": ["Combat", "Magic Item"],
+      "actionType": "No Action / Passive",
+      "usage": "Cheat Death consumes replicated Uncommon or Rare items; Magical Guidance refreshes Flash of Genius on Short Rest",
+      "resourceCost": "One or more replicated Uncommon or Rare magic items for Cheat Death",
+      "recharge": "Short Rest for Magical Guidance",
+      "mechanicalEffect": "If you drop to 0 Hit Points without dying outright, disintegrate replicated Uncommon or Rare magic items to stay standing with 20 Hit Points per item. If you are attuned to a magic item, a Short Rest restores all Flash of Genius uses.",
+      "showInCombat": true
+    }
+  },
+  "psion": {
+    "Spellcasting": {
+      "summary": "Cast prepared Psion spells using Intelligence.",
+      "description": "You shape magic through disciplined psionic force. Your spellcasting ability is Intelligence. Psion spellcasting also ignores many verbal and material component requirements, except when the material component has a cost or is consumed.",
+      "tags": ["Spellcasting", "Psionic"],
+      "actionType": "Passive",
+      "mechanicalEffect": "Prepare Psion spells using Intelligence. Psion spellcasting removes many verbal and material requirements, except costly or consumed material components.",
+      "showInCombat": false
+    },
+    "Psionic Power": {
+      "summary": "Use Psionic Energy Dice to fuel telekinesis, telepathy, and later powers.",
+      "description": "You gain Psionic Energy Dice, a pool of dice that fuels several Psion features. Your early powers let you push or pull creatures with telekinesis and extend your telepathic range. You regain one expended die on a Short Rest and all expended dice on a Long Rest.",
+      "tags": ["Combat", "Psionic"],
+      "actionType": "Bonus Action / No Action",
+      "usage": "Psionic Energy Dice scale by Psion level; regain one on Short Rest and all on Long Rest",
+      "resourceCost": "Psionic Energy Dice, as specified by each feature",
+      "recharge": "Short Rest and Long Rest",
+      "mechanicalEffect": "Gain Psionic Energy Dice that fuel Psion features. Your starting powers include telekinetic movement and telepathic range options, and some Psion features spend or roll these dice.",
+      "showInCombat": true
+    },
+    "Subtle Telekinesis": {
+      "summary": "Improve Mage Hand with subtle, invisible casting.",
+      "description": "You know Mage Hand. You can cast it without Somatic components, and you can make the spectral hand Invisible when you cast it.",
+      "tags": ["Psionic"],
+      "actionType": "Passive",
+      "mechanicalEffect": "You know Mage Hand, can cast it without Somatic components, and can make the hand Invisible when you cast it.",
+      "showInCombat": false
+    },
+    "Psionic Discipline": {
+      "summary": "Learn additional psionic techniques fueled by Energy Dice.",
+      "description": "You learn psionic discipline options fueled by Psionic Energy Dice. You gain two options at level 2 and gain one additional option at Psion levels 5, 10, 13, and 17. Unless an option says otherwise, you use only one discipline each turn.",
+      "tags": ["Combat", "Psionic"],
+      "actionType": "Varies by Discipline",
+      "usage": "2 options at level 2, plus one more at levels 5, 10, 13, and 17",
+      "resourceCost": "Psionic Energy Dice, as specified by the discipline",
+      "mechanicalEffect": "Learn discipline options fueled by Psionic Energy Dice. You normally use only one discipline each turn unless the option says otherwise.",
+      "showInCombat": true
+    },
+    "Psion Subclass": {
+      "summary": "Choose your psionic specialty.",
+      "description": "You choose a Psion subclass. That choice grants immediate subclass features and later subclass features when you reach the listed Psion levels.",
+      "tags": ["Subclass", "Psionic"],
+      "actionType": "Passive",
+      "mechanicalEffect": "Choose a Psion specialty and gain its features at the listed subclass levels.",
+      "showInCombat": false
+    },
+    "Psionic Restoration": {
+      "summary": "Meditate for 1 minute to regain expended Psionic Energy Dice.",
+      "description": "You can spend 1 minute in focused meditation to regain expended Psionic Energy Dice. After using this feature, you must finish a Long Rest before using it again.",
+      "tags": ["Psionic"],
+      "actionType": "1 Minute",
+      "usage": "Once per Long Rest",
+      "resourceCost": "Psionic Restoration use",
+      "recharge": "Long Rest",
+      "mechanicalEffect": "After a 1-minute meditation, regain expended Psionic Energy Dice. Once used, this recovery returns after a Long Rest.",
+      "showInCombat": true
+    },
+    "Psionic Surge": {
+      "summary": "Spend a Hit Point Die to raise low Psionic Energy Dice rolls.",
+      "description": "After you roll one or more Psionic Energy Dice, you can spend one Hit Point Die to stabilize the result. Any Psionic Energy Die that rolled 1, 2, or 3 is treated as a 4.",
+      "tags": ["Combat", "Psionic"],
+      "actionType": "No Action",
+      "usage": "After rolling one or more Psionic Energy Dice",
+      "resourceCost": "1 Hit Point Die",
+      "recharge": "Uses Hit Point Dice",
+      "mechanicalEffect": "After rolling Psionic Energy Dice, spend one Hit Point Die to treat any roll of 1, 2, or 3 on those dice as a 4.",
+      "showInCombat": true
+    },
+    "Psionic Reserves": {
+      "summary": "Recover Psionic Energy Dice when Initiative is rolled.",
+      "description": "When Initiative is rolled, your mind snaps back into fighting focus. If you have fewer than four Psionic Energy Dice available, you regain expended dice until you have four.",
+      "tags": ["Combat", "Psionic"],
+      "actionType": "Initiative",
+      "usage": "Triggers when Initiative is rolled",
+      "recharge": "Initiative",
+      "mechanicalEffect": "When Initiative is rolled, regain expended Psionic Energy Dice until you have four if you currently have fewer than four.",
+      "showInCombat": true
+    },
+    "Enkindled Lifeforce": {
+      "summary": "Spend Hit Point Dice for extra Psionic Energy Dice on a feature roll.",
+      "description": "Once per turn, after rolling Psionic Energy Dice for a Psion feature or discipline, you can spend one or two Hit Point Dice. For each Hit Point Die spent, roll an extra Psionic Energy Die and add it to the total without expending that extra Energy Die.",
+      "tags": ["Combat", "Psionic"],
+      "actionType": "No Action",
+      "usage": "Once per turn",
+      "resourceCost": "1 or 2 Hit Point Dice",
+      "recharge": "Uses Hit Point Dice",
+      "mechanicalEffect": "Once per turn after rolling Psionic Energy Dice for a Psion feature or discipline, spend one or two Hit Point Dice to roll extra Psionic Energy Dice and add them to the total.",
+      "showInCombat": true
+    }
+  }
+}

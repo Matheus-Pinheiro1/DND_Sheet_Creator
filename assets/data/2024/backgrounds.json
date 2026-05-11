@@ -1,0 +1,416 @@
+[
+  {
+    "index": "acolyte",
+    "name": "Acolyte",
+    "starting_proficiencies": [
+      { "index": "skill-insight" },
+      { "index": "skill-religion" }
+    ],
+    "ability_options": ["int", "wis", "cha"],
+    "feat": {
+      "id": "magic-initiate-cleric",
+      "name": "Magic Initiate (Cleric)"
+    },
+    "tool_proficiencies": ["Calligrapher's Supplies"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 8,
+        "items": [
+          { "id": "calligraphers-supplies", "name": "Calligrapher's Supplies" },
+          { "id": "book-prayers", "name": "Book (prayers)" },
+          { "id": "holy-symbol", "name": "Holy Symbol" },
+          { "id": "parchment", "name": "Parchment (10 sheets)" },
+          { "id": "robe", "name": "Robe" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You devoted part of your life to service, study, and rites tied to a temple, shrine, monastery, or other sacred community. That life taught you theology, ceremony, and disciplined practice."
+  },
+  {
+    "index": "artisan",
+    "name": "Artisan",
+    "starting_proficiencies": [
+      { "index": "skill-investigation" },
+      { "index": "skill-persuasion" }
+    ],
+    "ability_options": ["str", "dex", "int"],
+    "feat": { "id": "crafter", "name": "Crafter" },
+    "tool_proficiencies": ["One kind of Artisan's Tools"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 32,
+        "items": [
+          { "id": "artisans-tools", "name": "Artisan's Tools" },
+          { "id": "pouch", "name": "Pouch", "quantity": 2 },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You learned to make, repair, and price useful objects. Time spent at a tradebench taught you craft knowledge, negotiation, and practical problem-solving."
+  },
+  {
+    "index": "charlatan",
+    "name": "Charlatan",
+    "starting_proficiencies": [
+      { "index": "skill-deception" },
+      { "index": "skill-sleight-of-hand" }
+    ],
+    "ability_options": ["dex", "con", "cha"],
+    "feat": { "id": "skilled", "name": "Skilled" },
+    "tool_proficiencies": ["Forgery Kit"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 15,
+        "items": [
+          { "id": "forgery-kit", "name": "Forgery Kit" },
+          { "id": "fine-clothes", "name": "Fine Clothes" },
+          { "id": "disguise-pieces", "name": "Disguise pieces" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You survived by manipulating appearances, stories, and expectations. Whether through stagecraft, fraud, or confidence games, you learned how to misdirect other people."
+  },
+  {
+    "index": "criminal",
+    "name": "Criminal",
+    "starting_proficiencies": [
+      { "index": "skill-sleight-of-hand" },
+      { "index": "skill-stealth" }
+    ],
+    "ability_options": ["dex", "con", "int"],
+    "feat": { "id": "alert", "name": "Alert" },
+    "tool_proficiencies": ["Thieves' Tools"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 16,
+        "items": [
+          { "id": "dagger", "name": "Dagger", "quantity": 2 },
+          { "id": "thieves-tools", "name": "Thieves' Tools" },
+          { "id": "crowbar", "name": "Crowbar" },
+          { "id": "pouch", "name": "Pouch", "quantity": 2 },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You spent time around burglary, smuggling, theft, or other illegal work. That experience trained your hands, your nerves, and your instinct for danger."
+  },
+  {
+    "index": "entertainer",
+    "name": "Entertainer",
+    "starting_proficiencies": [
+      { "index": "skill-acrobatics" },
+      { "index": "skill-performance" }
+    ],
+    "ability_options": ["str", "dex", "cha"],
+    "feat": { "id": "musician", "name": "Musician" },
+    "tool_proficiencies": ["One Musical Instrument"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 11,
+        "items": [
+          { "id": "musical-instrument", "name": "Musical Instrument" },
+          { "id": "costume", "name": "Costume" },
+          { "id": "mirror", "name": "Mirror" },
+          { "id": "perfume", "name": "Perfume" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You performed for crowds as a musician, dancer, actor, or similar showperson. Your training taught timing, movement, crowd awareness, and stage presence."
+  },
+  {
+    "index": "farmer",
+    "name": "Farmer",
+    "starting_proficiencies": [
+      { "index": "skill-animal-handling" },
+      { "index": "skill-nature" }
+    ],
+    "ability_options": ["str", "con", "wis"],
+    "feat": { "id": "tough", "name": "Tough" },
+    "tool_proficiencies": ["Carpenter's Tools"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 30,
+        "items": [
+          { "id": "sickle", "name": "Sickle" },
+          { "id": "carpenters-tools", "name": "Carpenter's Tools" },
+          { "id": "shovel", "name": "Shovel" },
+          { "id": "iron-pot", "name": "Iron Pot" },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You worked the land, cared for animals, and learned the rhythm of weather and seasons. Your labor built endurance and practical knowledge."
+  },
+  {
+    "index": "guard",
+    "name": "Guard",
+    "starting_proficiencies": [
+      { "index": "skill-athletics" },
+      { "index": "skill-perception" }
+    ],
+    "ability_options": ["str", "int", "wis"],
+    "feat": { "id": "alert", "name": "Alert" },
+    "tool_proficiencies": ["None"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 12,
+        "items": [
+          { "id": "spear", "name": "Spear" },
+          { "id": "light-crossbow", "name": "Light Crossbow" },
+          { "id": "bolt", "name": "Bolt", "quantity": 20 },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You were charged with watching for trouble, protecting people or property, and reacting quickly when danger appeared."
+  },
+  {
+    "index": "guide",
+    "name": "Guide",
+    "starting_proficiencies": [
+      { "index": "skill-stealth" },
+      { "index": "skill-survival" }
+    ],
+    "ability_options": ["dex", "wis", "cha"],
+    "feat": { "id": "magic-initiate-druid", "name": "Magic Initiate (Druid)" },
+    "tool_proficiencies": ["Cartographer's Tools"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 8,
+        "items": [
+          { "id": "shortbow", "name": "Shortbow" },
+          { "id": "arrow", "name": "Arrow", "quantity": 20 },
+          { "id": "cartographers-tools", "name": "Cartographer's Tools" },
+          { "id": "bedroll", "name": "Bedroll" },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You led travelers through dangerous or unfamiliar places. That life sharpened your stealth, fieldcraft, and knowledge of the natural world."
+  },
+  {
+    "index": "hermit",
+    "name": "Hermit",
+    "starting_proficiencies": [
+      { "index": "skill-medicine" },
+      { "index": "skill-religion" }
+    ],
+    "ability_options": ["con", "wis", "cha"],
+    "feat": { "id": "healer", "name": "Healer" },
+    "tool_proficiencies": ["Herbalism Kit"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 16,
+        "items": [
+          { "id": "herbalism-kit", "name": "Herbalism Kit" },
+          { "id": "bedroll", "name": "Bedroll" },
+          { "id": "lamp", "name": "Lamp" },
+          { "id": "oil", "name": "Oil" },
+          { "id": "robe", "name": "Robe" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You lived apart from society for a time, focused on reflection, healing, prayer, or quiet study. That solitude gave you insight and self-reliance."
+  },
+  {
+    "index": "merchant",
+    "name": "Merchant",
+    "starting_proficiencies": [
+      { "index": "skill-animal-handling" },
+      { "index": "skill-persuasion" }
+    ],
+    "ability_options": ["con", "int", "cha"],
+    "feat": { "id": "lucky", "name": "Lucky" },
+    "tool_proficiencies": ["Navigator's Tools"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 22,
+        "items": [
+          { "id": "navigators-tools", "name": "Navigator's Tools" },
+          { "id": "ledger", "name": "Ledger" },
+          { "id": "fine-clothes", "name": "Fine Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You bought, sold, and moved goods for profit. Deal-making, route planning, and calculated risk became part of your everyday life."
+  },
+  {
+    "index": "noble",
+    "name": "Noble",
+    "starting_proficiencies": [
+      { "index": "skill-history" },
+      { "index": "skill-persuasion" }
+    ],
+    "ability_options": ["str", "int", "cha"],
+    "feat": { "id": "skilled", "name": "Skilled" },
+    "tool_proficiencies": ["One Gaming Set"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 29,
+        "items": [
+          { "id": "fine-clothes", "name": "Fine Clothes" },
+          { "id": "signet-ring", "name": "Signet Ring" },
+          { "id": "scroll-of-pedigree", "name": "Scroll of Pedigree" },
+          { "id": "gaming-set", "name": "Gaming Set" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You were raised around rank, title, and privilege. Courtly life taught protocol, history, influence, and the expectations of authority."
+  },
+  {
+    "index": "sage",
+    "name": "Sage",
+    "starting_proficiencies": [
+      { "index": "skill-arcana" },
+      { "index": "skill-history" }
+    ],
+    "ability_options": ["con", "int", "wis"],
+    "feat": {
+      "id": "magic-initiate-wizard",
+      "name": "Magic Initiate (Wizard)"
+    },
+    "tool_proficiencies": ["Calligrapher's Supplies"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 8,
+        "items": [
+          { "id": "quarterstaff", "name": "Quarterstaff" },
+          { "id": "calligraphers-supplies", "name": "Calligrapher's Supplies" },
+          { "id": "book-history", "name": "Book (history)" },
+          { "id": "parchment", "name": "Parchment (8 sheets)" },
+          { "id": "robe", "name": "Robe" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You spent years among books, scrolls, and lectures, building a foundation of deep study. Your training emphasized lore, research, and rudimentary magical theory."
+  },
+  {
+    "index": "sailor",
+    "name": "Sailor",
+    "starting_proficiencies": [
+      { "index": "skill-acrobatics" },
+      { "index": "skill-perception" }
+    ],
+    "ability_options": ["str", "dex", "wis"],
+    "feat": { "id": "tavern-brawler", "name": "Tavern Brawler" },
+    "tool_proficiencies": ["Navigator's Tools"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 20,
+        "items": [
+          { "id": "dagger", "name": "Dagger" },
+          { "id": "navigators-tools", "name": "Navigator's Tools" },
+          { "id": "rope", "name": "Rope" },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You lived and worked aboard ships, where balance, quick hands, and sharp senses mattered every day."
+  },
+  {
+    "index": "scribe",
+    "name": "Scribe",
+    "starting_proficiencies": [
+      { "index": "skill-investigation" },
+      { "index": "skill-perception" }
+    ],
+    "ability_options": ["dex", "int", "wis"],
+    "feat": { "id": "skilled", "name": "Skilled" },
+    "tool_proficiencies": ["Calligrapher's Supplies"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 23,
+        "items": [
+          { "id": "calligraphers-supplies", "name": "Calligrapher's Supplies" },
+          { "id": "lamp", "name": "Lamp" },
+          { "id": "oil", "name": "Oil" },
+          { "id": "parchment", "name": "Parchment (12 sheets)" },
+          { "id": "fine-clothes", "name": "Fine Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You copied records, letters, and legal or arcane texts for patrons. Accuracy, observation, and careful reading became second nature."
+  },
+  {
+    "index": "soldier",
+    "name": "Soldier",
+    "starting_proficiencies": [
+      { "index": "skill-athletics" },
+      { "index": "skill-intimidation" }
+    ],
+    "ability_options": ["str", "dex", "con"],
+    "feat": { "id": "savage-attacker", "name": "Savage Attacker" },
+    "tool_proficiencies": ["One Gaming Set"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 14,
+        "items": [
+          { "id": "spear", "name": "Spear" },
+          { "id": "shortbow", "name": "Shortbow" },
+          { "id": "arrow", "name": "Arrow", "quantity": 20 },
+          { "id": "gaming-set", "name": "Gaming Set" },
+          { "id": "healers-kit", "name": "Healer's Kit" },
+          { "id": "quiver", "name": "Quiver" },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "Military service trained you for discipline, violence, and survival under pressure. You learned to act decisively and endure hardship."
+  },
+  {
+    "index": "wayfarer",
+    "name": "Wayfarer",
+    "starting_proficiencies": [
+      { "index": "skill-insight" },
+      { "index": "skill-stealth" }
+    ],
+    "ability_options": ["dex", "wis", "cha"],
+    "feat": { "id": "lucky", "name": "Lucky" },
+    "tool_proficiencies": ["Thieves' Tools"],
+    "equipment_options": [
+      {
+        "id": "A",
+        "gold": 16,
+        "items": [
+          { "id": "dagger", "name": "Dagger", "quantity": 2 },
+          { "id": "thieves-tools", "name": "Thieves' Tools" },
+          { "id": "gaming-set", "name": "Gaming Set" },
+          { "id": "bedroll", "name": "Bedroll" },
+          { "id": "travelers-clothes", "name": "Traveler's Clothes" }
+        ]
+      },
+      { "id": "B", "gold": 50, "items": [] }
+    ],
+    "description": "You lived by moving from place to place, relying on quick instincts, light steps, and the good fortune to survive bad situations."
+  }
+]

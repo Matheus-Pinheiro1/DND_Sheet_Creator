@@ -1,0 +1,2122 @@
+{
+  "types": [
+    "aberration",
+    "beast",
+    "celestial",
+    "construct",
+    "dragon",
+    "elemental",
+    "fey",
+    "fiend",
+    "giant",
+    "humanoid",
+    "monstrosity",
+    "ooze",
+    "plant",
+    "undead"
+  ],
+  "sizes": [
+    "tiny",
+    "small",
+    "medium",
+    "large",
+    "huge",
+    "gargantuan"
+  ],
+  "monsters": [
+    {
+      "index": "aboleth",
+      "cr": 10.0,
+      "type": "aberration",
+      "size": "large"
+    },
+    {
+      "index": "chuul",
+      "cr": 4.0,
+      "type": "aberration",
+      "size": "large"
+    },
+    {
+      "index": "cloaker",
+      "cr": 8.0,
+      "type": "aberration",
+      "size": "large"
+    },
+    {
+      "index": "flumph",
+      "cr": 0.125,
+      "type": "aberration",
+      "size": "small"
+    },
+    {
+      "index": "gibbering-mouther",
+      "cr": 2.0,
+      "type": "aberration",
+      "size": "medium"
+    },
+    {
+      "index": "grell",
+      "cr": 3.0,
+      "type": "aberration",
+      "size": "medium"
+    },
+    {
+      "index": "grimlock",
+      "cr": 0.25,
+      "type": "aberration",
+      "size": "medium"
+    },
+    {
+      "index": "intellect-devourer",
+      "cr": 2.0,
+      "type": "aberration",
+      "size": "tiny"
+    },
+    {
+      "index": "mind-flayer",
+      "cr": 7.0,
+      "type": "aberration",
+      "size": "medium"
+    },
+    {
+      "index": "nothic",
+      "cr": 2.0,
+      "type": "aberration",
+      "size": "medium"
+    },
+    {
+      "index": "otyugh",
+      "cr": 5.0,
+      "type": "aberration",
+      "size": "large"
+    },
+    {
+      "index": "roper",
+      "cr": 5.0,
+      "type": "aberration",
+      "size": "large"
+    },
+    {
+      "index": "spectator",
+      "cr": 3.0,
+      "type": "aberration",
+      "size": "medium"
+    },
+    {
+      "index": "ape",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "axe-beak",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "baboon",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "badger",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "bat",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "black-bear",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "blood-hawk",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "boar",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "brown-bear",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "camel",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "cat",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "constrictor-snake",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "crab",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "crocodile",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "deer",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "dire-wolf",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "draft-horse",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "eagle",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "elephant",
+      "cr": 4.0,
+      "type": "beast",
+      "size": "huge"
+    },
+    {
+      "index": "elk",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "flying-snake",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "frog",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "giant-ape",
+      "cr": 7.0,
+      "type": "beast",
+      "size": "huge"
+    },
+    {
+      "index": "giant-badger",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "giant-bat",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-centipede",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "giant-crab",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "giant-crocodile",
+      "cr": 5.0,
+      "type": "beast",
+      "size": "huge"
+    },
+    {
+      "index": "giant-eagle",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-elk",
+      "cr": 2.0,
+      "type": "beast",
+      "size": "huge"
+    },
+    {
+      "index": "giant-fire-beetle",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "giant-frog",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "giant-goat",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-hyena",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-lizard",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-octopus",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-owl",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-poisonous-snake",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "giant-rat",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "giant-scorpion",
+      "cr": 3.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-sea-horse",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-shark",
+      "cr": 5.0,
+      "type": "beast",
+      "size": "huge"
+    },
+    {
+      "index": "giant-spider",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-toad",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-vulture",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "giant-wasp",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "giant-weasel",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "giant-wolf-spider",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "goat",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "hawk",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "hyena",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "jackal",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "killer-whale",
+      "cr": 3.0,
+      "type": "beast",
+      "size": "huge"
+    },
+    {
+      "index": "lion",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "lizard",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "mammoth",
+      "cr": 6.0,
+      "type": "beast",
+      "size": "huge"
+    },
+    {
+      "index": "mastiff",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "mule",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "octopus",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "small"
+    },
+    {
+      "index": "owl",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "panther",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "poisonous-snake",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "polar-bear",
+      "cr": 2.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "pony",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "quipper",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "rat",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "raven",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "reef-shark",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "rhinoceros",
+      "cr": 2.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "riding-horse",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "saber-toothed-tiger",
+      "cr": 2.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "scorpion",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "sea-horse",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "spider",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "stirge",
+      "cr": 0.125,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "swarm-of-bats",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "swarm-of-insects",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "swarm-of-poisonous-snakes",
+      "cr": 2.0,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "swarm-of-quippers",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "swarm-of-rats",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "swarm-of-ravens",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "tiger",
+      "cr": 1.0,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "vulture",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "warhorse",
+      "cr": 0.5,
+      "type": "beast",
+      "size": "large"
+    },
+    {
+      "index": "weasel",
+      "cr": 0.0,
+      "type": "beast",
+      "size": "tiny"
+    },
+    {
+      "index": "wolf",
+      "cr": 0.25,
+      "type": "beast",
+      "size": "medium"
+    },
+    {
+      "index": "couatl",
+      "cr": 4.0,
+      "type": "celestial",
+      "size": "medium"
+    },
+    {
+      "index": "deva",
+      "cr": 10.0,
+      "type": "celestial",
+      "size": "medium"
+    },
+    {
+      "index": "pegasus",
+      "cr": 2.0,
+      "type": "celestial",
+      "size": "large"
+    },
+    {
+      "index": "planetar",
+      "cr": 16.0,
+      "type": "celestial",
+      "size": "large"
+    },
+    {
+      "index": "solar",
+      "cr": 21.0,
+      "type": "celestial",
+      "size": "large"
+    },
+    {
+      "index": "unicorn",
+      "cr": 5.0,
+      "type": "celestial",
+      "size": "large"
+    },
+    {
+      "index": "animated-armor",
+      "cr": 1.0,
+      "type": "construct",
+      "size": "medium"
+    },
+    {
+      "index": "clay-golem",
+      "cr": 9.0,
+      "type": "construct",
+      "size": "large"
+    },
+    {
+      "index": "flesh-golem",
+      "cr": 5.0,
+      "type": "construct",
+      "size": "medium"
+    },
+    {
+      "index": "flying-sword",
+      "cr": 0.25,
+      "type": "construct",
+      "size": "small"
+    },
+    {
+      "index": "helmed-horror",
+      "cr": 4.0,
+      "type": "construct",
+      "size": "large"
+    },
+    {
+      "index": "homunculus",
+      "cr": 0.0,
+      "type": "construct",
+      "size": "tiny"
+    },
+    {
+      "index": "iron-golem",
+      "cr": 16.0,
+      "type": "construct",
+      "size": "large"
+    },
+    {
+      "index": "shield-guardian",
+      "cr": 7.0,
+      "type": "construct",
+      "size": "large"
+    },
+    {
+      "index": "stone-golem",
+      "cr": 10.0,
+      "type": "construct",
+      "size": "large"
+    },
+    {
+      "index": "black-dragon-wyrmling",
+      "cr": 2.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "blue-dragon-wyrmling",
+      "cr": 3.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "brass-dragon-wyrmling",
+      "cr": 1.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "bronze-dragon-wyrmling",
+      "cr": 2.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "copper-dragon-wyrmling",
+      "cr": 1.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "gold-dragon-wyrmling",
+      "cr": 3.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "green-dragon-wyrmling",
+      "cr": 2.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "red-dragon-wyrmling",
+      "cr": 4.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "silver-dragon-wyrmling",
+      "cr": 2.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "white-dragon-wyrmling",
+      "cr": 2.0,
+      "type": "dragon",
+      "size": "medium"
+    },
+    {
+      "index": "young-black-dragon",
+      "cr": 7.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-blue-dragon",
+      "cr": 9.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-brass-dragon",
+      "cr": 6.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-bronze-dragon",
+      "cr": 8.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-copper-dragon",
+      "cr": 7.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-gold-dragon",
+      "cr": 10.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-green-dragon",
+      "cr": 8.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-red-dragon",
+      "cr": 10.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-silver-dragon",
+      "cr": 9.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "young-white-dragon",
+      "cr": 6.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "adult-black-dragon",
+      "cr": 14.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-blue-dragon",
+      "cr": 16.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-brass-dragon",
+      "cr": 13.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-bronze-dragon",
+      "cr": 15.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-copper-dragon",
+      "cr": 14.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-gold-dragon",
+      "cr": 17.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-green-dragon",
+      "cr": 15.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-red-dragon",
+      "cr": 17.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-silver-dragon",
+      "cr": 16.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "adult-white-dragon",
+      "cr": 13.0,
+      "type": "dragon",
+      "size": "huge"
+    },
+    {
+      "index": "ancient-black-dragon",
+      "cr": 21.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-blue-dragon",
+      "cr": 23.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-brass-dragon",
+      "cr": 20.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-bronze-dragon",
+      "cr": 22.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-copper-dragon",
+      "cr": 21.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-gold-dragon",
+      "cr": 24.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-green-dragon",
+      "cr": 22.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-red-dragon",
+      "cr": 24.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-silver-dragon",
+      "cr": 23.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "ancient-white-dragon",
+      "cr": 20.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "dragon-turtle",
+      "cr": 17.0,
+      "type": "dragon",
+      "size": "gargantuan"
+    },
+    {
+      "index": "pseudodragon",
+      "cr": 0.25,
+      "type": "dragon",
+      "size": "tiny"
+    },
+    {
+      "index": "wyvern",
+      "cr": 6.0,
+      "type": "dragon",
+      "size": "large"
+    },
+    {
+      "index": "air-elemental",
+      "cr": 5.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "azer",
+      "cr": 2.0,
+      "type": "elemental",
+      "size": "medium"
+    },
+    {
+      "index": "dao",
+      "cr": 11.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "djinni",
+      "cr": 11.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "dust-mephit",
+      "cr": 0.5,
+      "type": "elemental",
+      "size": "small"
+    },
+    {
+      "index": "earth-elemental",
+      "cr": 5.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "efreeti",
+      "cr": 11.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "fire-elemental",
+      "cr": 5.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "fire-mephit",
+      "cr": 0.5,
+      "type": "elemental",
+      "size": "small"
+    },
+    {
+      "index": "galeb-duhr",
+      "cr": 6.0,
+      "type": "elemental",
+      "size": "medium"
+    },
+    {
+      "index": "gargoyle",
+      "cr": 2.0,
+      "type": "elemental",
+      "size": "medium"
+    },
+    {
+      "index": "ice-mephit",
+      "cr": 0.5,
+      "type": "elemental",
+      "size": "small"
+    },
+    {
+      "index": "invisible-stalker",
+      "cr": 6.0,
+      "type": "elemental",
+      "size": "medium"
+    },
+    {
+      "index": "magmin",
+      "cr": 0.5,
+      "type": "elemental",
+      "size": "small"
+    },
+    {
+      "index": "marid",
+      "cr": 11.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "mud-mephit",
+      "cr": 0.25,
+      "type": "elemental",
+      "size": "small"
+    },
+    {
+      "index": "salamander",
+      "cr": 5.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "smoke-mephit",
+      "cr": 0.25,
+      "type": "elemental",
+      "size": "small"
+    },
+    {
+      "index": "steam-mephit",
+      "cr": 0.25,
+      "type": "elemental",
+      "size": "small"
+    },
+    {
+      "index": "water-elemental",
+      "cr": 5.0,
+      "type": "elemental",
+      "size": "large"
+    },
+    {
+      "index": "xorn",
+      "cr": 5.0,
+      "type": "elemental",
+      "size": "medium"
+    },
+    {
+      "index": "blink-dog",
+      "cr": 0.25,
+      "type": "fey",
+      "size": "medium"
+    },
+    {
+      "index": "centaur",
+      "cr": 2.0,
+      "type": "fey",
+      "size": "large"
+    },
+    {
+      "index": "dryad",
+      "cr": 1.0,
+      "type": "fey",
+      "size": "medium"
+    },
+    {
+      "index": "green-hag",
+      "cr": 3.0,
+      "type": "fey",
+      "size": "medium"
+    },
+    {
+      "index": "night-hag",
+      "cr": 5.0,
+      "type": "fey",
+      "size": "medium"
+    },
+    {
+      "index": "pixie",
+      "cr": 0.25,
+      "type": "fey",
+      "size": "tiny"
+    },
+    {
+      "index": "satyr",
+      "cr": 0.5,
+      "type": "fey",
+      "size": "medium"
+    },
+    {
+      "index": "sea-hag",
+      "cr": 2.0,
+      "type": "fey",
+      "size": "medium"
+    },
+    {
+      "index": "sprite",
+      "cr": 0.25,
+      "type": "fey",
+      "size": "tiny"
+    },
+    {
+      "index": "balor",
+      "cr": 19.0,
+      "type": "fiend",
+      "size": "huge"
+    },
+    {
+      "index": "barbed-devil",
+      "cr": 5.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "bearded-devil",
+      "cr": 3.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "bone-devil",
+      "cr": 9.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "cambion",
+      "cr": 5.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "chain-devil",
+      "cr": 8.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "chasme",
+      "cr": 6.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "dretch",
+      "cr": 0.25,
+      "type": "fiend",
+      "size": "small"
+    },
+    {
+      "index": "erinyes",
+      "cr": 12.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "glabrezu",
+      "cr": 9.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "goristro",
+      "cr": 17.0,
+      "type": "fiend",
+      "size": "huge"
+    },
+    {
+      "index": "hezrou",
+      "cr": 8.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "horned-devil",
+      "cr": 11.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "ice-devil",
+      "cr": 14.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "imp",
+      "cr": 1.0,
+      "type": "fiend",
+      "size": "tiny"
+    },
+    {
+      "index": "lemure",
+      "cr": 0.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "marilith",
+      "cr": 16.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "nalfeshnee",
+      "cr": 13.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "nightmare",
+      "cr": 3.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "pit-fiend",
+      "cr": 20.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "quasit",
+      "cr": 1.0,
+      "type": "fiend",
+      "size": "tiny"
+    },
+    {
+      "index": "rakshasa",
+      "cr": 13.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "shadow-demon",
+      "cr": 4.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "spined-devil",
+      "cr": 2.0,
+      "type": "fiend",
+      "size": "small"
+    },
+    {
+      "index": "succubus",
+      "cr": 4.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "vrock",
+      "cr": 6.0,
+      "type": "fiend",
+      "size": "large"
+    },
+    {
+      "index": "yochlol",
+      "cr": 10.0,
+      "type": "fiend",
+      "size": "medium"
+    },
+    {
+      "index": "cloud-giant",
+      "cr": 9.0,
+      "type": "giant",
+      "size": "huge"
+    },
+    {
+      "index": "cyclops",
+      "cr": 6.0,
+      "type": "giant",
+      "size": "huge"
+    },
+    {
+      "index": "ettin",
+      "cr": 4.0,
+      "type": "giant",
+      "size": "large"
+    },
+    {
+      "index": "fire-giant",
+      "cr": 9.0,
+      "type": "giant",
+      "size": "huge"
+    },
+    {
+      "index": "frost-giant",
+      "cr": 8.0,
+      "type": "giant",
+      "size": "huge"
+    },
+    {
+      "index": "hill-giant",
+      "cr": 5.0,
+      "type": "giant",
+      "size": "huge"
+    },
+    {
+      "index": "ogre",
+      "cr": 2.0,
+      "type": "giant",
+      "size": "large"
+    },
+    {
+      "index": "oni",
+      "cr": 7.0,
+      "type": "giant",
+      "size": "large"
+    },
+    {
+      "index": "stone-giant",
+      "cr": 7.0,
+      "type": "giant",
+      "size": "huge"
+    },
+    {
+      "index": "storm-giant",
+      "cr": 13.0,
+      "type": "giant",
+      "size": "huge"
+    },
+    {
+      "index": "troll",
+      "cr": 5.0,
+      "type": "giant",
+      "size": "large"
+    },
+    {
+      "index": "acolyte",
+      "cr": 0.25,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "archmage",
+      "cr": 12.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "assassin",
+      "cr": 8.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "bandit",
+      "cr": 0.125,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "bandit-captain",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "berserker",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "bugbear",
+      "cr": 1.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "bugbear-chief",
+      "cr": 3.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "commoner",
+      "cr": 0.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "cult-fanatic",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "cultist",
+      "cr": 0.125,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "druid",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "gladiator",
+      "cr": 5.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "gnoll",
+      "cr": 0.5,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "gnoll-fang-of-yeenoghu",
+      "cr": 4.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "gnoll-pack-lord",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "goblin",
+      "cr": 0.25,
+      "type": "humanoid",
+      "size": "small"
+    },
+    {
+      "index": "goblin-boss",
+      "cr": 1.0,
+      "type": "humanoid",
+      "size": "small"
+    },
+    {
+      "index": "guard",
+      "cr": 0.125,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "hobgoblin",
+      "cr": 0.5,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "hobgoblin-captain",
+      "cr": 3.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "hobgoblin-warlord",
+      "cr": 6.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "kobold",
+      "cr": 0.125,
+      "type": "humanoid",
+      "size": "small"
+    },
+    {
+      "index": "knight",
+      "cr": 3.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "lizardfolk",
+      "cr": 0.5,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "lizardfolk-queen",
+      "cr": 4.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "lizardfolk-shaman",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "mage",
+      "cr": 6.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "merfolk",
+      "cr": 0.125,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "noble",
+      "cr": 0.125,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "orc",
+      "cr": 0.5,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "orc-eye-of-gruumsh",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "orc-war-chief",
+      "cr": 4.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "priest",
+      "cr": 2.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "sahuagin",
+      "cr": 0.5,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "sahuagin-baron",
+      "cr": 5.0,
+      "type": "humanoid",
+      "size": "large"
+    },
+    {
+      "index": "sahuagin-priestess",
+      "cr": 3.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "scout",
+      "cr": 0.5,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "spy",
+      "cr": 1.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "thug",
+      "cr": 0.5,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "tribal-warrior",
+      "cr": 0.125,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "troglodyte",
+      "cr": 0.25,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "veteran",
+      "cr": 3.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "yuan-ti-pureblood",
+      "cr": 1.0,
+      "type": "humanoid",
+      "size": "medium"
+    },
+    {
+      "index": "ankheg",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "basilisk",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "behir",
+      "cr": 11.0,
+      "type": "monstrosity",
+      "size": "huge"
+    },
+    {
+      "index": "bulette",
+      "cr": 5.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "carrion-crawler",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "chimera",
+      "cr": 6.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "cockatrice",
+      "cr": 0.5,
+      "type": "monstrosity",
+      "size": "small"
+    },
+    {
+      "index": "darkmantle",
+      "cr": 0.5,
+      "type": "monstrosity",
+      "size": "small"
+    },
+    {
+      "index": "death-dog",
+      "cr": 1.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "displacer-beast",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "ettercap",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "gorgon",
+      "cr": 5.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "grick",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "grick-alpha",
+      "cr": 7.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "griffon",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "harpy",
+      "cr": 1.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "hippogriff",
+      "cr": 1.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "hydra",
+      "cr": 8.0,
+      "type": "monstrosity",
+      "size": "huge"
+    },
+    {
+      "index": "kraken",
+      "cr": 23.0,
+      "type": "monstrosity",
+      "size": "gargantuan"
+    },
+    {
+      "index": "lamia",
+      "cr": 4.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "manticore",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "medusa",
+      "cr": 6.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "merrow",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "mimic",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "minotaur",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "bone-naga",
+      "cr": 4.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "guardian-naga",
+      "cr": 10.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "spirit-naga",
+      "cr": 8.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "owlbear",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "peryton",
+      "cr": 2.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "phase-spider",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "piercer",
+      "cr": 0.5,
+      "type": "monstrosity",
+      "size": "small"
+    },
+    {
+      "index": "purple-worm",
+      "cr": 15.0,
+      "type": "monstrosity",
+      "size": "gargantuan"
+    },
+    {
+      "index": "remorhaz",
+      "cr": 11.0,
+      "type": "monstrosity",
+      "size": "huge"
+    },
+    {
+      "index": "roc",
+      "cr": 11.0,
+      "type": "monstrosity",
+      "size": "gargantuan"
+    },
+    {
+      "index": "rust-monster",
+      "cr": 0.5,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "tarrasque",
+      "cr": 30.0,
+      "type": "monstrosity",
+      "size": "gargantuan"
+    },
+    {
+      "index": "thri-kreen",
+      "cr": 1.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "umber-hulk",
+      "cr": 5.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "winter-wolf",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "worg",
+      "cr": 0.5,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "yuan-ti-abomination",
+      "cr": 7.0,
+      "type": "monstrosity",
+      "size": "large"
+    },
+    {
+      "index": "yuan-ti-malison",
+      "cr": 3.0,
+      "type": "monstrosity",
+      "size": "medium"
+    },
+    {
+      "index": "black-pudding",
+      "cr": 4.0,
+      "type": "ooze",
+      "size": "large"
+    },
+    {
+      "index": "gelatinous-cube",
+      "cr": 2.0,
+      "type": "ooze",
+      "size": "large"
+    },
+    {
+      "index": "gray-ooze",
+      "cr": 0.5,
+      "type": "ooze",
+      "size": "medium"
+    },
+    {
+      "index": "ochre-jelly",
+      "cr": 2.0,
+      "type": "ooze",
+      "size": "large"
+    },
+    {
+      "index": "awakened-shrub",
+      "cr": 0.0,
+      "type": "plant",
+      "size": "small"
+    },
+    {
+      "index": "awakened-tree",
+      "cr": 2.0,
+      "type": "plant",
+      "size": "huge"
+    },
+    {
+      "index": "gas-spore",
+      "cr": 0.5,
+      "type": "plant",
+      "size": "medium"
+    },
+    {
+      "index": "myconid-adult",
+      "cr": 0.5,
+      "type": "plant",
+      "size": "medium"
+    },
+    {
+      "index": "myconid-sovereign",
+      "cr": 2.0,
+      "type": "plant",
+      "size": "large"
+    },
+    {
+      "index": "myconid-sprout",
+      "cr": 0.0,
+      "type": "plant",
+      "size": "small"
+    },
+    {
+      "index": "needle-blight",
+      "cr": 0.25,
+      "type": "plant",
+      "size": "medium"
+    },
+    {
+      "index": "shambling-mound",
+      "cr": 5.0,
+      "type": "plant",
+      "size": "large"
+    },
+    {
+      "index": "treant",
+      "cr": 9.0,
+      "type": "plant",
+      "size": "huge"
+    },
+    {
+      "index": "twig-blight",
+      "cr": 0.125,
+      "type": "plant",
+      "size": "small"
+    },
+    {
+      "index": "vine-blight",
+      "cr": 0.5,
+      "type": "plant",
+      "size": "medium"
+    },
+    {
+      "index": "violet-fungus",
+      "cr": 0.25,
+      "type": "plant",
+      "size": "medium"
+    },
+    {
+      "index": "banshee",
+      "cr": 4.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "crawling-claw",
+      "cr": 0.0,
+      "type": "undead",
+      "size": "tiny"
+    },
+    {
+      "index": "death-knight",
+      "cr": 17.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "demilich",
+      "cr": 18.0,
+      "type": "undead",
+      "size": "tiny"
+    },
+    {
+      "index": "flameskull",
+      "cr": 4.0,
+      "type": "undead",
+      "size": "tiny"
+    },
+    {
+      "index": "ghost",
+      "cr": 4.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "ghast",
+      "cr": 2.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "ghoul",
+      "cr": 1.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "lich",
+      "cr": 21.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "mummy",
+      "cr": 3.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "mummy-lord",
+      "cr": 15.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "revenant",
+      "cr": 5.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "shadow",
+      "cr": 0.5,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "skeleton",
+      "cr": 0.25,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "specter",
+      "cr": 1.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "vampire",
+      "cr": 13.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "vampire-spawn",
+      "cr": 5.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "wight",
+      "cr": 3.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "will-o-wisp",
+      "cr": 2.0,
+      "type": "undead",
+      "size": "tiny"
+    },
+    {
+      "index": "wraith",
+      "cr": 5.0,
+      "type": "undead",
+      "size": "medium"
+    },
+    {
+      "index": "zombie",
+      "cr": 0.25,
+      "type": "undead",
+      "size": "medium"
+    }
+  ]
+}
