@@ -5,7 +5,10 @@ import 'package:dnd_character_sheet/core/theme/app_theme.dart';
 import 'package:dnd_character_sheet/core/theme/app_text_styles.dart';
 import 'package:dnd_character_sheet/core/utils/dice_calculator.dart';
 import 'package:dnd_character_sheet/data/models/character_model.dart';
+import 'package:dnd_character_sheet/data/models/online_room_model.dart';
 import 'package:dnd_character_sheet/providers/character_providers.dart';
+import 'package:dnd_character_sheet/presentation/screens/online/online_room_sheet.dart';
+import 'package:dnd_character_sheet/providers/online_providers.dart';
 import 'tabs/tab_main.dart';
 import 'tabs/tab_combat.dart';
 import 'tabs/tab_spells.dart';
@@ -173,6 +176,36 @@ class _CharacterSheetScreenState extends ConsumerState<CharacterSheetScreen>
           icon: const Icon(Icons.edit_outlined),
           tooltip: 'Edit Character',
           onPressed: () => context.push('/create/${character.id}'),
+        ),
+        IconButton(
+          icon: const Icon(Icons.cloud_queue_outlined),
+          tooltip: 'Entrar na sala online',
+          onPressed: () async {
+            final cachedRoom = ref.read(onlineRoomProvider);
+            if (cachedRoom != null) {
+              final joined = ref.read(onlineRoomProvider.notifier).joinRoom(
+                    cachedRoom.code,
+                    playerName: character.name,
+                    character: OnlineCharacter(
+                      name: character.name,
+                      characterClass: character.classDisplayName.isNotEmpty
+                          ? character.classDisplayName
+                          : character.className,
+                      level: character.level,
+                    ),
+                  );
+              if (joined != null) {
+                context.push('/online-room/${joined.id}');
+                return;
+              }
+            }
+
+            showOnlineRoomBottomSheet(
+              context,
+              ref,
+              entryCharacter: character,
+            );
+          },
         ),
         IconButton(
           icon: const Icon(Icons.menu),

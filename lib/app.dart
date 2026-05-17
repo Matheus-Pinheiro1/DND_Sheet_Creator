@@ -12,6 +12,7 @@ import 'presentation/screens/custom_options/custom_class_screen.dart';
 import 'presentation/screens/monsters/monsters_screen.dart';
 import 'presentation/screens/monsters/monster_details_screen.dart';
 import 'presentation/screens/encounter/encounter_screen.dart';
+import 'presentation/screens/online/online_room_screen.dart';
 import 'presentation/screens/references/reference_lists_screen.dart';
 
 final _router = GoRouter(
@@ -73,6 +74,12 @@ final _router = GoRouter(
     GoRoute(
       path: '/encounter',
       builder: (ctx, state) => const EncounterScreen(),
+    ),
+    GoRoute(
+      path: '/online-room/:roomId',
+      builder: (ctx, state) => OnlineRoomScreen(
+        roomId: state.pathParameters['roomId']!,
+      ),
     ),
     GoRoute(
       path: '/references',

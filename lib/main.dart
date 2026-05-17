@@ -41,5 +41,6 @@ Future<void> _openHiveBoxes() {
     Hive.openBox<CustomBackgroundModel>(HiveConstants.customBgBox),
     Hive.openBox<CustomClassModel>(HiveConstants.customClassBox),
     Hive.openBox<String>(HiveConstants.encounterBox),
+    Hive.openBox<String>(HiveConstants.onlineRoomCacheBox),
   ]);
 }

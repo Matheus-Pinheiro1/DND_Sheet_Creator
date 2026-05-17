@@ -2,6 +2,10 @@
 
 part of 'custom_class_model.dart';
 
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
 class CustomClassModelAdapter extends TypeAdapter<CustomClassModel> {
   @override
   final int typeId = 4;

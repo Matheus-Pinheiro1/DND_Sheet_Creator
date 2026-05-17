@@ -10,8 +10,10 @@ import '../../../data/remote/spell_dto.dart';
 import '../../../providers/character_providers.dart';
 import '../../../providers/dnd_api_providers.dart';
 import '../../../providers/encounter_providers.dart';
+import '../../../providers/online_providers.dart';
 import '../shared/widgets/app_navigation_drawer.dart';
 import '../shared/widgets/character_avatar.dart';
+import '../online/online_room_sheet.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -89,6 +91,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             icon: const Icon(Icons.shield_outlined),
             tooltip: 'Encounter',
             onPressed: () => context.push('/encounter'),
+          ),
+          IconButton(
+            icon: const Icon(Icons.cloud_queue_outlined),
+            tooltip: 'Online',
+            onPressed: () => _showOnlineRoomSheet(context),
           ),
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -172,6 +179,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return _CharacterCard(character: characters[i - offset]);
       },
     );
+  }
+
+  void _showOnlineRoomSheet(BuildContext context) {
+    final cachedRoom = ref.read(onlineRoomProvider);
+    if (cachedRoom != null) {
+      context.push('/online-room/${cachedRoom.id}');
+      return;
+    }
+
+    showOnlineRoomBottomSheet(context, ref);
   }
 
   void _showAboutDialog(BuildContext context) {

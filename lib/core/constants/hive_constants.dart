@@ -9,6 +9,7 @@ class HiveConstants {
   static const String customBgBox = 'custom_backgrounds';
   static const String customClassBox = 'custom_classes';
   static const String encounterBox = 'encounter';
+  static const String onlineRoomCacheBox = 'online_room_cache';
 
   static const int characterTypeId = 0;
   static const int attackTypeId = 1;
