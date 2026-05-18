@@ -103,6 +103,7 @@ class _CustomClassScreenState extends ConsumerState<CustomClassScreen> {
       ),
       body: Form(
         key: _formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -122,6 +123,7 @@ class _CustomClassScreenState extends ConsumerState<CustomClassScreen> {
                 validator: (v) => (v == null || v.trim().isEmpty)
                     ? 'Class name is required'
                     : null,
+                onChanged: (_) => _formKey.currentState?.validate(),
               ),
               const SizedBox(height: 16),
               Row(

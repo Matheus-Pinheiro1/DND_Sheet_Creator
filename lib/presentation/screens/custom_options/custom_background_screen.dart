@@ -140,6 +140,7 @@ class _CustomBackgroundScreenState
               const _SectionLabel('Background Name *'),
               TextFormField(
                 controller: _nameCtrl,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 textCapitalization: TextCapitalization.words,
                 decoration: const InputDecoration(
                   hintText: 'e.g. Guild Spy, Ship Captain...',
@@ -148,6 +149,7 @@ class _CustomBackgroundScreenState
                 validator: (value) => value == null || value.trim().isEmpty
                     ? 'Name is required'
                     : null,
+                onChanged: (_) => _formKey.currentState?.validate(),
               ),
               const SizedBox(height: 20),
               const _SectionLabel('Skill Proficiencies (choose up to 2)'),
