@@ -4,7 +4,6 @@ const kDndConditions = [
   'Blinded',
   'Charmed',
   'Deafened',
-  'Exhaustion',
   'Frightened',
   'Grappled',
   'Incapacitated',
@@ -41,6 +40,7 @@ class EncounterParticipant {
   final int legendaryResistancesUsed;
   final bool reactionUsed;
   final bool concentrating;
+  final int exhaustionLevel;
   final String notes;
 
   const EncounterParticipant({
@@ -64,6 +64,7 @@ class EncounterParticipant {
     this.legendaryResistancesUsed = 0,
     this.reactionUsed = false,
     this.concentrating = false,
+    this.exhaustionLevel = 0,
     this.notes = '',
   });
 
@@ -121,7 +122,7 @@ class EncounterParticipant {
       name: name,
       originalName: '',
       type: 'Player Character',
-      crLabel: '—',
+      crLabel: '-',
       isPlayer: true,
       maxHp: maxHp,
       currentHp: maxHp,
@@ -143,6 +144,7 @@ class EncounterParticipant {
     int? legendaryResistancesMax,
     bool? reactionUsed,
     bool? concentrating,
+    int? exhaustionLevel,
     String? notes,
     String? name,
     String? originalName,
@@ -171,6 +173,7 @@ class EncounterParticipant {
           legendaryResistancesUsed ?? this.legendaryResistancesUsed,
       reactionUsed: reactionUsed ?? this.reactionUsed,
       concentrating: concentrating ?? this.concentrating,
+      exhaustionLevel: exhaustionLevel ?? this.exhaustionLevel,
       notes: notes ?? this.notes,
     );
   }
@@ -196,6 +199,7 @@ class EncounterParticipant {
         'legendaryResistancesUsed': legendaryResistancesUsed,
         'reactionUsed': reactionUsed,
         'concentrating': concentrating,
+        'exhaustionLevel': exhaustionLevel,
         'notes': notes,
       };
 
@@ -205,6 +209,13 @@ class EncounterParticipant {
     final monsterIndex = _string(json['monsterIndex']);
     final originalName = _string(json['originalName']);
     final maxHp = _int(json['maxHp'], fallback: 1);
+    final conditions = List<String>.from(_stringList(json['conditions']));
+    final legacyExhaustion = conditions.contains('Exhaustion');
+    final exhaustionLevel = _int(
+      json['exhaustionLevel'],
+      fallback: legacyExhaustion ? 1 : 0,
+    ).clamp(0, 6).toInt();
+    conditions.remove('Exhaustion');
 
     return EncounterParticipant(
       id: id.isEmpty ? const Uuid().v4() : id,
@@ -223,13 +234,14 @@ class EncounterParticipant {
       temporaryHp: _int(json['temporaryHp'] ?? json['tempHp']),
       armorClass: _int(json['armorClass'], fallback: 10),
       initiative: _int(json['initiative']),
-      conditions: _stringList(json['conditions']),
+      conditions: conditions,
       legendaryActionsMax: _int(json['legendaryActionsMax']),
       legendaryActionsUsed: _int(json['legendaryActionsUsed']),
       legendaryResistancesMax: _int(json['legendaryResistancesMax']),
       legendaryResistancesUsed: _int(json['legendaryResistancesUsed']),
       reactionUsed: _bool(json['reactionUsed']),
       concentrating: _bool(json['concentrating']),
+      exhaustionLevel: exhaustionLevel,
       notes: _string(json['notes']),
     );
   }

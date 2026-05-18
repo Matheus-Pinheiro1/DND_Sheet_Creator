@@ -23,10 +23,11 @@ class WeaponBonusCalculator {
       _relevantAbilityScore(weapon, character),
     );
     final isProficient = _isProficientWithWeapon(weapon, character);
+    final exhaustionPenalty = character.exhaustionLevel;
     return abilityMod +
         (isProficient ? profBonus : 0) +
         _fightingStyleAttackBonus(weapon, character) -
-        (character.exhaustionLevel * 2);
+        exhaustionPenalty;
   }
 
   static String calculateWeaponDamageDice(

@@ -70,7 +70,8 @@ class _TabNotesState extends ConsumerState<TabNotes> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
       child: Column(children: [
         _TextSection('Personality Traits', _traitsCtrl),
         _TextSection('Ideals', _idealsCtrl),

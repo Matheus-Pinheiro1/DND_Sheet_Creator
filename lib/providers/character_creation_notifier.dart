@@ -6,8 +6,12 @@ class CreationNotifier extends StateNotifier<CreationState> {
   CreationState get _notifierState => state;
   set _notifierState(CreationState value) => state = value;
 
-  void nextStep() => state = state.copyWith(currentStep: state.currentStep + 1);
-  void prevStep() => state = state.copyWith(currentStep: state.currentStep - 1);
+  void setStep(int step) {
+    state = state.copyWith(currentStep: step.clamp(0, 99).toInt());
+  }
+
+  void nextStep() => setStep(state.currentStep + 1);
+  void prevStep() => setStep(state.currentStep - 1);
 
   void setBasicInfo({
     required String name,

@@ -94,15 +94,18 @@ class _StatusRow extends StatelessWidget {
       children: [
         if (p.temporaryHp > 0)
           _StatusPill(label: 'Temp HP ${p.temporaryHp}', color: Colors.cyan),
+        if (p.exhaustionLevel > 0)
+          _StatusPill(
+            label: 'Exhaustion ${p.exhaustionLevel}',
+            color: AppTheme.crimson,
+          ),
         if (p.concentrating)
-          const _StatusPill(
-              label: '🎯 Concentration', color: Color(0xFF7B68EE)),
+          const _StatusPill(label: 'Concentration', color: Color(0xFF7B68EE)),
         if (p.reactionUsed)
-          const _StatusPill(label: '⚡ Reaction Used', color: Color(0xFFFF9800)),
+          const _StatusPill(label: 'Reaction Used', color: Color(0xFFFF9800)),
         if (p.legendaryActionsMax > 0)
           _StatusPill(
-            label:
-                '⚔️ LA ${p.legendaryActionsRemaining}/${p.legendaryActionsMax}',
+            label: 'LA ${p.legendaryActionsRemaining}/${p.legendaryActionsMax}',
             color: p.legendaryActionsRemaining > 0
                 ? AppTheme.gold
                 : Colors.white30,
@@ -110,7 +113,7 @@ class _StatusRow extends StatelessWidget {
         if (p.legendaryResistancesMax > 0)
           _StatusPill(
             label:
-                '🛡 LR ${p.legendaryResistancesRemaining}/${p.legendaryResistancesMax}',
+                'LR ${p.legendaryResistancesRemaining}/${p.legendaryResistancesMax}',
             color: p.legendaryResistancesRemaining > 0
                 ? const Color(0xFF20B2AA)
                 : Colors.white30,
@@ -147,18 +150,56 @@ class _ConditionPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(
-        color: AppTheme.crimson.withValues(alpha: 0.7),
-        borderRadius: BorderRadius.circular(12),
+    return Tooltip(
+      message: _conditionTooltip(label),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        decoration: BoxDecoration(
+          color: AppTheme.crimson.withValues(alpha: 0.7),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(label,
+            style: AppTextStyles.lato(
+                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.bold)),
       ),
-      child: Text(label,
-          style: AppTextStyles.lato(
-              color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
     );
   }
 }
+
+const _conditionDescriptions = <String, String>{
+  'Blinded':
+      'Cannot see; attacks against it have advantage, and its attacks have disadvantage.',
+  'Charmed':
+      'Cannot attack or target the charmer; the charmer has advantage on social checks.',
+  'Deafened':
+      'Cannot hear and automatically fails checks that require hearing.',
+  'Exhaustion':
+      'Suffers stacking exhaustion penalties until the condition is reduced.',
+  'Frightened':
+      'Disadvantage while the source is in sight; cannot willingly move closer.',
+  'Grappled': 'Speed is 0 until the grapple ends.',
+  'Incapacitated': 'Cannot take actions or reactions.',
+  'Invisible':
+      'Cannot be seen without special senses; attacks against it have disadvantage.',
+  'Paralyzed':
+      'Incapacitated, cannot move or speak, and nearby hits can become critical hits.',
+  'Petrified':
+      'Transformed and incapacitated; resistant to damage and unaware of surroundings.',
+  'Poisoned': 'Disadvantage on attack rolls and ability checks.',
+  'Prone':
+      'Only crawls unless it stands; nearby attacks have advantage, ranged attacks disadvantage.',
+  'Restrained':
+      'Speed is 0; attacks against it have advantage, and its attacks have disadvantage.',
+  'Stunned':
+      'Incapacitated, cannot move, speaks falteringly, and fails STR/DEX saves.',
+  'Unconscious':
+      'Incapacitated, drops held items, falls prone, and nearby hits can become critical hits.',
+};
+
+String _conditionTooltip(String label) =>
+    _conditionDescriptions[label] ?? label;
 
 class _QuickButton extends StatelessWidget {
   final IconData icon;
@@ -330,6 +371,76 @@ class _ToggleTile extends StatelessWidget {
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ExhaustionControl extends StatelessWidget {
+  final int level;
+  final VoidCallback onDecrease;
+  final VoidCallback onIncrease;
+
+  const _ExhaustionControl({
+    required this.level,
+    required this.onDecrease,
+    required this.onIncrease,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message:
+          'Exhaustion has 6 levels. Apply -2 per level to d20 tests; level 6 is death.',
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: level > 0
+              ? AppTheme.crimson.withValues(alpha: 0.16)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: level > 0 ? AppTheme.crimson : Colors.white24,
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Exhaustion',
+                style: AppTextStyles.lato(
+                  color: level > 0 ? AppTheme.crimson : Colors.white54,
+                  fontSize: 12,
+                  fontWeight: level > 0 ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            ),
+            IconButton(
+              visualDensity: VisualDensity.compact,
+              tooltip: 'Decrease exhaustion',
+              onPressed: level > 0 ? onDecrease : null,
+              icon: const Icon(Icons.remove, size: 16),
+            ),
+            SizedBox(
+              width: 52,
+              child: Text(
+                '$level / 6',
+                textAlign: TextAlign.center,
+                style: AppTextStyles.cinzel(
+                  color: level > 0 ? AppTheme.crimson : Colors.white38,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            IconButton(
+              visualDensity: VisualDensity.compact,
+              tooltip: 'Increase exhaustion',
+              onPressed: level < 6 ? onIncrease : null,
+              icon: const Icon(Icons.add, size: 16),
             ),
           ],
         ),

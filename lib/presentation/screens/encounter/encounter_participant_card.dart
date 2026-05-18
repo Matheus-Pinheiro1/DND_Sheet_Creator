@@ -4,6 +4,7 @@ class _ParticipantCard extends StatelessWidget {
   final EncounterParticipant participant;
   final bool isActive;
   final VoidCallback onTap;
+  final VoidCallback onJumpToTurn;
   final void Function(int) onDamage;
   final void Function(int) onHeal;
 
@@ -11,6 +12,7 @@ class _ParticipantCard extends StatelessWidget {
     required this.participant,
     required this.isActive,
     required this.onTap,
+    required this.onJumpToTurn,
     required this.onDamage,
     required this.onHeal,
   });
@@ -19,7 +21,7 @@ class _ParticipantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final p = participant;
     final isDefeated = p.isDefeated;
-    final tagColor = p.colorTag == 0 ? null : Color(p.colorTag);
+    final tagColor = p.colorTag == 0 ? null : encounterColorForTag(p.colorTag);
 
     final borderColor = isActive
         ? AppTheme.gold
@@ -116,7 +118,7 @@ class _ParticipantCard extends StatelessWidget {
                           Text(
                             p.isPlayer
                                 ? 'Player Character'
-                                : '${_capitalize(p.type)} • CR ${p.crLabel}',
+                                : '${_capitalize(p.type)} - CR ${p.crLabel}',
                             style: AppTextStyles.lato(
                                 color: Colors.white38, fontSize: 11),
                           ),
@@ -125,6 +127,18 @@ class _ParticipantCard extends StatelessWidget {
                     ),
                     // AC badge
                     _AcBadge(ac: p.armorClass),
+                    IconButton(
+                      visualDensity: VisualDensity.compact,
+                      tooltip: isActive ? 'Current turn' : 'Jump to turn',
+                      icon: Icon(
+                        isActive
+                            ? Icons.play_circle_fill
+                            : Icons.low_priority_outlined,
+                        size: 18,
+                      ),
+                      color: isActive ? AppTheme.gold : Colors.white54,
+                      onPressed: isActive ? null : onJumpToTurn,
+                    ),
                     IconButton(
                       visualDensity: VisualDensity.compact,
                       tooltip: 'Edit',
@@ -142,7 +156,7 @@ class _ParticipantCard extends StatelessWidget {
                     _QuickButton(
                       icon: Icons.remove,
                       color: AppTheme.crimson,
-                      onTap: () => _quickDamage(context, p.id, onDamage),
+                      onTap: () => _quickDamage(context, onDamage),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -165,10 +179,17 @@ class _ParticipantCard extends StatelessWidget {
                     _QuickButton(
                       icon: Icons.add,
                       color: const Color(0xFF4CAF50),
-                      onTap: () => _quickHeal(context, p.id, onHeal),
+                      onTap: () => _quickHeal(context, onHeal),
                     ),
                   ],
                 ),
+                if (!p.isPlayer && p.monsterIndex.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  _MonsterAbilitySummary(
+                    key: ValueKey(p.monsterIndex),
+                    monsterIndex: p.monsterIndex,
+                  ),
+                ],
                 if (_hasStatus(p)) ...[
                   const SizedBox(height: 8),
                   _StatusRow(participant: p),
@@ -193,13 +214,13 @@ class _ParticipantCard extends StatelessWidget {
 
   bool _hasStatus(EncounterParticipant p) =>
       p.temporaryHp > 0 ||
+      p.exhaustionLevel > 0 ||
       p.concentrating ||
       p.reactionUsed ||
       p.legendaryActionsMax > 0 ||
       p.legendaryResistancesMax > 0;
 
-  void _quickDamage(
-      BuildContext context, String id, void Function(int) onDamage) {
+  void _quickDamage(BuildContext context, void Function(int) onDamage) {
     _showQuickInputDialog(
       context,
       title: 'Apply Damage',
@@ -210,7 +231,7 @@ class _ParticipantCard extends StatelessWidget {
     );
   }
 
-  void _quickHeal(BuildContext context, String id, void Function(int) onHeal) {
+  void _quickHeal(BuildContext context, void Function(int) onHeal) {
     _showQuickInputDialog(
       context,
       title: 'Apply Healing',
@@ -243,19 +264,24 @@ class _ParticipantCard extends StatelessWidget {
           decoration: InputDecoration(hintText: hintText),
           onSubmitted: (v) {
             final amount = int.tryParse(v) ?? 0;
-            onConfirm(amount);
-            Navigator.pop(ctx);
+            Navigator.of(ctx).pop();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              onConfirm(amount);
+            });
           },
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('Cancel')),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: confirmColor),
             onPressed: () {
               final amount = int.tryParse(ctrl.text) ?? 0;
-              onConfirm(amount);
-              Navigator.pop(ctx);
+              Navigator.of(ctx).pop();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                onConfirm(amount);
+              });
             },
             child: Text(confirmLabel),
           ),
@@ -271,6 +297,117 @@ class _ParticipantCard extends StatelessWidget {
     if (percent > 0.5) return const Color(0xFF4CAF50);
     if (percent > 0.25) return const Color(0xFFFF9800);
     return AppTheme.crimson;
+  }
+}
+
+class _MonsterAbilitySummary extends ConsumerWidget {
+  final String monsterIndex;
+
+  const _MonsterAbilitySummary({
+    required this.monsterIndex,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final monsterAsync = ref.watch(monsterDetailProvider(monsterIndex));
+
+    return monsterAsync.when(
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
+      data: (monster) {
+        final abilities = [
+          _AbilityValue.fromMonster(monster, 'STR'),
+          _AbilityValue.fromMonster(monster, 'DEX'),
+          _AbilityValue.fromMonster(monster, 'CON'),
+          _AbilityValue.fromMonster(monster, 'INT'),
+          _AbilityValue.fromMonster(monster, 'WIS'),
+          _AbilityValue.fromMonster(monster, 'CHA'),
+        ];
+
+        return Wrap(
+          spacing: 5,
+          runSpacing: 5,
+          children: abilities
+              .map((ability) => _AbilityModifierChip(ability: ability))
+              .toList(),
+        );
+      },
+    );
+  }
+}
+
+class _AbilityValue {
+  final String label;
+  final int score;
+  final int? savingThrowBonus;
+
+  const _AbilityValue(
+    this.label,
+    this.score, {
+    this.savingThrowBonus,
+  });
+
+  factory _AbilityValue.fromMonster(MonsterDetailDto monster, String label) {
+    return _AbilityValue(
+      label,
+      monster.abilityScoreFor(label),
+      savingThrowBonus: monster.savingThrowBonuses[label],
+    );
+  }
+
+  bool get hasSavingThrow => savingThrowBonus != null;
+
+  int get rawModifier => DiceCalculator.getModifier(score);
+
+  int get displayValue => rawModifier + (savingThrowBonus ?? 0);
+
+  String get modifier {
+    final value = displayValue;
+    return value >= 0 ? '+$value' : '$value';
+  }
+
+  String get tooltip {
+    if (!hasSavingThrow) return '$label ability modifier';
+    final raw = rawModifier >= 0 ? '+$rawModifier' : '$rawModifier';
+    final bonus =
+        savingThrowBonus! >= 0 ? '+$savingThrowBonus' : '$savingThrowBonus';
+    return 'Saving Throw: $label $modifier ($raw + $bonus)';
+  }
+}
+
+class _AbilityModifierChip extends StatelessWidget {
+  final _AbilityValue ability;
+
+  const _AbilityModifierChip({required this.ability});
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: ability.tooltip,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+        decoration: BoxDecoration(
+          color: ability.hasSavingThrow
+              ? AppTheme.gold.withValues(alpha: 0.12)
+              : AppTheme.charcoal.withValues(alpha: 0.38),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: ability.hasSavingThrow
+                ? AppTheme.gold.withValues(alpha: 0.45)
+                : Colors.white10,
+          ),
+        ),
+        child: Text(
+          '${ability.label} ${ability.modifier}',
+          style: AppTextStyles.lato(
+            color: ability.hasSavingThrow ? AppTheme.gold : Colors.white54,
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -314,10 +451,12 @@ class _ColorTagPicker extends StatelessWidget {
           selected: selectedColor == 0,
           onSelected: onSelected,
         ),
-        for (final colorTag in _encounterColorTags)
+        for (final colorTag in encounterColorTags)
           _ColorChoice(
             colorTag: colorTag,
-            selected: selectedColor == colorTag,
+            selected: selectedColor == colorTag ||
+                (selectedColor == legacyBlackEncounterColorTag &&
+                    colorTag == visibleGrayEncounterColorTag),
             onSelected: onSelected,
           ),
       ],
@@ -340,7 +479,8 @@ class _ColorChoice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = colorTag == 0 ? Colors.white38 : Color(colorTag);
+    final color =
+        colorTag == 0 ? Colors.white38 : encounterColorForTag(colorTag);
 
     return InkWell(
       borderRadius: BorderRadius.circular(18),

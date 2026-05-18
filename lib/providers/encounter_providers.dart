@@ -1,5 +1,7 @@
 // lib/providers/encounter_providers.dart
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/models/encounter_model.dart';
@@ -19,6 +21,9 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   final EncounterRepository _repo;
   late List<EncounterModel> _encounters;
   late String _activeEncounterId;
+  final _saveErrorController = StreamController<Object>.broadcast();
+  Timer? _saveDebounce;
+  static const _saveDebounceDuration = Duration(milliseconds: 600);
 
   EncounterNotifier(this._repo) : super(_repo.loadAll().activeEncounter) {
     final loaded = _repo.loadAll();
@@ -27,11 +32,10 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     state = loaded.activeEncounter;
   }
 
-  // ── Participants ─────────────────────────────────────────────────────────
-
   List<EncounterModel> get encounters => List.unmodifiable(_encounters);
   String get activeEncounterId => _activeEncounterId;
   bool get hasMultipleEncounters => _encounters.length > 1;
+  Stream<Object> get saveErrors => _saveErrorController.stream;
 
   void createEncounter({String? name}) {
     final encounter = EncounterModel.newEncounter(name: _encounterName(name));
@@ -53,6 +57,17 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
         .map(
           (encounter) => encounter.id == id
               ? encounter.copyWith(name: trimmed)
+              : encounter,
+        )
+        .toList();
+    _persistActive();
+  }
+
+  void setEncounterColor(String id, int colorTag) {
+    _encounters = _encounters
+        .map(
+          (encounter) => encounter.id == id
+              ? encounter.copyWith(colorTag: colorTag)
               : encounter,
         )
         .toList();
@@ -83,20 +98,16 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
 
   void addParticipant(EncounterParticipant participant) {
     final currentParticipantId = state.currentParticipant?.id;
-    // Auto-number duplicates: "Goblin", "Goblin #2", "Goblin #3"
     final baseName = participant.originalName.trim().isNotEmpty
         ? participant.originalName.trim()
         : participant.name.trim();
-    final sameBase = state.participants
-        .where(
-          (p) =>
-              p.name == baseName ||
-              p.name.startsWith('$baseName #') ||
-              p.originalName == baseName ||
-              p.originalName.startsWith('$baseName #'),
-        )
-        .length;
-    final name = sameBase == 0 ? baseName : '$baseName #${sameBase + 1}';
+    final normalizedBaseName = baseName.isEmpty ? 'Participant' : baseName;
+    final existingNames = state.participants
+        .map((p) => p.name.trim())
+        .where((name) => name.isNotEmpty)
+        .toSet();
+    final name =
+        _nextAvailableParticipantName(normalizedBaseName, existingNames);
 
     _updatePreservingParticipant(
       state.copyWith(
@@ -152,8 +163,6 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     );
   }
 
-  // ── HP ───────────────────────────────────────────────────────────────────
-
   void applyDamage(String id, int amount) {
     if (amount <= 0) return;
     _mutate(id, (p) {
@@ -197,8 +206,6 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     );
   }
 
-  // ── Initiative ───────────────────────────────────────────────────────────
-
   void setInitiative(String id, int initiative) {
     _mutate(id, (p) => p.copyWith(initiative: initiative));
   }
@@ -210,14 +217,16 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   void setParticipantName(String id, String name) {
     final trimmed = name.trim();
     if (trimmed.isEmpty) return;
-    _mutate(id, (p) => p.copyWith(name: trimmed));
+    _mutate(id, (p) {
+      final originalName =
+          _shouldPreserveGeneratedName(p) ? p.name.trim() : p.originalName;
+      return p.copyWith(name: trimmed, originalName: originalName);
+    });
   }
 
   void setColorTag(String id, int colorTag) {
     _mutate(id, (p) => p.copyWith(colorTag: colorTag));
   }
-
-  // ── Conditions ───────────────────────────────────────────────────────────
 
   void toggleCondition(String id, String condition) {
     _mutate(id, (p) {
@@ -235,7 +244,30 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     _mutate(id, (p) => p.copyWith(conditions: []));
   }
 
-  // ── Combat resources ─────────────────────────────────────────────────────
+  void setExhaustionLevel(String id, int level) {
+    _mutate(
+      id,
+      (p) => p.copyWith(exhaustionLevel: level.clamp(0, 6).toInt()),
+    );
+  }
+
+  void incrementExhaustion(String id) {
+    _mutate(
+      id,
+      (p) => p.copyWith(
+        exhaustionLevel: (p.exhaustionLevel + 1).clamp(0, 6).toInt(),
+      ),
+    );
+  }
+
+  void decrementExhaustion(String id) {
+    _mutate(
+      id,
+      (p) => p.copyWith(
+        exhaustionLevel: (p.exhaustionLevel - 1).clamp(0, 6).toInt(),
+      ),
+    );
+  }
 
   void useLegendaryAction(String id) {
     _mutate(id, (p) {
@@ -288,8 +320,6 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     _mutate(id, (p) => p.copyWith(notes: notes));
   }
 
-  // ── Turn management ──────────────────────────────────────────────────────
-
   void nextTurn() {
     final sorted = state.sortedParticipants;
     if (sorted.isEmpty) return;
@@ -298,7 +328,6 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     var nextIdx = state.currentTurnIndex + 1;
     var nextRound = state.currentRound;
 
-    // New round: reset reactions + legendary actions for all participants
     if (nextIdx >= count) {
       nextIdx = 0;
       nextRound++;
@@ -329,7 +358,7 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     var prevRound = state.currentRound;
 
     if (prevIdx < 0) {
-      if (prevRound <= 1) return; // Can't go before round 1
+      if (prevRound <= 1) return;
       prevIdx = count - 1;
       prevRound--;
     }
@@ -346,8 +375,6 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     if (idx < 0) return;
     _update(state.copyWith(currentTurnIndex: idx));
   }
-
-  // ── Encounter lifecycle ───────────────────────────────────────────────────
 
   void resetEncounter() {
     _update(
@@ -366,8 +393,6 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
           .toList(),
     ));
   }
-
-  // ── Helpers ───────────────────────────────────────────────────────────────
 
   void _mutate(
       String id, EncounterParticipant Function(EncounterParticipant) fn) {
@@ -438,11 +463,53 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     return 'Encounter $index';
   }
 
+  String _nextAvailableParticipantName(
+    String baseName,
+    Set<String> existingNames,
+  ) {
+    if (!existingNames.contains(baseName)) return baseName;
+
+    var suffix = 2;
+    while (existingNames.contains('$baseName #$suffix')) {
+      suffix++;
+    }
+    return '$baseName #$suffix';
+  }
+
+  bool _shouldPreserveGeneratedName(EncounterParticipant participant) {
+    if (participant.isPlayer) return false;
+    final current = participant.name.trim();
+    final original = participant.originalName.trim();
+    if (current.isEmpty || original.isEmpty || current == original) {
+      return false;
+    }
+    if (!current.startsWith(original)) return false;
+
+    final suffix = current.substring(original.length).trim();
+    if (!suffix.startsWith('#')) return false;
+    return int.tryParse(suffix.substring(1).trim()) != null;
+  }
+
   void _saveAll() {
-    _repo
-        .saveAll(_encounters, _activeEncounterId)
-        .catchError((Object error, StackTrace stackTrace) {
-      debugPrint('Failed to save encounter: $error');
+    _saveDebounce?.cancel();
+    _saveDebounce = Timer(_saveDebounceDuration, () {
+      _repo
+          .saveAll(_encounters, _activeEncounterId)
+          .catchError((Object error, StackTrace stackTrace) {
+        debugPrint('Failed to save encounter: $error');
+        if (!_saveErrorController.isClosed) {
+          _saveErrorController.add(error);
+        }
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    _saveDebounce?.cancel();
+    _repo.saveAll(_encounters, _activeEncounterId).ignore();
+    _saveErrorController.close();
+    //_concentrationBreakController.close();
+    super.dispose();
   }
 }

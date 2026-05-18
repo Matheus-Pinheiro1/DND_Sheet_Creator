@@ -244,6 +244,26 @@
         "Mass Cure Wounds"
       ]
     },
+    "cleric-night": {
+      "3":[
+        "Cause Fear",
+        "Sleep",
+        "Darkness",
+        "Invisibility"
+      ],
+      "5": [
+        "Fear",
+        "Nondetection"
+      ],
+      "7": [
+        "Greater Invisibility",
+        "Shadow of Moil"
+      ],
+      "9": [
+        "Chilling Darkness",
+        "Dream"
+      ]
+    },
     "cleric-light": {
       "3": [
         "Burning Hands",
@@ -390,6 +410,28 @@
       "17": [
         "Hold Monster",
         "Scrying"
+      ]
+    },
+    "paladin-oathbreaker": {
+      "3": [
+        "Hellish Rebuke",
+        "Witch Bolt"
+      ],
+      "5": [
+        "Crown of Madness",
+        "Darkness"
+      ],
+      "9": [
+        "Fear",
+        "Summon Undead"
+      ],
+      "13": [
+        "Blight",
+        "Phantasmal Killer"
+      ],
+      "17": [
+        "Contagion",
+        "Steel Wind Strike"
       ]
     },
     "paladin-noble-genies": {
@@ -681,7 +723,8 @@
     },
     "tiefling::fiendish-legacy::abyssal": {
       "1": [
-        "Poison Spray"
+        "Poison Spray",
+        "Thamauturgy"
       ],
       "3": [
         "Ray of Sickness"
@@ -692,7 +735,8 @@
     },
     "tiefling::fiendish-legacy::chthonic": {
       "1": [
-        "Chill Touch"
+        "Chill Touch",
+        "Thamauturgy"
       ],
       "3": [
         "False Life"
@@ -703,13 +747,25 @@
     },
     "tiefling::fiendish-legacy::infernal": {
       "1": [
-        "Fire Bolt"
+        "Fire Bolt",
+        "Thamauturgy"
       ],
       "3": [
         "Hellish Rebuke"
       ],
       "5": [
         "Darkness"
+      ]
+    },
+    "disembodied": {
+      "1": [
+        "Feather Fall"
+      ],
+      "3": [
+        "Blur"
+      ],
+      "5": [
+        "Blink"
       ]
     }
   },

@@ -21,7 +21,7 @@ class StepAdvancements extends ConsumerWidget {
 
     if (state.className.isEmpty) {
       return const _InfoMessage(
-        emoji: 'âš ï¸',
+        emoji: '⚠️',
         title: 'No class selected',
         subtitle: 'Go back and choose your class first.',
       );
@@ -34,7 +34,7 @@ class StepAdvancements extends ConsumerWidget {
 
     if (advancementLevels.isEmpty) {
       return const _InfoMessage(
-        emoji: 'âš”ï¸',
+        emoji: '⚔️',
         title: 'No Advancements Yet',
         subtitle:
             'Reach level 4 to unlock your first Ability Score Improvement or Feat.',

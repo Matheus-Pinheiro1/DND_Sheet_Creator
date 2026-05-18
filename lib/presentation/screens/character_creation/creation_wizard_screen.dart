@@ -122,10 +122,16 @@ class _CreationWizardScreenState extends ConsumerState<CreationWizardScreen> {
       );
     }
 
-    final currentStep = state.currentStep;
     final stepLabels = _stepLabels(state);
     final stepIcons = _stepIcons(state);
     final totalSteps = stepLabels.length;
+    final currentStep = state.currentStep.clamp(0, totalSteps - 1).toInt();
+    if (currentStep != state.currentStep) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        ref.read(creationProvider.notifier).setStep(currentStep);
+      });
+    }
 
     return Scaffold(
       backgroundColor: AppTheme.charcoal,
@@ -139,44 +145,49 @@ class _CreationWizardScreenState extends ConsumerState<CreationWizardScreen> {
           },
         ),
       ),
-      body: Column(
-        children: [
-          _StepProgressBar(
-            currentStep: currentStep,
-            totalSteps: totalSteps,
-            stepIcons: stepIcons,
-            stepLabels: stepLabels,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Text(
-              stepLabels[currentStep],
-              style: AppTextStyles.cinzel(
-                color: AppTheme.gold,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.2,
+      body: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            _StepProgressBar(
+              currentStep: currentStep,
+              totalSteps: totalSteps,
+              stepIcons: stepIcons,
+              stepLabels: stepLabels,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                stepLabels[currentStep],
+                style: AppTextStyles.cinzel(
+                  color: AppTheme.gold,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                ),
               ),
             ),
-          ),
-          const Divider(height: 1, color: Colors.white12),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: _buildStepContent(currentStep, state),
+            const Divider(height: 1, color: Colors.white12),
+            Expanded(
+              child: SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                padding: const EdgeInsets.all(16),
+                child: _buildStepContent(currentStep, state),
+              ),
             ),
-          ),
-          _NavigationButtons(
-            currentStep: currentStep,
-            totalSteps: totalSteps,
-            canAdvance: !_isSaving && _canAdvance(currentStep, state),
-            isEditMode: _isEditMode,
-            isLevelUpMode: widget.levelUpMode,
-            onBack: notifier.prevStep,
-            onNext: () =>
-                _handleNext(context, currentStep, totalSteps, notifier),
-          ),
-        ],
+            _NavigationButtons(
+              currentStep: currentStep,
+              totalSteps: totalSteps,
+              canAdvance: !_isSaving && _canAdvance(currentStep, state),
+              isEditMode: _isEditMode,
+              isLevelUpMode: widget.levelUpMode,
+              onBack: notifier.prevStep,
+              onNext: () =>
+                  _handleNext(context, currentStep, totalSteps, notifier),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -258,9 +269,14 @@ class _CreationWizardScreenState extends ConsumerState<CreationWizardScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pop(ctx);
+              Navigator.of(ctx).pop();
               notifier.reset();
-              context.pop();
+              final router = GoRouter.of(context);
+              if (router.canPop()) {
+                router.pop();
+              } else {
+                router.go('/');
+              }
             },
             style:
                 ElevatedButton.styleFrom(backgroundColor: Colors.red.shade800),

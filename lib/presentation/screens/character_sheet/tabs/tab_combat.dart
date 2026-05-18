@@ -53,7 +53,7 @@ class TabCombat extends ConsumerWidget {
         : character.initiative;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -139,6 +139,23 @@ class TabCombat extends ConsumerWidget {
               character.copyWith(exhaustionLevel: value),
             ),
           ),
+          if (character.exhaustionLevel > 0) ...[
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              margin: const EdgeInsets.only(bottom: 12),
+              decoration: BoxDecoration(
+                color: Colors.orange.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.orange.withValues(alpha: 0.4)),
+              ),
+              child: Text(
+                'Exhausted ${character.exhaustionLevel}: '
+                '-${character.exhaustionLevel} in all rolls with a D20 '
+                '(Attacks, Ability Checks and Saving Throws)',
+                style: AppTextStyles.lato(color: Colors.orange, fontSize: 12),
+              ),
+            ),
+          ],
           const SizedBox(height: 16),
           const _SectionLabel('Attacks & Actions'),
           _AttacksSection(character: character, onUpdate: save),

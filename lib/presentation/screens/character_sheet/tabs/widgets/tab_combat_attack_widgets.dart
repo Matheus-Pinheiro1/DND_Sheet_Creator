@@ -123,7 +123,11 @@ class _AttackCard extends StatelessWidget {
                     )),
                 if (attack.isMagic) ...[
                   const SizedBox(width: 6),
-                  const Text('ÃƒÂ¢Ã…â€œÃ‚Â¨', style: TextStyle(fontSize: 11)),
+                  const Icon(
+                    Icons.auto_awesome,
+                    color: Colors.purpleAccent,
+                    size: 14,
+                  ),
                 ],
               ]),
               const SizedBox(height: 4),

@@ -1,5 +1,6 @@
 import '../../core/utils/dice_calculator.dart';
 import '../../core/utils/weapon_bonus_calculator.dart';
+import '../local/armor_data.dart';
 import '../local/weapons_data.dart';
 import '../models/attack_model.dart';
 import '../models/character_model.dart';
@@ -53,8 +54,7 @@ class EquipmentMechanicsService {
   }
 
   static bool hasShield(List<String> equipment) {
-    return EquipmentEntryService.equippedEntries(equipment)
-        .any((entry) => _candidateNames(entry).contains('shield'));
+    return EquipmentEntryService.equippedEntries(equipment).any(isShieldEntry);
   }
 
   static bool affectsArmorClass(List<String> equipment) {
@@ -64,9 +64,52 @@ class EquipmentMechanicsService {
 
   static String armorClassSourceKey(List<String> equipment) {
     final activeEquipment = EquipmentEntryService.equippedEntries(equipment);
-    final armor = _bestArmor(activeEquipment)?.name ?? '';
+    final armor = armorFromEquipmentEntries(activeEquipment)?.name ??
+        _bestArmor(activeEquipment)?.name ??
+        '';
     final shield = hasShield(activeEquipment) ? 'shield' : '';
     return '$armor|$shield';
+  }
+
+  static DndArmor? armorFromEquipmentEntry(String entry) {
+    final candidates = _candidateNames(entry);
+
+    for (final armor in kDndArmors) {
+      final names = {
+        _normalize(armor.id),
+        _normalize(armor.name),
+        ...armor.aliases.map(_normalize),
+      };
+      if (candidates.any(names.contains)) {
+        return armor;
+      }
+    }
+
+    return null;
+  }
+
+  static DndArmor? armorFromEquipmentEntries(List<String> equipment) {
+    DndArmor? best;
+
+    for (final entry in EquipmentEntryService.equippedEntries(equipment)) {
+      final armor = armorFromEquipmentEntry(entry);
+      if (armor == null || armor.isShield) continue;
+      if (best == null || armor.baseAc > best.baseAc) {
+        best = armor;
+      }
+    }
+
+    return best;
+  }
+
+  static bool isArmorEntry(String entry) {
+    final armor = armorFromEquipmentEntry(entry);
+    return armor != null && !armor.isShield;
+  }
+
+  static bool isShieldEntry(String entry) {
+    return armorFromEquipmentEntry(entry)?.isShield == true ||
+        _candidateNames(entry).contains('shield');
   }
 
   static _ArmorRule? _bestArmor(List<String> equipment, {int? dexMod}) {

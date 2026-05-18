@@ -15,75 +15,78 @@ Future<void> showSpellDetailDialog(BuildContext context, SpellDto spell) {
       expand: false,
       initialChildSize: 0.72,
       maxChildSize: 0.94,
-      builder: (_, controller) => SingleChildScrollView(
-        controller: controller,
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(2),
+      builder: (context, controller) {
+        final bottomPadding = MediaQuery.of(context).viewPadding.bottom + 24;
+        return SingleChildScrollView(
+          controller: controller,
+          padding: EdgeInsets.fromLTRB(24, 24, 24, bottomPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
-            ),
-            Text(
-              spell.name,
-              style: AppTextStyles.cinzel(
-                color: AppTheme.gold,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                _Chip(spell.level == 0 ? 'Cantrip' : 'Level ${spell.level}'),
-                _Chip(spell.school),
-                _Chip(spell.castingTime),
-                if (spell.ritual) const _Chip('Ritual'),
-                if (spell.concentration) const _Chip('Concentration'),
-              ],
-            ),
-            const SizedBox(height: 16),
-            _FactRow('Range', spell.range),
-            _FactRow('Duration', spell.duration),
-            _FactRow('Components', spell.components.join(', ')),
-            if (spell.damageType != null && spell.damageType!.isNotEmpty)
-              _FactRow('Damage', spell.damageType!),
-            const Divider(height: 28),
-            Text('Description',
+              Text(
+                spell.name,
                 style: AppTextStyles.cinzel(
-                    color: AppTheme.gold,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            Text(spell.desc,
-                style: AppTextStyles.lato(
-                    color: Colors.white70, fontSize: 14, height: 1.55)),
-            if ((spell.higherLevel ?? '').trim().isNotEmpty) ...[
-              const SizedBox(height: 18),
-              Text('At Higher Levels',
+                  color: AppTheme.gold,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  _Chip(spell.level == 0 ? 'Cantrip' : 'Level ${spell.level}'),
+                  _Chip(spell.school),
+                  _Chip(spell.castingTime),
+                  if (spell.ritual) const _Chip('Ritual'),
+                  if (spell.concentration) const _Chip('Concentration'),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _FactRow('Range', spell.range),
+              _FactRow('Duration', spell.duration),
+              _FactRow('Components', spell.components.join(', ')),
+              if (spell.damageType != null && spell.damageType!.isNotEmpty)
+                _FactRow('Damage', spell.damageType!),
+              const Divider(height: 28),
+              Text('Description',
                   style: AppTextStyles.cinzel(
                       color: AppTheme.gold,
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
-              Text(spell.higherLevel!,
+              Text(spell.desc,
                   style: AppTextStyles.lato(
                       color: Colors.white70, fontSize: 14, height: 1.55)),
+              if ((spell.higherLevel ?? '').trim().isNotEmpty) ...[
+                const SizedBox(height: 18),
+                Text('At Higher Levels',
+                    style: AppTextStyles.cinzel(
+                        color: AppTheme.gold,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                Text(spell.higherLevel!,
+                    style: AppTextStyles.lato(
+                        color: Colors.white70, fontSize: 14, height: 1.55)),
+              ],
+              const SizedBox(height: 24),
             ],
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     ),
   );
 }

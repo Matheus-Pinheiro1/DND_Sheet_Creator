@@ -329,6 +329,31 @@
     }
   },
   {
+    "index": "disembodied",
+    "name": "Disembodied",
+    "speed": 30,
+    "ability_bonuses": [],
+    "size": "Medium",
+    "languages": [{ "name": "Common" }, { "name": "One Extra Language of your choice" }],
+    "traits": [
+      { "index": "fade-away", "name": "Fade away" },
+      { "index": "planar-outcast", "name": "Planar Outcast" },
+      { "index": "eyes-of-night", "name": "Eyes of Night" },
+      { "index": "shadow-cantrips", "name": "Shadow Cantrips" },
+      { "index": "quash-the-light", "name": "Quash the Light" },
+      { "index": "arcane-origins", "name": "Arcane Origins" }
+    ],
+    "description": "Wanderers pulled partly out of the Material Plane, carrying night-touched magic and a talent for slipping through the border of worlds.",
+    "trait_details": {
+      "fade-away": "On your turn as an action, you can fade from the Material Plane and disappear into the Ethereal Plane. While you remain faded away, you cannot interact with the Material Plane, and effects on the Material Plane cannot interact with you, including spells and creatures. However, you can move and hear as normal, and see everything in shades of grey.\nThis effect lasts for 1 minute, or until you use a bonus action to end it. When the effect ends, you reappear in the Material Plane, in the closest unoccupied space you disappeared from. Once you use this feature, you cannot use it again until you complete a long rest.",
+      "planar-outcast": "You may cast the feather fall spell once per day, targeting yourself only. When you reach 3rd level, you may cast the blur spell once per day. When you reach 5th level, you may cast the blink spell once per day. Intelligence is your spellcasting ability for these spells.",
+      "eyes-of-night": "You have darkvision out to a range of 300 feet. In that radius, you can see in dim light as if it were bright light and in darkness as if it were dim light. As an action, you can magically share this darkvision with willing creatures you can see within 10 feet of you, up to a number of creatures equal to your Wisdom modifier (minimum of one creature). The shared darkvision lasts for 1 hour. Once you share it, you can't do so again until you finish a long rest, unless you expend a spell slot of any level to share it again.",
+      "shadow-cantrips": "You know the shadow lance and minor illusion cantrips. These spells are granted by your species and don't count against the number of cantrips you know.",
+      "quash-the-light": "Whenever you hit a creature with an attack, and whenever a creature fails its saving throw against one of your spells or class features, if you can see the creature, you can magically extinguish one source of nonmagical light that the creature is wearing or carrying.",
+      "arcane-origins": "You gain proficiency in the Arcana skill"
+    }
+  },
+  {
     "index": "tiefling",
     "name": "Tiefling",
     "speed": 30,

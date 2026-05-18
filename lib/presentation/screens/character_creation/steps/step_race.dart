@@ -34,7 +34,7 @@ class StepRace extends ConsumerWidget {
               'Species sets your movement speed, languages, and species traits. Some 2024 species also ask you to choose a built-in option such as a Draconic Ancestry or Giant Ancestry. Pick the species first, then choose its internal option if one appears below the card.',
         ),
         if (customRaces.isNotEmpty) ...[
-          const _SectionHeader('ðŸŽ¨ Homebrew Species'),
+          const _SectionHeader('🎨 Homebrew Species'),
           ...customRaces.map((race) => _CustomRaceCard(
                 race: race,
                 isSelected:
@@ -103,7 +103,7 @@ class StepRace extends ConsumerWidget {
                     isSelected: _selectedBaseRaceId(state.race) == race.index,
                     selectedOptionIds: _selectedOptionIds(state.race),
                     selectedExtraLanguage:
-                        _selectedHumanExtraLanguage(state.languages),
+                        _selectedExtraLanguage(state.languages),
                     onSelectExtraLanguage: (language) {
                       ref
                           .read(creationProvider.notifier)
@@ -167,7 +167,7 @@ class StepRace extends ConsumerWidget {
     return parts.skip(1).toList();
   }
 
-  static String _selectedHumanExtraLanguage(List<String> languages) {
+  static String _selectedExtraLanguage(List<String> languages) {
     for (final language in languages) {
       final normalized = language.trim().toLowerCase();
       if (normalized.isEmpty) continue;

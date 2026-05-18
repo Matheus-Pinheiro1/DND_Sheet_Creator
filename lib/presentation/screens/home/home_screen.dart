@@ -66,29 +66,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               if (encounterNotifier.activeEncounterId != bannerEncounter.id) {
                 encounterNotifier.selectEncounter(bannerEncounter.id);
               }
-              context.push('/encounter');
+              context.go('/encounter');
             },
           );
 
     return Scaffold(
-      drawer: const AppNavigationDrawer(selectedRoute: '/'),
+      drawer: AppNavigationDrawer(
+        selectedRoute: '/',
+        onNavigate: (route) {
+          if (context.mounted) context.go(route);
+        },
+      ),
       appBar: AppBar(
         title: const Text('⚔️ D&D Character Sheet'),
         actions: [
           IconButton(
             icon: const Icon(Icons.library_books_outlined),
             tooltip: 'Rules References',
-            onPressed: () => context.push('/references'),
+            onPressed: () => context.go('/references'),
           ),
           IconButton(
             icon: const Icon(Icons.pets_outlined),
             tooltip: 'Monster Compendium',
-            onPressed: () => context.push('/monsters'),
+            onPressed: () => context.go('/monsters'),
           ),
           IconButton(
             icon: const Icon(Icons.shield_outlined),
             tooltip: 'Encounter',
-            onPressed: () => context.push('/encounter'),
+            onPressed: () => context.go('/encounter'),
           ),
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -178,7 +183,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     showAboutDialog(
       context: context,
       applicationName: 'D&D Character Sheet',
-      applicationVersion: '1.5.0',
+      applicationVersion: 'Alpha(igual o pai)',
       applicationLegalese: 'D&D Character Sheet fan-made app by Pinhas',
     );
   }

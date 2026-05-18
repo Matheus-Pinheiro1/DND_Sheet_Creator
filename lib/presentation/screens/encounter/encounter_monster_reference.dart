@@ -2,8 +2,12 @@ part of 'encounter_screen.dart';
 
 class _MonsterCombatReference extends ConsumerWidget {
   final EncounterParticipant participant;
+  final ValueChanged<String> onOpenMonster;
 
-  const _MonsterCombatReference({required this.participant});
+  const _MonsterCombatReference({
+    required this.participant,
+    required this.onOpenMonster,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,11 +24,9 @@ class _MonsterCombatReference extends ConsumerWidget {
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
         onPressed: () {
-          final router = GoRouter.of(context);
-          Navigator.of(context).pop();
-          router.push(
-            '/monsters/${Uri.encodeComponent(participant.monsterIndex)}',
-          );
+          Navigator.of(context).maybePop().then((_) {
+            onOpenMonster(participant.monsterIndex);
+          });
         },
         icon: const Icon(Icons.open_in_new, size: 14),
         label: Text(
@@ -113,6 +115,11 @@ class _MonsterCombatEntries extends StatelessWidget {
       children: [
         _MonsterAbilityGrid(monster: monster),
         const SizedBox(height: 14),
+        _MonsterDefenseSummary(monster: monster),
+        if (monster.damageResistances.isNotEmpty ||
+            monster.damageImmunities.isNotEmpty ||
+            monster.conditionImmunities.isNotEmpty)
+          const SizedBox(height: 14),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -146,6 +153,97 @@ class _MonsterCombatEntries extends StatelessWidget {
   }
 }
 
+class _MonsterDefenseSummary extends StatelessWidget {
+  final MonsterDetailDto monster;
+
+  const _MonsterDefenseSummary({required this.monster});
+
+  @override
+  Widget build(BuildContext context) {
+    final defenses = [
+      if (monster.damageImmunities.isNotEmpty)
+        _MonsterDefenseData(
+          label: 'Damage Immunities',
+          value: monster.damageImmunities.join(', '),
+          color: AppTheme.crimson,
+        ),
+      if (monster.damageResistances.isNotEmpty)
+        _MonsterDefenseData(
+          label: 'Resistances',
+          value: monster.damageResistances.join(', '),
+          color: const Color(0xFFFF9800),
+        ),
+      if (monster.conditionImmunities.isNotEmpty)
+        _MonsterDefenseData(
+          label: 'Condition Immunities',
+          value: monster.conditionImmunities.join(', '),
+          color: const Color(0xFF20B2AA),
+        ),
+    ];
+
+    if (defenses.isEmpty) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: defenses
+          .map(
+            (defense) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: _MonsterDefenseRow(defense: defense),
+            ),
+          )
+          .toList(),
+    );
+  }
+}
+
+class _MonsterDefenseData {
+  final String label;
+  final String value;
+  final Color color;
+
+  const _MonsterDefenseData({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+}
+
+class _MonsterDefenseRow extends StatelessWidget {
+  final _MonsterDefenseData defense;
+
+  const _MonsterDefenseRow({required this.defense});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: defense.color.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: defense.color.withValues(alpha: 0.35)),
+      ),
+      child: RichText(
+        text: TextSpan(
+          style: AppTextStyles.lato(color: Colors.white70, fontSize: 12),
+          children: [
+            TextSpan(
+              text: '${defense.label}: ',
+              style: AppTextStyles.lato(
+                color: defense.color,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextSpan(text: defense.value),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _MonsterAbilityGrid extends StatelessWidget {
   final MonsterDetailDto monster;
 
@@ -154,12 +252,12 @@ class _MonsterAbilityGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final abilities = [
-      _MonsterAbility('STR', monster.strength),
-      _MonsterAbility('DEX', monster.dexterity),
-      _MonsterAbility('CON', monster.constitution),
-      _MonsterAbility('INT', monster.intelligence),
-      _MonsterAbility('WIS', monster.wisdom),
-      _MonsterAbility('CHA', monster.charisma),
+      _MonsterAbility.fromMonster(monster, 'STR'),
+      _MonsterAbility.fromMonster(monster, 'DEX'),
+      _MonsterAbility.fromMonster(monster, 'CON'),
+      _MonsterAbility.fromMonster(monster, 'INT'),
+      _MonsterAbility.fromMonster(monster, 'WIS'),
+      _MonsterAbility.fromMonster(monster, 'CHA'),
     ];
 
     return LayoutBuilder(
@@ -187,11 +285,35 @@ class _MonsterAbilityGrid extends StatelessWidget {
 class _MonsterAbility {
   final String label;
   final int score;
+  final int? savingThrowBonus;
 
-  const _MonsterAbility(this.label, this.score);
+  const _MonsterAbility(
+    this.label,
+    this.score, {
+    this.savingThrowBonus,
+  });
+
+  factory _MonsterAbility.fromMonster(MonsterDetailDto monster, String label) {
+    return _MonsterAbility(
+      label,
+      monster.abilityScoreFor(label),
+      savingThrowBonus: monster.savingThrowBonuses[label],
+    );
+  }
+
+  bool get hasSavingThrow => savingThrowBonus != null;
+
+  int get rawModifier => DiceCalculator.getModifier(score);
+
+  int get savingThrow => rawModifier + (savingThrowBonus ?? 0);
 
   String get modifier {
-    final value = DiceCalculator.getModifier(score);
+    final value = rawModifier;
+    return value >= 0 ? '+$value' : '$value';
+  }
+
+  String get savingThrowLabel {
+    final value = savingThrow;
     return value >= 0 ? '+$value' : '$value';
   }
 }
@@ -204,12 +326,18 @@ class _MonsterAbilityTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 58,
+      height: ability.hasSavingThrow ? 70 : 58,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: AppTheme.charcoal.withValues(alpha: 0.55),
+        color: ability.hasSavingThrow
+            ? AppTheme.gold.withValues(alpha: 0.10)
+            : AppTheme.charcoal.withValues(alpha: 0.55),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.white10),
+        border: Border.all(
+          color: ability.hasSavingThrow
+              ? AppTheme.gold.withValues(alpha: 0.35)
+              : Colors.white10,
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -245,6 +373,17 @@ class _MonsterAbilityTile extends StatelessWidget {
               ),
             ],
           ),
+          if (ability.hasSavingThrow) ...[
+            const SizedBox(height: 2),
+            Text(
+              'Save ${ability.savingThrowLabel}',
+              style: AppTextStyles.lato(
+                color: AppTheme.gold,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -421,5 +560,3 @@ class _MonsterEntry extends StatelessWidget {
         .join(', ');
   }
 }
-
-// ── Add player sheet ─────────────────────────────────────────────────────────

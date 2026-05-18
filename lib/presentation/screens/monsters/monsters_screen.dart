@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../shared/widgets/app_navigation_drawer.dart';
 import '../shared/widgets/loading_dragon.dart';
 
 part 'monster_quantity_sheet.dart';
@@ -152,28 +153,6 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
           ),
         );
       }
-
-      final activeEncounter = ref.read(encounterProvider);
-      final encounterSuffix = notifier.hasMultipleEncounters
-          ? ' to ${activeEncounter.name}'
-          : ' to encounter';
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            count == 1
-                ? '$displayName added$encounterSuffix'
-                : '$displayName x$count added$encounterSuffix',
-          ),
-          backgroundColor: AppTheme.ashGray,
-          action: SnackBarAction(
-            label: 'View',
-            textColor: AppTheme.gold,
-            onPressed: () => context.push('/encounter'),
-          ),
-          duration: const Duration(seconds: 2),
-        ),
-      );
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -200,6 +179,8 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
 
     final quantity = await showModalBottomSheet<int>(
       context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
       backgroundColor: Colors.transparent,
       builder: (ctx) => _MonsterQuantitySheet(name: name, meta: meta),
     );
@@ -215,13 +196,19 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
     final activeCount = filters.activeFilterCount;
 
     return Scaffold(
+      drawer: AppNavigationDrawer(
+        selectedRoute: '/monsters',
+        onNavigate: (route) {
+          if (context.mounted) context.go(route);
+        },
+      ),
       appBar: AppBar(
         title: const Text('Monster Compendium'),
         actions: [
           IconButton(
             icon: const Icon(Icons.library_books_outlined),
             tooltip: 'Rules References',
-            onPressed: () => context.push('/references'),
+            onPressed: () => context.go('/references'),
           ),
         ],
       ),
@@ -229,7 +216,7 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
         builder: (context, ref, _) {
           final count = ref.watch(encounterProvider).participants.length;
           return FloatingActionButton.extended(
-            onPressed: () => context.push('/encounter'),
+            onPressed: () => context.go('/encounter'),
             backgroundColor: AppTheme.crimson,
             icon: Stack(
               clipBehavior: Clip.none,
@@ -267,7 +254,6 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
       ),
       body: Column(
         children: [
-          // â”€â”€ Search bar + filter toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
             child: Row(
@@ -291,8 +277,6 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
               ],
             ),
           ),
-
-          // â”€â”€ Animated filter panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           SizeTransition(
             sizeFactor: _filterFade,
             axisAlignment: -1,
@@ -307,15 +291,11 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
               ),
             ),
           ),
-
-          // â”€â”€ Result count strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           if (monstersAsync.hasValue)
             _ResultCountStrip(
               count: monstersAsync.valueOrNull?.length ?? 0,
               hasFilters: filters.hasActiveFilters,
             ),
-
-          // â”€â”€ Monster list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           Expanded(
             child: monstersAsync.when(
               loading: () =>

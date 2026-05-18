@@ -3,6 +3,7 @@ import 'package:dnd_character_sheet/core/theme/app_theme.dart';
 import 'package:dnd_character_sheet/data/local/choice_lists_data.dart';
 import 'package:dnd_character_sheet/presentation/screens/shared/widgets/app_navigation_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ReferenceListsScreen extends StatefulWidget {
   const ReferenceListsScreen({super.key});
@@ -54,7 +55,12 @@ class _ReferenceListsScreenState extends State<ReferenceListsScreen> {
     return DefaultTabController(
       length: _lists.length,
       child: Scaffold(
-        drawer: const AppNavigationDrawer(selectedRoute: '/references'),
+        drawer: AppNavigationDrawer(
+          selectedRoute: '/references',
+          onNavigate: (route) {
+            if (context.mounted) context.go(route);
+          },
+        ),
         appBar: AppBar(
           title: const Text('Rules References'),
           bottom: TabBar(

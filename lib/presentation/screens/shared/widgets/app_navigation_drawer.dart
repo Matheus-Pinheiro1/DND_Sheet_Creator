@@ -1,15 +1,29 @@
 import 'package:dnd_character_sheet/core/theme/app_text_styles.dart';
 import 'package:dnd_character_sheet/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-class AppNavigationDrawer extends StatelessWidget {
+class AppNavigationDrawer extends StatefulWidget {
   final String selectedRoute;
+  final ValueChanged<String> onNavigate;
 
   const AppNavigationDrawer({
     super.key,
     required this.selectedRoute,
+    required this.onNavigate,
   });
+
+  @override
+  State<AppNavigationDrawer> createState() => _AppNavigationDrawerState();
+}
+
+class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
+  late NavigatorState _navigator;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _navigator = Navigator.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,25 +68,33 @@ class AppNavigationDrawer extends StatelessWidget {
               icon: Icons.home_outlined,
               label: 'Characters',
               route: '/',
-              selectedRoute: selectedRoute,
+              selectedRoute: widget.selectedRoute,
+              onClose: _navigator.pop,
+              onNavigate: widget.onNavigate,
             ),
             _DrawerTile(
               icon: Icons.library_books_outlined,
               label: 'Rules References',
               route: '/references',
-              selectedRoute: selectedRoute,
+              selectedRoute: widget.selectedRoute,
+              onClose: _navigator.pop,
+              onNavigate: widget.onNavigate,
             ),
             _DrawerTile(
               icon: Icons.pets_outlined,
               label: 'Monster Compendium',
               route: '/monsters',
-              selectedRoute: selectedRoute,
+              selectedRoute: widget.selectedRoute,
+              onClose: _navigator.pop,
+              onNavigate: widget.onNavigate,
             ),
             _DrawerTile(
               icon: Icons.shield_outlined,
               label: 'Encounter',
               route: '/encounter',
-              selectedRoute: selectedRoute,
+              selectedRoute: widget.selectedRoute,
+              onClose: _navigator.pop,
+              onNavigate: widget.onNavigate,
             ),
           ],
         ),
@@ -86,12 +108,16 @@ class _DrawerTile extends StatelessWidget {
   final String label;
   final String route;
   final String selectedRoute;
+  final VoidCallback onClose;
+  final ValueChanged<String> onNavigate;
 
   const _DrawerTile({
     required this.icon,
     required this.label,
     required this.route,
     required this.selectedRoute,
+    required this.onClose,
+    required this.onNavigate,
   });
 
   @override
@@ -127,8 +153,11 @@ class _DrawerTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         onTap: () {
-          Navigator.of(context).pop();
-          if (!selected) context.go(route);
+          onClose();
+          if (selected) return;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            onNavigate(route);
+          });
         },
       ),
     );

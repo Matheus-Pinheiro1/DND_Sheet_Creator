@@ -1,5 +1,7 @@
 // lib/providers/dnd_api_providers.dart
 
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/models/class_feature_model.dart';
@@ -95,7 +97,7 @@ final subclassFeatureProgressionProvider = FutureProvider.family
       .getSubclassFeatureProgression(args.subclass, args.level);
 });
 
-// ── Monster providers ─────────────────────────────────────────────────────
+// Monster providers
 
 /// Loads the full monster index (no query) once and keeps it alive.
 /// This is the source of truth for the filtered monsters screen.
@@ -124,8 +126,21 @@ final monstersProvider =
   return ref.watch(dndApiRepositoryProvider).getMonsters(query: query);
 });
 
-final monsterDetailProvider =
-    FutureProvider.family<MonsterDetailDto, String>((ref, monsterIndex) {
-  ref.keepAlive();
+final monsterDetailProvider = FutureProvider.autoDispose
+    .family<MonsterDetailDto, String>((ref, monsterIndex) {
+  final cacheLink = ref.keepAlive();
+  Timer? cacheTimer;
+
+  ref.onCancel(() {
+    cacheTimer = Timer(const Duration(minutes: 5), cacheLink.close);
+  });
+  ref.onResume(() {
+    cacheTimer?.cancel();
+    cacheTimer = null;
+  });
+  ref.onDispose(() {
+    cacheTimer?.cancel();
+  });
+
   return ref.watch(dndApiRepositoryProvider).getMonsterDetail(monsterIndex);
 });

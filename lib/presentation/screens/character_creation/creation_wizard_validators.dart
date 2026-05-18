@@ -37,16 +37,13 @@ extension _CreationWizardValidation on _CreationWizardScreenState {
   }
 
   bool _hasSpeciesLanguageChoice(CreationState state) {
-    if (!_isHumanSpecies(state)) return true;
     for (final language in state.languages) {
       final normalized = language.trim().toLowerCase();
       if (normalized.isEmpty) continue;
-      if (normalized == 'common') continue;
       if (normalized.contains('extra language')) return false;
       if (normalized.contains('language of your choice')) return false;
-      return true;
     }
-    return false;
+    return true;
   }
 
   bool _hasCompletedHumanSpeciesChoices(CreationState state) {

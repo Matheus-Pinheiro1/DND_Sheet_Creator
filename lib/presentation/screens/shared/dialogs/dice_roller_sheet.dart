@@ -179,173 +179,180 @@ class _DiceRollerSheetState extends State<_DiceRollerSheet> {
     final displayExpression = _expressionCtrl.text.trim().isEmpty
         ? _expression
         : _expressionCtrl.text.trim();
+    final media = MediaQuery.of(context);
+    final bottomInset = media.viewInsets.bottom + media.viewPadding.bottom;
 
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Padding(
         padding: EdgeInsets.only(
           left: 20,
           right: 20,
           top: 20,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+          bottom: bottomInset + 20,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(2),
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
-            ),
-            Text(
-              widget.title,
-              style: AppTextStyles.cinzel(
-                color: AppTheme.gold,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              Text(
+                widget.title,
+                style: AppTextStyles.cinzel(
+                  color: AppTheme.gold,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: _dice
-                  .map(
-                    (die) => ChoiceChip(
-                      label: Text('d$die'),
-                      selected: _sides == die,
-                      selectedColor: AppTheme.crimson,
-                      onSelected: (_) => setState(() {
-                        _sides = die;
-                        _syncExpressionFromSelection();
-                      }),
-                    ),
-                  )
-                  .toList(),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _expressionCtrl,
-              decoration: const InputDecoration(
-                hintText: 'Ex.: 4d10+1d4+3',
-                prefixIcon: Icon(Icons.functions),
-                isDense: true,
-              ),
-              onSubmitted: _rollExpression,
-              onChanged: (_) => setState(() {}),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              'Bônus fixo apenas. Você pode usar anotações como (STR + PB) fora da fórmula.',
-              style: AppTextStyles.lato(
-                color: Colors.white54,
-                fontSize: 11,
-              ),
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: _rollDefault,
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppTheme.charcoal,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.white12),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: _dice
+                    .map(
+                      (die) => ChoiceChip(
+                        label: Text('d$die'),
+                        selected: _sides == die,
+                        selectedColor: AppTheme.crimson,
+                        onSelected: (_) => setState(() {
+                          _sides = die;
+                          _syncExpressionFromSelection();
+                        }),
                       ),
-                      child: Column(
-                        children: [
-                          Text(
-                            displayExpression,
-                            style: AppTextStyles.lato(
-                              color: Colors.white70,
-                              fontSize: 13,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 250),
-                            child: Text(
-                              _finalRoll?.toString() ?? '—',
-                              key: ValueKey(_finalRoll),
-                              style: AppTextStyles.cinzel(
-                                color: AppTheme.gold,
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold,
+                    )
+                    .toList(),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: _expressionCtrl,
+                decoration: const InputDecoration(
+                  hintText: 'Ex.: 4d10+1d4+3',
+                  prefixIcon: Icon(Icons.functions),
+                  isDense: true,
+                ),
+                onSubmitted: _rollExpression,
+                onChanged: (_) => setState(() {}),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Bônus fixo apenas. Você pode usar anotações como (STR + PB) fora da fórmula.',
+                style: AppTextStyles.lato(
+                  color: Colors.white54,
+                  fontSize: 11,
+                ),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: _rollDefault,
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppTheme.charcoal,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white12),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              displayExpression,
+                              style: AppTextStyles.lato(
+                                color: Colors.white70,
+                                fontSize: 13,
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            _historyLabel.isEmpty
-                                ? 'Tap to roll'
-                                : _historyLabel,
-                            style: AppTextStyles.lato(
-                              color: Colors.white54,
-                              fontSize: 12,
+                            const SizedBox(height: 10),
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 250),
+                              child: Text(
+                                _finalRoll?.toString() ?? '—',
+                                key: ValueKey(_finalRoll),
+                                style: AppTextStyles.cinzel(
+                                  color: AppTheme.gold,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                            const SizedBox(height: 6),
+                            Text(
+                              _historyLabel.isEmpty
+                                  ? 'Tap to roll'
+                                  : _historyLabel,
+                              style: AppTextStyles.lato(
+                                color: Colors.white54,
+                                fontSize: 12,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () => setState(() {
-                        _modifier++;
-                        _syncExpressionFromSelection();
-                      }),
-                      icon: const Icon(Icons.add_circle_outline,
-                          color: Colors.white70),
-                    ),
-                    Text(
-                      _modifier >= 0 ? '+$_modifier' : '$_modifier',
-                      style: AppTextStyles.cinzel(
-                        color: AppTheme.gold,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                  const SizedBox(width: 10),
+                  Column(
+                    children: [
+                      IconButton(
+                        onPressed: () => setState(() {
+                          _modifier++;
+                          _syncExpressionFromSelection();
+                        }),
+                        icon: const Icon(Icons.add_circle_outline,
+                            color: Colors.white70),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () => setState(() {
-                        _modifier--;
-                        _syncExpressionFromSelection();
-                      }),
-                      icon: const Icon(Icons.remove_circle_outline,
-                          color: Colors.white70),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: _rollDefault,
-                icon: const Icon(Icons.casino),
-                label: Text(
-                  'Roll ${displayExpression.isEmpty ? '1d$_sides' : displayExpression}',
-                  style: AppTextStyles.cinzel(fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                      Text(
+                        _modifier >= 0 ? '+$_modifier' : '$_modifier',
+                        style: AppTextStyles.cinzel(
+                          color: AppTheme.gold,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => setState(() {
+                          _modifier--;
+                          _syncExpressionFromSelection();
+                        }),
+                        icon: const Icon(Icons.remove_circle_outline,
+                            color: Colors.white70),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: _rollDefault,
+                  icon: const Icon(Icons.casino),
+                  label: Text(
+                    'Roll ${displayExpression.isEmpty ? '1d$_sides' : displayExpression}',
+                    style: AppTextStyles.cinzel(fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

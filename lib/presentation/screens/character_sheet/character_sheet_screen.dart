@@ -78,6 +78,12 @@ class _CharacterSheetScreenState extends ConsumerState<CharacterSheetScreen>
     }
   }
 
+  void _closeSidebar() {
+    if (_scaffoldKey.currentState?.isEndDrawerOpen == true) {
+      Navigator.of(context).pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final character = ref.watch(characterByIdProvider(widget.characterId));
@@ -121,17 +127,27 @@ class _CharacterSheetScreenState extends ConsumerState<CharacterSheetScreen>
         currentTabIndex: _tabController.index,
         tabs: _tabs,
         onTabSelected: _jumpToTab,
+        onClose: _closeSidebar,
+        onEditCharacter: () {
+          if (context.mounted) context.push('/create/${character.id}');
+        },
+        onOpenRoute: (route) {
+          if (context.mounted) context.go(route);
+        },
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          TabMain(character: character),
-          TabCombat(character: character),
-          TabSpells(character: character),
-          TabFeatures(character: character),
-          TabEquipment(character: character),
-          TabNotes(character: character),
-        ],
+      body: SafeArea(
+        top: false,
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            TabMain(character: character),
+            TabCombat(character: character),
+            TabSpells(character: character),
+            TabFeatures(character: character),
+            TabEquipment(character: character),
+            TabNotes(character: character),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: 'dice_roller_fab',
@@ -200,12 +216,18 @@ class _CharacterSidebar extends ConsumerWidget {
   final int currentTabIndex;
   final List<_TabDef> tabs;
   final void Function(int) onTabSelected;
+  final VoidCallback onClose;
+  final VoidCallback onEditCharacter;
+  final ValueChanged<String> onOpenRoute;
 
   const _CharacterSidebar({
     required this.character,
     required this.currentTabIndex,
     required this.tabs,
     required this.onTabSelected,
+    required this.onClose,
+    required this.onEditCharacter,
+    required this.onOpenRoute,
   });
 
   @override
@@ -263,8 +285,10 @@ class _CharacterSidebar extends ConsumerWidget {
                   style: AppTextStyles.lato(color: Colors.white, fontSize: 14),
                 ),
                 onTap: () {
-                  Navigator.of(context).pop();
-                  context.push('/create/${character.id}');
+                  onClose();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    onEditCharacter();
+                  });
                 },
               ),
               ListTile(
@@ -278,8 +302,10 @@ class _CharacterSidebar extends ConsumerWidget {
                   style: AppTextStyles.lato(color: Colors.white, fontSize: 14),
                 ),
                 onTap: () {
-                  Navigator.of(context).pop();
-                  context.push('/references');
+                  onClose();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    onOpenRoute('/references');
+                  });
                 },
               ),
               ListTile(
@@ -293,8 +319,10 @@ class _CharacterSidebar extends ConsumerWidget {
                   style: AppTextStyles.lato(color: Colors.white, fontSize: 14),
                 ),
                 onTap: () {
-                  Navigator.of(context).pop();
-                  context.push('/monsters');
+                  onClose();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    onOpenRoute('/monsters');
+                  });
                 },
               ),
               ListTile(
@@ -309,8 +337,10 @@ class _CharacterSidebar extends ConsumerWidget {
                       AppTextStyles.lato(color: Colors.white70, fontSize: 14),
                 ),
                 onTap: () {
-                  Navigator.of(context).pop();
-                  context.go('/');
+                  onClose();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    onOpenRoute('/');
+                  });
                 },
               ),
               const SizedBox(height: 12),

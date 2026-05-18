@@ -101,7 +101,7 @@ class _GrantedSpellsPreview extends StatelessWidget {
   }
 }
 
-class _SpellSelectionTile extends ConsumerWidget {
+class _SpellSelectionTile extends ConsumerStatefulWidget {
   final SpellDto spell;
   final int maxSpellLevel;
   final int currentCantrips;
@@ -119,7 +119,48 @@ class _SpellSelectionTile extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_SpellSelectionTile> createState() =>
+      _SpellSelectionTileState();
+}
+
+class _SpellSelectionTileState extends ConsumerState<_SpellSelectionTile>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _expandAnimation;
+  bool _expanded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 220),
+      vsync: this,
+    );
+    _expandAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _toggleExpanded() {
+    setState(() {
+      _expanded = !_expanded;
+      if (_expanded) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final spell = widget.spell;
     final state = ref.watch(creationProvider);
     final isSelected = state.selectedSpells.contains(spell.index);
 
@@ -134,88 +175,178 @@ class _SpellSelectionTile extends ConsumerWidget {
           color: isSelected ? AppTheme.gold : Colors.white10,
         ),
       ),
-      child: ListTile(
-        onTap: () => _toggle(context, ref, state, isSelected),
-        onLongPress: () => _showDetail(context),
-        title: Row(
-          children: [
-            Expanded(
-              child: Text(
-                spell.name,
-                style: AppTextStyles.cinzel(
-                  color: isSelected ? AppTheme.gold : Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+      child: Column(
+        children: [
+          InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () => _toggle(context, isSelected),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Row(
+                children: [
+                  Icon(
+                    isSelected
+                        ? Icons.check_circle
+                        : Icons.radio_button_unchecked,
+                    color: isSelected ? AppTheme.gold : Colors.white30,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                spell.name,
+                                style: AppTextStyles.cinzel(
+                                  color:
+                                      isSelected ? AppTheme.gold : Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            _Tag(
+                              spell.school
+                                  .substring(0, spell.school.length.clamp(0, 3))
+                                  .toUpperCase(),
+                              Colors.blueGrey,
+                            ),
+                            if (spell.ritual)
+                              const _Tag('R', Colors.purpleAccent),
+                            if (spell.concentration)
+                              const _Tag('C', Colors.orangeAccent),
+                            if (spell.damageType != null)
+                              const _Tag('DMG', Colors.redAccent),
+                          ],
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          spell.level == 0
+                              ? '${spell.school} Cantrip • ${spell.castingTime}'
+                              : 'Level ${spell.level} ${spell.school} • ${spell.castingTime}',
+                          style: AppTextStyles.lato(
+                            color: Colors.white54,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  GestureDetector(
+                    onTap: _toggleExpanded,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: AnimatedRotation(
+                        turns: _expanded ? 0.5 : 0,
+                        duration: const Duration(milliseconds: 220),
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white54,
+                          size: 22,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            _Tag(
-                spell.school
-                    .substring(0, spell.school.length.clamp(0, 3))
-                    .toUpperCase(),
-                Colors.blueGrey),
-            if (spell.ritual) const _Tag('R', Colors.purpleAccent),
-            if (spell.concentration) const _Tag('C', Colors.orangeAccent),
-            if (spell.damageType != null) const _Tag('DMG', Colors.redAccent),
-          ],
-        ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(top: 4),
-          child: Text(
-            spell.level == 0
-                ? '${spell.school} Cantrip • ${spell.castingTime}'
-                : 'Level ${spell.level} ${spell.school} • ${spell.castingTime}',
-            style: AppTextStyles.lato(
-              color: Colors.white54,
-              fontSize: 12,
+          ),
+          SizeTransition(
+            sizeFactor: _expandAnimation,
+            axisAlignment: -1,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Divider(color: Colors.white12, height: 16),
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 4,
+                    children: [
+                      _InfoChip('Range', spell.range),
+                      _InfoChip('Duration', spell.duration),
+                      _InfoChip('Components', spell.components.join(', ')),
+                      if (spell.castingTime.isNotEmpty)
+                        _InfoChip('Cast', spell.castingTime),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    spell.desc,
+                    style: AppTextStyles.lato(
+                      color: Colors.white70,
+                      fontSize: 13,
+                      height: 1.55,
+                    ),
+                    maxLines: 8,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  if ((spell.higherLevel ?? '').trim().isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      'At Higher Levels: ${spell.higherLevel}',
+                      style: AppTextStyles.lato(
+                        color: Colors.white54,
+                        fontSize: 12,
+                        height: 1.45,
+                      ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ],
+              ),
             ),
           ),
-        ),
-        trailing: Icon(
-          isSelected ? Icons.check_circle : Icons.info_outline,
-          color: isSelected ? AppTheme.gold : Colors.white30,
-        ),
+        ],
       ),
     );
   }
 
-  void _toggle(BuildContext context, WidgetRef ref, CreationState state,
-      bool isSelected) {
+  void _toggle(BuildContext context, bool isSelected) {
     if (isSelected) {
-      ref.read(creationProvider.notifier).toggleSpell(spell.index);
+      ref.read(creationProvider.notifier).toggleSpell(widget.spell.index);
       return;
     }
-    if (spell.level > maxSpellLevel && spell.level != 0) {
+    if (widget.spell.level > widget.maxSpellLevel && widget.spell.level != 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'You can only choose spells of level $maxSpellLevel or lower right now.',
+            'You can only choose spells of level ${widget.maxSpellLevel} or lower right now.',
           ),
         ),
       );
       return;
     }
-    if (spell.level == 0 && currentCantrips >= maxCantrips) {
+    if (widget.spell.level == 0 &&
+        widget.currentCantrips >= widget.maxCantrips) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'You already selected the maximum number of cantrips ($maxCantrips).',
+            'You already selected the maximum number of cantrips (${widget.maxCantrips}).',
           ),
         ),
       );
       return;
     }
-    if (spell.level > 0 && currentLeveled >= maxLeveled) {
+    if (widget.spell.level > 0 && widget.currentLeveled >= widget.maxLeveled) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'You already selected the maximum number of leveled spells ($maxLeveled).',
+            'You already selected the maximum number of leveled spells (${widget.maxLeveled}).',
           ),
         ),
       );
       return;
     }
-    ref.read(creationProvider.notifier).toggleSpell(spell.index);
+    ref.read(creationProvider.notifier).toggleSpell(widget.spell.index);
   }
 
   void _showDetail(BuildContext context) {
@@ -230,66 +361,48 @@ class _SpellSelectionTile extends ConsumerWidget {
         expand: false,
         initialChildSize: 0.55,
         maxChildSize: 0.92,
-        builder: (_, ctrl) => SingleChildScrollView(
-          controller: ctrl,
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white24,
-                    borderRadius: BorderRadius.circular(2),
+        builder: (context, ctrl) {
+          final bottomPadding = MediaQuery.of(context).viewPadding.bottom + 24;
+          return SingleChildScrollView(
+            controller: ctrl,
+            padding: EdgeInsets.fromLTRB(24, 24, 24, bottomPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                spell.name,
-                style: AppTextStyles.cinzel(
-                  fontSize: 22,
-                  color: AppTheme.gold,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  widget.spell.name,
+                  style: AppTextStyles.cinzel(
+                    fontSize: 22,
+                    color: AppTheme.gold,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                spell.level == 0
-                    ? '${spell.school} Cantrip'
-                    : 'Level ${spell.level} ${spell.school}',
-                style: AppTextStyles.lato(color: Colors.white54),
-              ),
-              const Divider(height: 24, color: Colors.white12),
-              _Row('Casting Time', spell.castingTime),
-              _Row('Range', spell.range),
-              _Row('Duration', spell.duration),
-              _Row('Components', spell.components.join(', ')),
-              const SizedBox(height: 12),
-              Text(
-                'Description',
-                style: AppTextStyles.cinzel(
-                  color: AppTheme.gold,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 4),
+                Text(
+                  widget.spell.level == 0
+                      ? '${widget.spell.school} Cantrip'
+                      : 'Level ${widget.spell.level} ${widget.spell.school}',
+                  style: AppTextStyles.lato(color: Colors.white54),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                spell.desc,
-                style: AppTextStyles.lato(
-                  color: Colors.white70,
-                  height: 1.6,
-                  fontSize: 14,
-                ),
-              ),
-              if (spell.higherLevel != null &&
-                  spell.higherLevel!.isNotEmpty) ...[
+                const Divider(height: 24, color: Colors.white12),
+                _Row('Casting Time', widget.spell.castingTime),
+                _Row('Range', widget.spell.range),
+                _Row('Duration', widget.spell.duration),
+                _Row('Components', widget.spell.components.join(', ')),
                 const SizedBox(height: 12),
                 Text(
-                  'At Higher Levels',
+                  'Description',
                   style: AppTextStyles.cinzel(
                     color: AppTheme.gold,
                     fontSize: 14,
@@ -298,17 +411,62 @@ class _SpellSelectionTile extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  spell.higherLevel!,
+                  widget.spell.desc,
                   style: AppTextStyles.lato(
-                    color: Colors.white54,
-                    height: 1.5,
+                    color: Colors.white70,
+                    height: 1.6,
+                    fontSize: 14,
                   ),
                 ),
+                if (widget.spell.higherLevel != null &&
+                    widget.spell.higherLevel!.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  Text(
+                    'At Higher Levels',
+                    style: AppTextStyles.cinzel(
+                      color: AppTheme.gold,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.spell.higherLevel!,
+                    style: AppTextStyles.lato(
+                      color: Colors.white54,
+                      height: 1.5,
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 32),
               ],
-              const SizedBox(height: 32),
-            ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _InfoChip extends StatelessWidget {
+  final String label;
+  final String value;
+  const _InfoChip(this.label, this.value);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: '$label: ',
+            style: AppTextStyles.lato(color: Colors.white38, fontSize: 11),
           ),
-        ),
+          TextSpan(
+            text: value,
+            style: AppTextStyles.lato(color: Colors.white60, fontSize: 11),
+          ),
+        ],
       ),
     );
   }

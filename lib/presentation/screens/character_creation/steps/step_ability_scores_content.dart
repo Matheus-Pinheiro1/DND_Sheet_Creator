@@ -295,7 +295,7 @@ extension _StepAbilityScoreContent on _StepAbilityScoresState {
               SizedBox(
                 width: 44,
                 child: Text(
-                  mod != null ? (mod >= 0 ? '+$mod' : '$mod') : 'â€”',
+                  mod != null ? (mod >= 0 ? '+$mod' : '$mod') : '-”',
                   style: AppTextStyles.cinzel(
                     color: mod == null
                         ? Colors.white24
@@ -315,7 +315,7 @@ extension _StepAbilityScoreContent on _StepAbilityScoresState {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              'âš ï¸  Assign all values to continue',
+              'Assign all values to continue',
               style: AppTextStyles.lato(
                 color: Colors.orangeAccent,
                 fontSize: 12,

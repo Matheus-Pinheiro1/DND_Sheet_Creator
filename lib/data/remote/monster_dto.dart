@@ -92,6 +92,48 @@ class MonsterDetailDto {
     return value.toString();
   }
 
+  Map<String, int> get savingThrowBonuses {
+    final result = <String, int>{};
+    final pattern = RegExp(
+      r'Saving Throw:\s*([A-Za-z]{3})\s*([+-]?\d+)',
+      caseSensitive: false,
+    );
+
+    for (final proficiency in proficiencies) {
+      final match = pattern.firstMatch(proficiency);
+      if (match == null) continue;
+
+      final ability = match.group(1)?.toUpperCase();
+      final value = int.tryParse(match.group(2) ?? '');
+      if (ability == null || value == null) continue;
+
+      result[ability] = value;
+    }
+
+    return result;
+  }
+
+  int abilityScoreFor(String ability) {
+    return switch (ability.toUpperCase()) {
+      'STR' => strength,
+      'DEX' => dexterity,
+      'CON' => constitution,
+      'INT' => intelligence,
+      'WIS' => wisdom,
+      'CHA' => charisma,
+      _ => 10,
+    };
+  }
+
+  int abilityModifierFor(String ability) {
+    return ((abilityScoreFor(ability) - 10) / 2).floor();
+  }
+
+  int savingThrowFor(String ability) {
+    final label = ability.toUpperCase();
+    return abilityModifierFor(label) + (savingThrowBonuses[label] ?? 0);
+  }
+
   factory MonsterDetailDto.fromJson(Map<String, dynamic> json) =>
       MonsterDetailDto(
         index: (json['index'] ?? '').toString(),

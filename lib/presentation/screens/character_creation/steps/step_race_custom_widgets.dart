@@ -56,7 +56,7 @@ class _CustomRaceCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${race.speed} ft Â· ${race.size}',
+                    '${race.speed} ft · ${race.size}',
                     style: AppTextStyles.lato(
                       color: Colors.white54,
                       fontSize: 12,

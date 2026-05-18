@@ -9,7 +9,6 @@ import 'package:dnd_character_sheet/providers/dnd_api_providers.dart';
 import 'package:dnd_character_sheet/providers/encounter_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../shared/widgets/loading_dragon.dart';
 import '../shared/widgets/stat_box.dart';
@@ -33,7 +32,7 @@ class MonsterDetailScreen extends ConsumerWidget {
                       .where((p) => p.monsterIndex == monsterIndex)
                       .length;
                   return TextButton.icon(
-                    onPressed: () => _addToEncounter(context, ref, monster),
+                    onPressed: () => _addToEncounter(ref, monster),
                     icon: const Icon(Icons.add, size: 18),
                     label: Text(
                       countInEncounter > 0
@@ -60,7 +59,6 @@ class MonsterDetailScreen extends ConsumerWidget {
   }
 
   void _addToEncounter(
-    BuildContext context,
     WidgetRef ref,
     MonsterDetailDto monster,
   ) {
@@ -84,32 +82,6 @@ class MonsterDetailScreen extends ConsumerWidget {
     );
 
     ref.read(encounterProvider.notifier).addParticipant(participant);
-
-    final notifier = ref.read(encounterProvider.notifier);
-    final activeEncounter = ref.read(encounterProvider);
-    final encounterSuffix = notifier.hasMultipleEncounters
-        ? ' to ${activeEncounter.name}'
-        : ' to encounter';
-    final added = ref
-        .read(encounterProvider)
-        .participants
-        .lastWhere((p) => p.monsterIndex == monster.index);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '${added.name} added$encounterSuffix',
-          style: AppTextStyles.lato(color: Colors.white),
-        ),
-        backgroundColor: AppTheme.ashGray,
-        action: SnackBarAction(
-          label: 'View Encounter',
-          textColor: AppTheme.gold,
-          onPressed: () => context.push('/encounter'),
-        ),
-        duration: const Duration(seconds: 3),
-      ),
-    );
   }
 }
 
@@ -166,6 +138,22 @@ class _MonsterDetailBody extends StatelessWidget {
                 _MiniStat('WIS', monster.wisdom),
                 _MiniStat('CHA', monster.charisma),
               ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          _SectionCard(
+            title: 'Saving Throws',
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
+                  .map((ability) => _SavingThrowStat(
+                        label: ability,
+                        value: monster.savingThrowFor(ability),
+                        proficient:
+                            monster.savingThrowBonuses.containsKey(ability),
+                      ))
+                  .toList(),
             ),
           ),
           const SizedBox(height: 12),
@@ -323,6 +311,55 @@ class _MiniStat extends StatelessWidget {
                   fontWeight: FontWeight.bold)),
           Text(label,
               style: AppTextStyles.lato(color: Colors.white38, fontSize: 11)),
+        ],
+      ),
+    );
+  }
+}
+
+class _SavingThrowStat extends StatelessWidget {
+  final String label;
+  final int value;
+  final bool proficient;
+
+  const _SavingThrowStat({
+    required this.label,
+    required this.value,
+    required this.proficient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final signed = value >= 0 ? '+$value' : '$value';
+
+    return Container(
+      width: 72,
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      decoration: BoxDecoration(
+        color: proficient
+            ? AppTheme.gold.withValues(alpha: 0.12)
+            : AppTheme.charcoal.withValues(alpha: 0.45),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: proficient
+              ? AppTheme.gold.withValues(alpha: 0.45)
+              : Colors.white10,
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            signed,
+            style: AppTextStyles.cinzel(
+              color: proficient ? AppTheme.gold : Colors.white70,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            label,
+            style: AppTextStyles.lato(color: Colors.white38, fontSize: 10),
+          ),
         ],
       ),
     );

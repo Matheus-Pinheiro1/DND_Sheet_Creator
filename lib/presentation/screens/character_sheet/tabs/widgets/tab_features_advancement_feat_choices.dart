@@ -38,7 +38,7 @@ extension _AdvancementPickerFeatChoices on _AdvancementPickerSheetState {
       return [
         const SizedBox(height: 12),
         _MultiChoiceSection(
-          title: 'Choose 3 artisanâ€™s tools',
+          title: "Choose 3 artisan's tools",
           subtitle: '${_crafterTools.length} / 3 selected',
           options: options,
           selectedValues: _crafterTools,
@@ -231,7 +231,7 @@ extension _AdvancementPickerFeatChoices on _AdvancementPickerSheetState {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${spell.school} â€¢ ${spell.castingTime} â€¢ ${spell.range}',
+                      '${spell.school} • ${spell.castingTime} • ${spell.range}',
                       style: AppTextStyles.lato(
                         color: Colors.white54,
                         fontSize: 11,

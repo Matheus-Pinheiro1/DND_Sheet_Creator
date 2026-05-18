@@ -237,9 +237,10 @@ class _OfficialRaceCard extends StatelessWidget {
                   },
                 ),
               ],
-              if (isSelected && race.index == 'human') ...[
+              if (isSelected && _hasExtraLanguageChoice) ...[
                 const SizedBox(height: 12),
-                _HumanExtraLanguageChooser(
+                _SpeciesExtraLanguageChooser(
+                  raceName: race.name,
                   selectedLanguage: selectedExtraLanguage,
                   onChanged: onSelectExtraLanguage,
                 ),
@@ -260,13 +261,23 @@ class _OfficialRaceCard extends StatelessWidget {
     }
     return null;
   }
+
+  bool get _hasExtraLanguageChoice {
+    return race.languages.any((language) {
+      final normalized = language.trim().toLowerCase();
+      return normalized.contains('extra language') ||
+          normalized.contains('language of your choice');
+    });
+  }
 }
 
-class _HumanExtraLanguageChooser extends StatelessWidget {
+class _SpeciesExtraLanguageChooser extends StatelessWidget {
+  final String raceName;
   final String selectedLanguage;
   final ValueChanged<String> onChanged;
 
-  const _HumanExtraLanguageChooser({
+  const _SpeciesExtraLanguageChooser({
+    required this.raceName,
     required this.selectedLanguage,
     required this.onChanged,
   });
@@ -309,7 +320,7 @@ class _HumanExtraLanguageChooser extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Human Language',
+            '$raceName Language',
             style: AppTextStyles.cinzel(
               color: AppTheme.gold,
               fontSize: 13,
@@ -320,7 +331,7 @@ class _HumanExtraLanguageChooser extends StatelessWidget {
           Text(
             complete
                 ? 'Selected: $selectedLanguage'
-                : 'Choose the extra language granted by Human.',
+                : 'Choose the extra language granted by $raceName.',
             style: AppTextStyles.lato(
               color: complete ? Colors.greenAccent : Colors.white60,
               fontSize: 12,

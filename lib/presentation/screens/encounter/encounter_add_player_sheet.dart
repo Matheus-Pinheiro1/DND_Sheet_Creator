@@ -23,11 +23,21 @@ class _AddPlayerSheetState extends State<_AddPlayerSheet> {
     super.dispose();
   }
 
+  String? _positiveNumberValidator(String? value, String label) {
+    final parsed = int.tryParse(value ?? '');
+    if (parsed == null) return 'Required';
+    if (parsed <= 0) return '$label must be greater than 0';
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+    final bottomInset = media.viewInsets.bottom + media.viewPadding.bottom;
+
     return Container(
       padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
+        bottom: bottomInset,
       ),
       decoration: const BoxDecoration(
         color: AppTheme.charcoal,
@@ -74,8 +84,7 @@ class _AddPlayerSheetState extends State<_AddPlayerSheet> {
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: const InputDecoration(labelText: 'Max HP'),
-                      validator: (v) =>
-                          (int.tryParse(v ?? '') == null) ? 'Required' : null,
+                      validator: (v) => _positiveNumberValidator(v, 'HP'),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -85,26 +94,36 @@ class _AddPlayerSheetState extends State<_AddPlayerSheet> {
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: const InputDecoration(labelText: 'AC'),
-                      validator: (v) =>
-                          (int.tryParse(v ?? '') == null) ? 'Required' : null,
+                      validator: (v) => _positiveNumberValidator(v, 'AC'),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (!_formKey.currentState!.validate()) return;
-                    widget.onAdd(
-                      _nameCtrl.text.trim(),
-                      int.parse(_hpCtrl.text),
-                      int.parse(_acCtrl.text),
-                    );
-                  },
-                  child: const Text('Add to Encounter'),
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.of(context).maybePop(),
+                      child: const Text('Cancel'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (!_formKey.currentState!.validate()) return;
+                        widget.onAdd(
+                          _nameCtrl.text.trim(),
+                          int.parse(_hpCtrl.text),
+                          int.parse(_acCtrl.text),
+                        );
+                      },
+                      child: const Text('Add to Encounter'),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -113,5 +132,3 @@ class _AddPlayerSheetState extends State<_AddPlayerSheet> {
     );
   }
 }
-
-// ── Shared small widgets ─────────────────────────────────────────────────────

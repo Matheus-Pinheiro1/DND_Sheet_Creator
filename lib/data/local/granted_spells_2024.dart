@@ -119,11 +119,12 @@ Map<String, String> get _spellIndexAliases =>
 String _normalizeSpellKey(String value) {
   final lowered = value
       .toLowerCase()
-      .replaceAll('â€™', "'")
-      .replaceAll('â€œ', '"')
-      .replaceAll('â€', '"')
-      .replaceAll('â€“', '-')
-      .replaceAll('â€”', '-')
+      .replaceAll('\u2018', "'")
+      .replaceAll('\u2019', "'")
+      .replaceAll('\u201c', '"')
+      .replaceAll('\u201d', '"')
+      .replaceAll('\u2013', '-')
+      .replaceAll('\u2014', '-')
       .replaceAll(RegExp(r"[^a-z0-9'+ ]"), ' ')
       .replaceAll(RegExp(r'\s+'), ' ')
       .trim();
@@ -210,10 +211,11 @@ List<GrantedSpellEntry> buildGrantedSpellEntries({
 String _slugifySpellName(String value) {
   return value
       .toLowerCase()
-      .replaceAll('â€™', '')
+      .replaceAll('\u2018', '')
+      .replaceAll('\u2019', '')
       .replaceAll("'", '')
-      .replaceAll('â€œ', '')
-      .replaceAll('â€', '')
+      .replaceAll('\u201c', '')
+      .replaceAll('\u201d', '')
       .replaceAll(RegExp(r'[^a-z0-9]+'), '-')
       .replaceAll(RegExp(r'-+'), '-')
       .replaceAll(RegExp(r'^-|-$'), '');

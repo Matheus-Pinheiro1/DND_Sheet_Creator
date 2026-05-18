@@ -10,17 +10,19 @@ class EncounterModel {
   final List<EncounterParticipant> participants;
   final int currentTurnIndex;
   final int currentRound;
+  final int colorTag;
 
   const EncounterModel({
     this.id = '',
     this.name = 'Encounter',
     this.participants = const [],
-    this.currentTurnIndex = 0,
+    this.currentTurnIndex = -1,
     this.currentRound = 1,
+    this.colorTag = 0,
   });
 
   bool get isEmpty => participants.isEmpty;
-  bool get isStarted => currentRound > 1 || currentTurnIndex > 0;
+  bool get isStarted => !isEmpty && currentTurnIndex >= 0;
 
   List<EncounterParticipant> get sortedParticipants {
     final list = [
@@ -40,7 +42,7 @@ class EncounterModel {
 
   EncounterParticipant? get currentParticipant {
     final sorted = sortedParticipants;
-    if (sorted.isEmpty) return null;
+    if (sorted.isEmpty || currentTurnIndex < 0) return null;
     final idx = currentTurnIndex.clamp(0, sorted.length - 1);
     return sorted[idx];
   }
@@ -51,6 +53,7 @@ class EncounterModel {
     List<EncounterParticipant>? participants,
     int? currentTurnIndex,
     int? currentRound,
+    int? colorTag,
   }) {
     return EncounterModel(
       id: id ?? this.id,
@@ -58,6 +61,7 @@ class EncounterModel {
       participants: participants ?? this.participants,
       currentTurnIndex: currentTurnIndex ?? this.currentTurnIndex,
       currentRound: currentRound ?? this.currentRound,
+      colorTag: colorTag ?? this.colorTag,
     );
   }
 
@@ -67,14 +71,16 @@ class EncounterModel {
         'participants': participants.map((p) => p.toJson()).toList(),
         'currentTurnIndex': currentTurnIndex,
         'currentRound': currentRound,
+        'colorTag': colorTag,
       };
 
   factory EncounterModel.fromJson(Map<String, dynamic> json) => EncounterModel(
         id: _string(json['id']),
         name: _string(json['name'], fallback: 'Encounter'),
         participants: _participants(json['participants']),
-        currentTurnIndex: _int(json['currentTurnIndex']),
+        currentTurnIndex: _int(json['currentTurnIndex'], fallback: -1),
         currentRound: _int(json['currentRound'], fallback: 1),
+        colorTag: _int(json['colorTag']),
       );
 
   static EncounterModel get empty => const EncounterModel();

@@ -297,7 +297,7 @@ class _AdvancementPickerSheetState
           child: Text(
             remaining > 0
                 ? 'Distribute $remaining more point${remaining > 1 ? 's' : ''}.'
-                : 'âœ“ All 2 points assigned. Hit Confirm to save.',
+                : 'All 2 points assigned. Hit Confirm to save.',
             style: AppTextStyles.lato(
               color: remaining == 0 ? Colors.greenAccent : Colors.white54,
               fontSize: 12,
@@ -344,7 +344,7 @@ class _AdvancementPickerSheetState
                       ),
                       Text(
                         delta > 0
-                            ? '$base â†’ $current  (+$delta)'
+                            ? '$base ->’ $current  (+$delta)'
                             : '$current${atCap ? '  (cap)' : ''}',
                         style: AppTextStyles.lato(
                           color: delta > 0
@@ -386,7 +386,7 @@ class _AdvancementPickerSheetState
         const SizedBox(height: 8),
         if (widget.advLevel >= 19)
           Text(
-            'Epic boon level â€” ability cap raised to 30.',
+            'Epic boon level - ability cap raised to 30.',
             style: AppTextStyles.lato(color: Colors.white38, fontSize: 11),
             textAlign: TextAlign.center,
           ),

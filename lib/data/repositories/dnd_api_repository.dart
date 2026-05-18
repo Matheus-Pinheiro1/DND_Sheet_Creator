@@ -50,97 +50,13 @@ class DndApiRepository {
   };
 
   Future<List<RaceDto>> getRaces() async {
-    const cacheKey = 'races_full_v2';
     final local = await _loadLocalList('assets/data/2024/races.json');
-    final localRaces = local.map(RaceDto.fromJson).toList();
-
-    try {
-      final res = await _dio.get('$_base/races');
-      final list = res.data['results'] as List<dynamic>;
-      final remote =
-          await Future.wait(list.map((r) => _getRace(r['index'] as String)));
-      final merged = <String, RaceDto>{
-        for (final item in remote) item.index: item,
-        for (final item in localRaces) item.index: item,
-      }.values.toList();
-      await _cacheBox.put(
-        cacheKey,
-        jsonEncode(merged.map((e) => e.toJson()).toList()),
-      );
-      return merged;
-    } catch (_) {
-      final cached = _cacheBox.get(cacheKey);
-      if (cached != null) {
-        return (jsonDecode(cached) as List<dynamic>)
-            .map((e) => RaceDto.fromJson(Map<String, dynamic>.from(e as Map)))
-            .toList();
-      }
-      return localRaces;
-    }
-  }
-
-  Future<RaceDto> _getRace(String index) async {
-    final res = await _dio.get('$_base/races/$index');
-    return RaceDto.fromJson(Map<String, dynamic>.from(res.data as Map));
+    return local.map(RaceDto.fromJson).toList();
   }
 
   Future<List<ClassDto>> getClasses() async {
-    const cacheKey = 'classes_full_v2';
-    final local = (await _loadLocalList('assets/data/2024/classes.json'))
-        .map(ClassDto.fromJson)
-        .toList();
-    try {
-      final res = await _dio.get('$_base/classes');
-      final list = res.data['results'] as List<dynamic>;
-      final remote =
-          await Future.wait(list.map((c) => _getClass(c['index'] as String)));
-      final merged = <String, ClassDto>{
-        for (final item in remote) item.index: item,
-        for (final item in local) item.index: item,
-      }.values.toList();
-      await _cacheBox.put(
-        cacheKey,
-        jsonEncode(
-          merged
-              .map(
-                (e) => {
-                  'index': e.index,
-                  'name': e.name,
-                  'hit_die': e.hitDie,
-                  'saving_throws': e.savingThrows
-                      .map((s) => {'index': s, 'name': s.toUpperCase()})
-                      .toList(),
-                  'proficiencies':
-                      e.proficiencies.map((p) => {'name': p}).toList(),
-                  'proficiency_choices': const [],
-                  'spellcasting': ((e.spellcastingAbility ?? '').isEmpty)
-                      ? null
-                      : {
-                          'spellcasting_ability': {
-                            'index': e.spellcastingAbility,
-                            'name': (e.spellcastingAbility ?? '').toUpperCase(),
-                          }
-                        },
-                },
-              )
-              .toList(),
-        ),
-      );
-      return merged;
-    } catch (_) {
-      final cached = _cacheBox.get(cacheKey);
-      if (cached != null) {
-        return (jsonDecode(cached) as List<dynamic>)
-            .map((e) => ClassDto.fromJson(Map<String, dynamic>.from(e as Map)))
-            .toList();
-      }
-      return local;
-    }
-  }
-
-  Future<ClassDto> _getClass(String index) async {
-    final res = await _dio.get('$_base/classes/$index');
-    return ClassDto.fromJson(Map<String, dynamic>.from(res.data as Map));
+    final local = await _loadLocalList('assets/data/2024/classes.json');
+    return local.map(ClassDto.fromJson).toList();
   }
 
   Future<List<ClassDto>> getUaClasses() async {
@@ -273,14 +189,7 @@ class DndApiRepository {
   }
 
   Future<void> clearSpellCache(String classIndex) async {
-    await _cacheBox.delete('spells_$classIndex');
-    await _cacheBox.delete('spells_${classIndex}_v2');
-    await _cacheBox.delete('spells_${classIndex}_v3');
-    await _cacheBox.delete('spells_${classIndex}_v4');
     await _cacheBox.delete('spells_${classIndex}_v5');
-    await _cacheBox.delete('spells_all_detailed_v2');
-    await _cacheBox.delete('spells_all_detailed_v3');
-    await _cacheBox.delete('spells_all_detailed_v4');
     await _cacheBox.delete('spells_all_detailed_v5');
   }
 

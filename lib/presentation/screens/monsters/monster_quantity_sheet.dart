@@ -37,11 +37,11 @@ class _MonsterQuantitySheetState extends State<_MonsterQuantitySheet> {
   @override
   Widget build(BuildContext context) {
     final meta = widget.meta;
+    final media = MediaQuery.of(context);
+    final bottomInset = media.viewInsets.bottom + media.viewPadding.bottom;
 
     return Container(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
+      padding: EdgeInsets.only(bottom: bottomInset),
       decoration: const BoxDecoration(
         color: AppTheme.charcoal,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -125,17 +125,28 @@ class _MonsterQuantitySheetState extends State<_MonsterQuantitySheet> {
               ],
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () => Navigator.of(context).pop(_quantity),
-                icon: const Icon(Icons.add_circle_outline),
-                label: Text(
-                  _quantity == 1
-                      ? 'Add ${widget.name}'
-                      : 'Add ${widget.name} x$_quantity',
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.of(context).maybePop(),
+                    child: const Text('Cancel'),
+                  ),
                 ),
-              ),
+                const SizedBox(width: 12),
+                Expanded(
+                  flex: 2,
+                  child: ElevatedButton.icon(
+                    onPressed: () => Navigator.of(context).pop(_quantity),
+                    icon: const Icon(Icons.add_circle_outline),
+                    label: Text(
+                      _quantity == 1
+                          ? 'Add ${widget.name}'
+                          : 'Add ${widget.name} x$_quantity',
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

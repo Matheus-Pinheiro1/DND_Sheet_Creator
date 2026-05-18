@@ -72,6 +72,10 @@
         "name": "Life Domain"
       },
       {
+        "index": "cleric-night",
+        "name": "Night Domain"
+      },
+      {
         "index": "cleric-light",
         "name": "Light Domain"
       },
@@ -158,6 +162,10 @@
       {
         "index": "paladin-vengeance",
         "name": "Oath of Vengeance"
+      },
+      {
+        "index": "paladin-oathbreaker",
+        "name": "OathBreaker"
       },
       {
         "index": "paladin-noble-genies",
@@ -753,6 +761,36 @@
         {
           "name": "Supreme Healing",
           "description": "When you would normally roll one or more dice to restore Hit Points to a creature with a spell or Channel Divinity, don’t roll those dice for the healing; instead use the highest number possible for each die. For example, instead of restoring 2d6 Hit Points to a creature with a spell, you restore 12."
+        }
+      ]
+    },
+    "cleric-night": {
+      "3": [
+        {
+          "name": "Night Domain Spells",
+          "description": "Your connection to this divine domain ensures you always have certain spells ready. When you reach a Cleric level specified in the Night Domain Spells table, you thereafter always have the listed spells prepared.\n3: Cause Fear, Sleep, Darkness, Invisibility.\n5: Fear, Nondetection.\n7: Greater Invisibility, Shadow of Moil.\n9: Chilling Darkness, Dream."
+        },
+        {
+          "name": "Night Terror",
+          "description": "You can use your Channel Divinity to conjure a divine aspect of night's true terror. You create magical darkness to fill a 10-foot-radius sphere centered on a location that you can see within 60 feet. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.\nEach creature of your choice in the area must succeed on a Wisdom saving throw or become frightened of you until the end of its next turn. While a creature is frightened in this way, it can't move or take actions. You and any creatures of your choice can see into the darkness as if it were an area of dim light. The darkness lasts until the end of your next turn."
+        }
+      ],
+      "6": [
+        {
+          "name": "Nocturnal Dread",
+          "description": "You become a symbol of night's uncertainty, radiating the primal dread of what one cannot see.\nAt all times, an aura extends 30 feet out from you and affects creatures of your choice within it. If an affected creature that you can see is frightened or can't see you, it feels an eerie dread and the sensation that something is watching it in secret. While it feels this magical dread, it can't take reactions and has disadvantage on all ability checks except Wisdom (Perception) checks and checks made for initiative. Creatures that can't be frightened are immune to this effect.\nAlso, you can't be put to sleep by magic, and you are still aware of your surroundings while you are asleep."
+        }
+      ],
+      "8": [
+        {
+          "name": "Potent Cantrip",
+          "description": "You add your Wisdom modifier to the damage you deal with any Cleric cantrip."
+        }
+      ],
+      "17": [
+        {
+          "name": "Night Weaver",
+          "description": "Creatures that are entirely within darkness have disadvantage on saving throws against your Cleric spells and class features.\nIn addition, magical darkness doesn't impede your darkvision, out to a range of 120 feet from you. The shared darkvision granted to your allies by your Eyes of Night feature is still impeded by magical darkness."
         }
       ]
     },
@@ -1407,6 +1445,40 @@
         {
           "name": "Avenging Angel",
           "description": "As a Bonus Action, you gain the benefits below for 10 minutes or until you end them (no action required). Once you use this feature, you can't use it again until you finish a Long Rest. You can also restore your use of it by expending a level 5 spell slot (no action required).\nFlight. You sprout spectral wings on your back and have a Fly Speed of 60 feet, and can hover.\nFrightful Aura. Whenever an enemy starts its turn in your Aura of Protection, that creature must succeed on a Wisdom saving throw or have the Frightened condition for 1 minute or until it takes any damage. Attack rolls against the Frightened creature have Advantage."
+        }
+      ]
+    },
+    "paladin-oathbreaker": {
+      "3": [
+        {
+          "name": "Conjure Undead",
+          "description": "As a Bonus Action, you can expend one use of your Channel Divinity to summon a number of Undead equal to half your Charisma modifier (round up; minimum of one Undead summoned).\nEach Undead appears in an unoccupied space you can see within 30 feet of you and is a type of your choice: Skeleton or Zombie (see appendix B of the Player’s Handbook for the stat blocks).\nThe Undead are under your control for 1 minute, after which they dissolve into ash. Each Undead is an ally to you and your allies.\nIn combat, the Undead shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger."
+        },
+        {
+          "name": "Dreadful Aspect",
+          "description": "Immediately after you cast Divine Smite, you can expend one use of your Channel Divinity to channel a burst of magical menace. Each creature of your choice in a 30-foot Emanation originating from you must succeed on a Wisdom saving throw or have the Frightened condition for 1 minute. A Frightened creature repeats the save at the end of each of its turns, ending the effect on itself on a success."
+        },
+        {
+          "name": "OathBreaker Spells",
+          "description": "The magic of your oath ensures you always have certain spells ready; when you reach a Paladin level specified in the Oathbreaker Spells table, you thereafter always have the listed spells prepared.\n3: Hellish Rebuke, Witch Bolt\n5: Crown of Madness, Darkness\n9: Fear, Summon Undead\n13: Blight, Phantasmal Killer\n17: Contagion, Steel Wind Strike"
+        }
+      ],
+      "7": [
+        {
+          "name": "Aura of Hate",
+          "description": "When you, as well as any Fiend or Undead in your Aura of Protection that is an ally, hits a creature with a melee attack, that attack deals extra Necrotic damage equal to your Charisma modifier."
+        }
+      ],
+      "15": [
+        {
+          "name": "Supernatural Resistance",
+          "description": "You gain Resistance to Bludgeoning, Piercing, and Slashing damage."
+        }
+      ],
+      "20": [
+        {
+          "name": "Dread Lord",
+          "description": "As a Bonus Action, you can imbue your Aura of Protection with unholy gloom, granting the benefits below for 10 minutes or until you end them (no action required). Once you use this feature, you can’t use it again until you finish a Long Rest. You can also restore your use of it by expending a level 5 spell slot (no action required).\nDarkness. Magical Darkness fills your Aura of Protection. You and allies in your Aura of Protection can see within this magical Darkness.\nFear. Whenever a creature with the Frightened condition starts its turn in your Aura of Protection, that creature takes 4d10 Psychic damage.\nShadow Strike. As a Bonus Action, you can make a melee spell attack, shaping the gloom exuding from you into a blade that targets one creature in your Aura of Protection. On a hit, the attack deals Necrotic damage equal to 3d10 plus your Charisma modifier."
         }
       ]
     },

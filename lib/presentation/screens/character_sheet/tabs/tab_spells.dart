@@ -36,7 +36,7 @@ class TabSpells extends ConsumerWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('âš”ï¸', style: TextStyle(fontSize: 56)),
+          const Icon(Icons.block, size: 56, color: Colors.white38),
           const SizedBox(height: 16),
           Text('Not a spellcaster',
               style: AppTextStyles.cinzel(
@@ -53,7 +53,7 @@ class TabSpells extends ConsumerWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('ðŸ§ª', style: TextStyle(fontSize: 56)),
+          const Icon(Icons.science_outlined, size: 56, color: Colors.white38),
           const SizedBox(height: 16),
           Text('Homebrew class spells are manual for now',
               style: AppTextStyles.cinzel(
@@ -77,7 +77,7 @@ class TabSpells extends ConsumerWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('ðŸ“œ', style: TextStyle(fontSize: 56)),
+          const Icon(Icons.menu_book_outlined, size: 56, color: Colors.white38),
           const SizedBox(height: 16),
           Text('No spells selected',
               style: AppTextStyles.cinzel(
@@ -268,7 +268,7 @@ class TabSpells extends ConsumerWidget {
                           child: StatBox(
                               label: 'Ability',
                               value: effectiveAbility.isEmpty
-                                  ? 'â€”'
+                                  ? '-'
                                   : effectiveAbility.toUpperCase(),
                               icon: Icons.psychology_outlined)),
                     ]),
@@ -296,7 +296,7 @@ class TabSpells extends ConsumerWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'Cantrips: $selectedCantrips/${limits.maxCantrips}  â€¢  Leveled: $selectedLeveled/${limits.maxLeveledSpells}',
+                            'Cantrips: $selectedCantrips/${limits.maxCantrips} - Leveled: $selectedLeveled/${limits.maxLeveledSpells}',
                             style: AppTextStyles.lato(
                               color: Colors.white70,
                               fontSize: 12,
@@ -355,7 +355,7 @@ class TabSpells extends ConsumerWidget {
                         },
                         icon: const Icon(Icons.bedtime_outlined,
                             size: 14, color: Colors.blueAccent),
-                        label: Text('Long Rest â€” Reset all slots',
+                        label: Text('Long Rest - Reset all slots',
                             style: AppTextStyles.lato(
                               color: Colors.blueAccent,
                               fontSize: 13,
@@ -370,8 +370,8 @@ class TabSpells extends ConsumerWidget {
                               padding: const EdgeInsets.only(bottom: 8),
                               child: Text(
                                 entry.key == 0
-                                    ? 'âœ¨ Cantrips'
-                                    : 'ðŸ“– Level ${entry.key}',
+                                    ? 'Cantrips'
+                                    : 'Spells - Level ${entry.key}',
                                 style: AppTextStyles.cinzel(
                                   color: AppTheme.gold,
                                   fontSize: 14,
@@ -384,8 +384,8 @@ class TabSpells extends ConsumerWidget {
                               final featGranted = featGrantedSpellMap[s.index];
                               final sourceText = granted != null
                                   ? character.className == 'monk'
-                                      ? 'Granted by ${granted.sourceLabel} â€¢ Unlocked at level ${granted.unlockLevel}'
-                                      : 'Always Prepared â€¢ ${granted.sourceLabel} â€¢ Unlocked at level ${granted.unlockLevel}'
+                                      ? 'Granted by ${granted.sourceLabel} - Unlocked at level ${granted.unlockLevel}'
+                                      : 'Always Prepared - ${granted.sourceLabel} - Unlocked at level ${granted.unlockLevel}'
                                   : originSpellIds.contains(s.index)
                                       ? 'Granted by Origin Feat'
                                       : featGranted ??

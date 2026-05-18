@@ -58,6 +58,9 @@ extension CreationStateModelBuilder on CreationState {
             ..._choiceValues(speciesOriginFeatChoices, 'skill:'),
           ]
         : const <String>[];
+    final speciesFixedSkills = _baseRaceId(race) == 'disembodied'
+        ? const ['arcana']
+        : const <String>[];
     final speciesToolChoices = isHumanSpecies
         ? _choiceValues(speciesOriginFeatChoices, 'tool:')
         : const <String>[];
@@ -338,6 +341,7 @@ extension CreationStateModelBuilder on CreationState {
       ...proficientSkills,
       ...backgroundSkillProfs,
       ...originSkillChoices,
+      ...speciesFixedSkills,
       ...speciesSkillChoices,
       ...classSkillChoices,
       ...artificerSkillChoices,
