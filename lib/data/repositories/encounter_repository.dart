@@ -1,5 +1,3 @@
-// lib/data/repositories/encounter_repository.dart
-
 import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';

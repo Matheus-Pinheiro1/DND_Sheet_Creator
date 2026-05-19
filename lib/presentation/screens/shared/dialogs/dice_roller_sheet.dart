@@ -248,7 +248,7 @@ class _DiceRollerSheetState extends State<_DiceRollerSheet> {
               ),
               const SizedBox(height: 6),
               Text(
-                'Bônus fixo apenas. Você pode usar anotações como (STR + PB) fora da fórmula.',
+                'Fixed bonus only. You can use notes like (STR + PB) out of the formula.',    
                 style: AppTextStyles.lato(
                   color: Colors.white54,
                   fontSize: 11,

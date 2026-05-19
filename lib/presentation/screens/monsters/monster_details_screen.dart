@@ -1,5 +1,3 @@
-// lib/presentation/screens/monsters/monster_details_screen.dart
-
 import 'package:dnd_character_sheet/core/theme/app_text_styles.dart';
 import 'package:dnd_character_sheet/core/theme/app_theme.dart';
 import 'package:dnd_character_sheet/core/utils/monster_combat_helpers.dart';
@@ -32,7 +30,7 @@ class MonsterDetailScreen extends ConsumerWidget {
                       .where((p) => p.monsterIndex == monsterIndex)
                       .length;
                   return TextButton.icon(
-                    onPressed: () => _addToEncounter(ref, monster),
+                    onPressed: () => _addToEncounter(context, ref, monster),
                     icon: const Icon(Icons.add, size: 18),
                     label: Text(
                       countInEncounter > 0
@@ -58,10 +56,20 @@ class MonsterDetailScreen extends ConsumerWidget {
     );
   }
 
-  void _addToEncounter(
+  Future<void> _addToEncounter(
+    BuildContext context,
     WidgetRef ref,
     MonsterDetailDto monster,
-  ) {
+  ) async {
+    final selectedEncounterId = await showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => const _AddToEncounterSheet(),
+    );
+    if (selectedEncounterId == null) return;
+
     final legendaryActionsCount = MonsterCombatHelpers.legendaryActionsMax(
       monster.legendaryActions,
     );
@@ -80,8 +88,19 @@ class MonsterDetailScreen extends ConsumerWidget {
       legendaryActionsCount: legendaryActionsCount,
       legendaryResistancesCount: legendaryResistancesCount,
     );
-
-    ref.read(encounterProvider.notifier).addParticipant(participant);
+    ref.read(encounterProvider.notifier).addParticipantToEncounter(
+          selectedEncounterId,
+          participant,
+        );
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Monster added to encounter!'),
+          backgroundColor: AppTheme.ashGray,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
 }
 
@@ -361,6 +380,105 @@ class _SavingThrowStat extends StatelessWidget {
             style: AppTextStyles.lato(color: Colors.white38, fontSize: 10),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _AddToEncounterSheet extends ConsumerWidget {
+  const _AddToEncounterSheet();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(encounterProvider.notifier);
+    final encounters = notifier.encounters;
+
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppTheme.charcoal,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 18),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              Text(
+                'Select Encounter',
+                style: AppTextStyles.cinzel(
+                  color: AppTheme.gold,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              if (encounters.isEmpty)
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'No encounters available.',
+                    style: AppTextStyles.lato(color: Colors.white54),
+                  ),
+                )
+              else
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: encounters.length,
+                    itemBuilder: (context, index) {
+                      final encounter = encounters[index];
+                      final count = encounter.participants.length;
+
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        decoration: BoxDecoration(
+                          color: AppTheme.darkBrown.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.white10),
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            encounter.name,
+                            style: AppTextStyles.cinzel(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '$count participant${count == 1 ? '' : 's'}',
+                            style: AppTextStyles.lato(
+                              color: Colors.white54,
+                              fontSize: 12,
+                            ),
+                          ),
+                          trailing: const Icon(Icons.add_circle_outline,
+                              color: AppTheme.gold),
+                          onTap: () {
+                            Navigator.of(context).pop(encounter.id);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

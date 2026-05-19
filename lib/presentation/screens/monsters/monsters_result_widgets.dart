@@ -132,11 +132,11 @@ class _MonsterCard extends StatelessWidget {
       s.isEmpty ? s : '${s[0].toUpperCase()}${s.substring(1)}';
 
   static Color _crColor(double cr) {
-    if (cr <= 0.5) return const Color(0xFF6DBF6D); // green
-    if (cr <= 4) return const Color(0xFFD4AF37); // gold
-    if (cr <= 10) return const Color(0xFFE07A30); // orange
-    if (cr <= 16) return const Color(0xFFD04040); // red
-    return const Color(0xFF9B59B6); // purple for CR 17+
+    if (cr <= 0.5) return const Color(0xFF6DBF6D);
+    if (cr <= 4) return const Color(0xFFD4AF37);
+    if (cr <= 10) return const Color(0xFFE07A30);
+    if (cr <= 16) return const Color(0xFFD04040);
+    return const Color(0xFF9B59B6);
   }
 
   static Color _typeColor(String type) {

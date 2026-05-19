@@ -1,5 +1,3 @@
-// lib/core/constants/hive_constants.dart
-
 class HiveConstants {
   HiveConstants._();
 

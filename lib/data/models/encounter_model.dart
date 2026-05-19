@@ -1,5 +1,3 @@
-// lib/data/models/encounter_model.dart
-
 import 'package:uuid/uuid.dart';
 
 import 'encounter_participant.dart';

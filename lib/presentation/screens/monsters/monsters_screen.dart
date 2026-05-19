@@ -1,5 +1,3 @@
-// lib/presentation/screens/monsters/monsters_screen.dart
-
 import 'dart:async';
 
 import 'package:dnd_character_sheet/core/theme/app_text_styles.dart';

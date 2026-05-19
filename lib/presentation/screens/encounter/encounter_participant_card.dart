@@ -59,11 +59,9 @@ class _ParticipantCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    // Initiative badge
                     _InitiativeBadge(
                         initiative: p.initiative, isActive: isActive),
                     const SizedBox(width: 10),
-                    // Name + type
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +123,6 @@ class _ParticipantCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // AC badge
                     _AcBadge(ac: p.armorClass),
                     IconButton(
                       visualDensity: VisualDensity.compact,
@@ -250,44 +247,16 @@ class _ParticipantCard extends StatelessWidget {
     required Color confirmColor,
     required void Function(int) onConfirm,
   }) {
-    final ctrl = TextEditingController();
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.ashGray,
-        title: Text(title, style: AppTextStyles.cinzel(color: AppTheme.gold)),
-        content: TextField(
-          controller: ctrl,
-          autofocus: true,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          decoration: InputDecoration(hintText: hintText),
-          onSubmitted: (v) {
-            final amount = int.tryParse(v) ?? 0;
-            Navigator.of(ctx).pop();
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              onConfirm(amount);
-            });
-          },
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Cancel')),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: confirmColor),
-            onPressed: () {
-              final amount = int.tryParse(ctrl.text) ?? 0;
-              Navigator.of(ctx).pop();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                onConfirm(amount);
-              });
-            },
-            child: Text(confirmLabel),
-          ),
-        ],
+      builder: (ctx) => _QuickInputDialog(
+        title: title,
+        hintText: hintText,
+        confirmLabel: confirmLabel,
+        confirmColor: confirmColor,
+        onConfirm: onConfirm,
       ),
-    ).whenComplete(ctrl.dispose);
+    );
   }
 
   static String _capitalize(String s) =>
@@ -297,6 +266,75 @@ class _ParticipantCard extends StatelessWidget {
     if (percent > 0.5) return const Color(0xFF4CAF50);
     if (percent > 0.25) return const Color(0xFFFF9800);
     return AppTheme.crimson;
+  }
+}
+
+class _QuickInputDialog extends StatefulWidget {
+  final String title;
+  final String hintText;
+  final String confirmLabel;
+  final Color confirmColor;
+  final void Function(int) onConfirm;
+
+  const _QuickInputDialog({
+    required this.title,
+    required this.hintText,
+    required this.confirmLabel,
+    required this.confirmColor,
+    required this.onConfirm,
+  });
+
+  @override
+  State<_QuickInputDialog> createState() => _QuickInputDialogState();
+}
+
+class _QuickInputDialogState extends State<_QuickInputDialog> {
+  late final TextEditingController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    final amount = int.tryParse(_ctrl.text) ?? 0;
+    Navigator.of(context).pop();
+    widget.onConfirm(amount);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: AppTheme.ashGray,
+      title:
+          Text(widget.title, style: AppTextStyles.cinzel(color: AppTheme.gold)),
+      content: TextField(
+        controller: _ctrl,
+        autofocus: true,
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        decoration: InputDecoration(hintText: widget.hintText),
+        onSubmitted: (_) => _submit(),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(backgroundColor: widget.confirmColor),
+          onPressed: _submit,
+          child: Text(widget.confirmLabel),
+        ),
+      ],
+    );
   }
 }
 

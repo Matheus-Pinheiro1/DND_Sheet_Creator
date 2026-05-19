@@ -48,9 +48,7 @@ class SorcererChoiceService {
             ),
         };
       }
-    } catch (_) {
-      // Keep static fallback usable before LocalDataLoader finishes.
-    }
+    } catch (_) {}
 
     return _fallbackMetamagicOptions;
   }

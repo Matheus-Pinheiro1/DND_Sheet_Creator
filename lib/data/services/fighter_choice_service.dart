@@ -128,9 +128,7 @@ class FighterChoiceService {
           );
         }).toList(growable: false);
       }
-    } catch (_) {
-      // Keep static fallback usable before LocalDataLoader finishes.
-    }
+    } catch (_) {}
 
     return _fallbackManeuverOptions;
   }

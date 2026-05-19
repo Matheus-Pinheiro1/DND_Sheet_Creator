@@ -1,5 +1,3 @@
-// lib/providers/encounter_providers.dart
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -125,6 +123,45 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
 
   void addPlayerCharacter(EncounterParticipant player) {
     addParticipant(player);
+  }
+
+  void addParticipantToEncounter(
+      String encounterId, EncounterParticipant participant) {
+    if (encounterId == _activeEncounterId) {
+      addParticipant(participant);
+      return;
+    }
+
+    final targetIndex = _encounters.indexWhere((e) => e.id == encounterId);
+    if (targetIndex < 0) return;
+
+    final targetEncounter = _encounters[targetIndex];
+
+    final baseName = participant.originalName.trim().isNotEmpty
+        ? participant.originalName.trim()
+        : participant.name.trim();
+    final normalizedBaseName = baseName.isEmpty ? 'Participant' : baseName;
+
+    final existingNames = targetEncounter.participants
+        .map((p) => p.name.trim())
+        .where((name) => name.isNotEmpty)
+        .toSet();
+    final name =
+        _nextAvailableParticipantName(normalizedBaseName, existingNames);
+
+    final newParticipant = participant.copyWith(
+      name: name,
+      originalName: participant.isPlayer ? '' : name,
+    );
+
+    final updatedEncounter = targetEncounter.copyWith(
+      participants: [...targetEncounter.participants, newParticipant],
+    );
+
+    _encounters = _encounters
+        .map((e) => e.id == encounterId ? updatedEncounter : e)
+        .toList();
+    _saveAll();
   }
 
   void removeParticipant(String id) {

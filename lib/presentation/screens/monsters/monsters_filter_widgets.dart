@@ -88,7 +88,6 @@ class _FilterPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Challenge Rating
           _FilterSection(
             label: 'Challenge Rating',
             child: SingleChildScrollView(
@@ -155,8 +154,6 @@ class _FilterPanel extends StatelessWidget {
               ),
             ),
           ),
-
-          // Clear button
           if (filters.hasActiveFilters)
             Align(
               alignment: Alignment.centerRight,

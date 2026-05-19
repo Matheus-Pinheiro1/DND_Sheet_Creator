@@ -203,7 +203,6 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
         ),
         child: Column(
           children: [
-            // Handle
             Padding(
               padding: const EdgeInsets.only(top: 12, bottom: 4),
               child: Container(
@@ -215,7 +214,6 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
                 ),
               ),
             ),
-            // Title
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
               child: Row(
@@ -438,7 +436,6 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
                     title: 'Combat Resources',
                     child: Column(
                       children: [
-                        // Concentration + Reaction
                         Row(
                           children: [
                             Expanded(
@@ -464,9 +461,7 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 12),
-
                         if (p.legendaryActionsMax > 0 ||
                             (int.tryParse(_legActCtrl.text) ?? 0) > 0) ...[
                           _LegendaryCounter(
@@ -478,7 +473,6 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
                           ),
                           const SizedBox(height: 8),
                         ],
-
                         if (p.legendaryResistancesMax > 0 ||
                             (int.tryParse(_legResCtrl.text) ?? 0) > 0) ...[
                           _LegendaryCounter(
@@ -490,7 +484,6 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
                           ),
                           const SizedBox(height: 8),
                         ],
-
                         Row(
                           children: [
                             Expanded(
