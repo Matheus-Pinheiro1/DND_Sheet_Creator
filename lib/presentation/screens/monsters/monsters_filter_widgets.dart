@@ -108,10 +108,7 @@ class _FilterPanel extends StatelessWidget {
               ),
             ),
           ),
-
           const _SectionDivider(),
-
-          // Type
           _FilterSection(
             label: 'Type',
             child: Padding(
@@ -130,10 +127,7 @@ class _FilterPanel extends StatelessWidget {
               ),
             ),
           ),
-
           const _SectionDivider(),
-
-          // Size
           _FilterSection(
             label: 'Size',
             child: SingleChildScrollView(

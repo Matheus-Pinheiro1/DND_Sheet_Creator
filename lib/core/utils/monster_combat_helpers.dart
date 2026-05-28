@@ -1,5 +1,16 @@
+import 'dart:math';
+
+import 'dice_calculator.dart';
+
 class MonsterCombatHelpers {
   MonsterCombatHelpers._();
+
+  static final Random _random = Random();
+
+  static int rollInitiative(int dexterity, {Random? random}) {
+    final source = random ?? _random;
+    return source.nextInt(20) + 1 + DiceCalculator.getModifier(dexterity);
+  }
 
   static int legendaryActionsMax(List<Map<String, dynamic>> actions) {
     return actions.isEmpty ? 0 : 3;

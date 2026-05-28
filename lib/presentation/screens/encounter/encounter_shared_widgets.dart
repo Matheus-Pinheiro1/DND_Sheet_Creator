@@ -3,12 +3,17 @@ part of 'encounter_screen.dart';
 class _InitiativeBadge extends StatelessWidget {
   final int initiative;
   final bool isActive;
+  final VoidCallback? onTap;
 
-  const _InitiativeBadge({required this.initiative, required this.isActive});
+  const _InitiativeBadge({
+    required this.initiative,
+    required this.isActive,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final badge = Container(
       width: 40,
       height: 40,
       decoration: BoxDecoration(
@@ -30,6 +35,13 @@ class _InitiativeBadge extends StatelessWidget {
           ),
         ),
       ),
+    );
+
+    if (onTap == null) return badge;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: badge,
     );
   }
 }

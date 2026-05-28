@@ -29,6 +29,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/icon.png
+    - assets/data/items_index.json
+    - assets/data/items_desc.json
     - assets/data/2024/classes.json
     - assets/data/2024/races.json
     - assets/data/2024/backgrounds.json

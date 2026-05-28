@@ -19,6 +19,7 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   final EncounterRepository _repo;
   late List<EncounterModel> _encounters;
   late String _activeEncounterId;
+  final Map<int, Map<String, _RoundResourceState>> _roundResourceSnapshots = {};
   final _saveErrorController = StreamController<Object>.broadcast();
   Timer? _saveDebounce;
   static const _saveDebounceDuration = Duration(milliseconds: 600);
@@ -34,6 +35,24 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   String get activeEncounterId => _activeEncounterId;
   bool get hasMultipleEncounters => _encounters.length > 1;
   Stream<Object> get saveErrors => _saveErrorController.stream;
+  List<SavedPlayerCharacter> get savedPlayerCharacters {
+    final playersByName = <String, SavedPlayerCharacter>{};
+
+    for (final encounter in _encounters) {
+      for (final participant in encounter.participants) {
+        if (!participant.isPlayer) continue;
+        final name = participant.name.trim();
+        if (name.isEmpty) continue;
+
+        playersByName[name.toLowerCase()] = SavedPlayerCharacter(
+          name: name,
+          initiative: participant.initiative,
+        );
+      }
+    }
+
+    return List.unmodifiable(playersByName.values);
+  }
 
   void createEncounter({String? name}) {
     final encounter = EncounterModel.newEncounter(name: _encounterName(name));
@@ -113,7 +132,7 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
           ...state.participants,
           participant.copyWith(
             name: name,
-            originalName: participant.isPlayer ? '' : name,
+            originalName: participant.isPlayer ? '' : normalizedBaseName,
           ),
         ],
       ),
@@ -151,7 +170,7 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
 
     final newParticipant = participant.copyWith(
       name: name,
-      originalName: participant.isPlayer ? '' : name,
+      originalName: participant.isPlayer ? '' : normalizedBaseName,
     );
 
     final updatedEncounter = targetEncounter.copyWith(
@@ -169,23 +188,10 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     final newParticipants =
         state.participants.where((p) => p.id != id).toList();
 
-    var newIdx = state.currentTurnIndex;
-    if (newParticipants.isEmpty) {
-      newIdx = 0;
-    } else if (currentParticipantId != null && currentParticipantId != id) {
-      final sorted =
-          state.copyWith(participants: newParticipants).sortedParticipants;
-      final preservedIdx = sorted
-          .indexWhere((participant) => participant.id == currentParticipantId);
-      newIdx = preservedIdx < 0 ? 0 : preservedIdx;
-    } else {
-      newIdx = newIdx.clamp(0, newParticipants.length - 1).toInt();
-    }
-
-    _update(state.copyWith(
-      participants: newParticipants,
-      currentTurnIndex: newIdx,
-    ));
+    _updatePreservingParticipant(
+      state.copyWith(participants: newParticipants),
+      currentParticipantId == id ? null : currentParticipantId,
+    );
   }
 
   void updateParticipant(EncounterParticipant updated) {
@@ -223,7 +229,10 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   }
 
   void setHp(String id, int hp) {
-    _mutate(id, (p) => p.copyWith(currentHp: hp.clamp(0, p.maxHp)));
+    _mutate(
+      id,
+      (p) => p.copyWith(currentHp: hp > p.maxHp ? p.maxHp : hp),
+    );
   }
 
   void setMaxHp(String id, int maxHp) {
@@ -248,6 +257,7 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   }
 
   void setAc(String id, int ac) {
+    if (ac <= 0) return;
     _mutate(id, (p) => p.copyWith(armorClass: ac));
   }
 
@@ -318,8 +328,16 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   }
 
   void setLegendaryActionsMax(String id, int max) {
-    _mutate(id,
-        (p) => p.copyWith(legendaryActionsMax: max, legendaryActionsUsed: 0));
+    if (max < 0) return;
+    _mutate(id, (p) {
+      final used = max == p.legendaryActionsMax
+          ? p.legendaryActionsUsed.clamp(0, max).toInt()
+          : 0;
+      return p.copyWith(
+        legendaryActionsMax: max,
+        legendaryActionsUsed: used,
+      );
+    });
   }
 
   void useLegendaryResistance(String id) {
@@ -335,10 +353,16 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   }
 
   void setLegendaryResistancesMax(String id, int max) {
-    _mutate(
-        id,
-        (p) => p.copyWith(
-            legendaryResistancesMax: max, legendaryResistancesUsed: 0));
+    if (max < 0) return;
+    _mutate(id, (p) {
+      final used = max == p.legendaryResistancesMax
+          ? p.legendaryResistancesUsed.clamp(0, max).toInt()
+          : 0;
+      return p.copyWith(
+        legendaryResistancesMax: max,
+        legendaryResistancesUsed: used,
+      );
+    });
   }
 
   void useReaction(String id) {
@@ -358,16 +382,29 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
   }
 
   void nextTurn() {
-    final sorted = state.sortedParticipants;
-    if (sorted.isEmpty) return;
+    final turnOrder = state.turnParticipants;
+    if (turnOrder.isEmpty) {
+      if (state.currentTurnIndex >= 0) {
+        _update(state.copyWith(currentTurnIndex: -1));
+      }
+      return;
+    }
 
-    final count = sorted.length;
+    final count = turnOrder.length;
     var nextIdx = state.currentTurnIndex + 1;
     var nextRound = state.currentRound;
 
     if (nextIdx >= count) {
       nextIdx = 0;
       nextRound++;
+      _roundResourceSnapshots.clear();
+      _roundResourceSnapshots[nextRound] = {
+        for (final participant in state.participants)
+          participant.id: _RoundResourceState(
+            legendaryActionsUsed: participant.legendaryActionsUsed,
+            reactionUsed: participant.reactionUsed,
+          ),
+      };
       final updated = state.participants
           .map((p) => p.copyWith(
                 reactionUsed: false,
@@ -390,30 +427,55 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
 
   void previousTurn() {
     if (state.isEmpty) return;
-    final count = state.sortedParticipants.length;
+    final count = state.turnParticipants.length;
+    if (count == 0) {
+      if (state.currentTurnIndex >= 0) {
+        _update(state.copyWith(currentTurnIndex: -1));
+      }
+      return;
+    }
+
     var prevIdx = state.currentTurnIndex - 1;
     var prevRound = state.currentRound;
+    var crossedRoundBoundary = false;
 
     if (prevIdx < 0) {
       if (prevRound <= 1) return;
       prevIdx = count - 1;
       prevRound--;
+      crossedRoundBoundary = true;
     }
 
+    final snapshot = crossedRoundBoundary
+        ? _roundResourceSnapshots.remove(state.currentRound)
+        : null;
+    final participants = snapshot == null
+        ? state.participants
+        : state.participants.map((participant) {
+            final saved = snapshot[participant.id];
+            if (saved == null) return participant;
+            return participant.copyWith(
+              legendaryActionsUsed: saved.legendaryActionsUsed,
+              reactionUsed: saved.reactionUsed,
+            );
+          }).toList();
+
     _update(state.copyWith(
+      participants: participants,
       currentTurnIndex: prevIdx,
       currentRound: prevRound,
     ));
   }
 
   void jumpToParticipant(String id) {
-    final sorted = state.sortedParticipants;
-    final idx = sorted.indexWhere((p) => p.id == id);
+    final turnOrder = state.turnParticipants;
+    final idx = turnOrder.indexWhere((p) => p.id == id);
     if (idx < 0) return;
     _update(state.copyWith(currentTurnIndex: idx));
   }
 
   void resetEncounter() {
+    _roundResourceSnapshots.clear();
     _update(
       state.copyWith(
         participants: const [],
@@ -448,15 +510,24 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     String? participantId,
   ) {
     if (participantId == null || newState.participants.isEmpty) {
-      _update(newState);
+      _update(newState.copyWith(
+        currentTurnIndex: _normalizedTurnIndex(newState),
+      ));
       return;
     }
 
-    final sorted = newState.sortedParticipants;
-    final index = sorted.indexWhere((p) => p.id == participantId);
+    final turnOrder = newState.turnParticipants;
+    final index = turnOrder.indexWhere((p) => p.id == participantId);
     _update(newState.copyWith(
-      currentTurnIndex: index < 0 ? newState.currentTurnIndex : index,
+      currentTurnIndex: index < 0 ? _normalizedTurnIndex(newState) : index,
     ));
+  }
+
+  int _normalizedTurnIndex(EncounterModel encounter) {
+    final turnOrder = encounter.turnParticipants;
+    if (turnOrder.isEmpty) return -1;
+    if (encounter.currentTurnIndex < 0) return -1;
+    return encounter.currentTurnIndex.clamp(0, turnOrder.length - 1).toInt();
   }
 
   void _update(EncounterModel newState) {
@@ -546,7 +617,28 @@ class EncounterNotifier extends StateNotifier<EncounterModel> {
     _saveDebounce?.cancel();
     _repo.saveAll(_encounters, _activeEncounterId).ignore();
     _saveErrorController.close();
-    //_concentrationBreakController.close();
     super.dispose();
   }
+}
+
+class SavedPlayerCharacter {
+  final String name;
+  final int initiative;
+
+  const SavedPlayerCharacter({
+    required this.name,
+    required this.initiative,
+  });
+
+  String get normalizedName => name.trim().toLowerCase();
+}
+
+class _RoundResourceState {
+  final int legendaryActionsUsed;
+  final bool reactionUsed;
+
+  const _RoundResourceState({
+    required this.legendaryActionsUsed,
+    required this.reactionUsed,
+  });
 }

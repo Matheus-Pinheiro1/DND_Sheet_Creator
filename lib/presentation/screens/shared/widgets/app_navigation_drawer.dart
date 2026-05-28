@@ -89,6 +89,14 @@ class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
               onNavigate: widget.onNavigate,
             ),
             _DrawerTile(
+              icon: Icons.inventory_2_outlined,
+              label: 'Item Compendium',
+              route: '/items',
+              selectedRoute: widget.selectedRoute,
+              onClose: _navigator.pop,
+              onNavigate: widget.onNavigate,
+            ),
+            _DrawerTile(
               icon: Icons.shield_outlined,
               label: 'Encounter',
               route: '/encounter',

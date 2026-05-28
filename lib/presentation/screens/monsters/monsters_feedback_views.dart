@@ -4,7 +4,10 @@ class _EmptyView extends StatelessWidget {
   final bool hasFilters;
   final VoidCallback onClear;
 
-  const _EmptyView({required this.hasFilters, required this.onClear});
+  const _EmptyView({
+    required this.hasFilters,
+    required this.onClear,
+  });
 
   @override
   Widget build(BuildContext context) {

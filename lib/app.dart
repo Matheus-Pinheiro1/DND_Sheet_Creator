@@ -1,3 +1,4 @@
+import 'package:dnd_character_sheet/presentation/screens/items/items_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'core/theme/app_theme.dart';
@@ -75,6 +76,10 @@ final _router = GoRouter(
     GoRoute(
       path: '/references',
       builder: (ctx, state) => const ReferenceListsScreen(),
+    ),
+    GoRoute(
+      path: '/items',
+      builder: (ctx, state) => const ItemsScreen(),
     ),
   ],
 );

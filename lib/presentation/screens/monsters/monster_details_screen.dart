@@ -87,6 +87,7 @@ class MonsterDetailScreen extends ConsumerWidget {
       ac: monster.armorClass,
       legendaryActionsCount: legendaryActionsCount,
       legendaryResistancesCount: legendaryResistancesCount,
+      initiative: MonsterCombatHelpers.rollInitiative(monster.dexterity),
     );
     ref.read(encounterProvider.notifier).addParticipantToEncounter(
           selectedEncounterId,
@@ -199,13 +200,17 @@ class _MonsterDetailBody extends StatelessWidget {
           ],
           if (monster.damageResistances.isNotEmpty ||
               monster.damageImmunities.isNotEmpty ||
-              monster.conditionImmunities.isNotEmpty) ...[
+              monster.conditionImmunities.isNotEmpty ||
+              monster.damageVulnerabilities.isNotEmpty) ...[
             const SizedBox(height: 12),
             _SectionCard(
               title: 'Defenses',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (monster.damageVulnerabilities.isNotEmpty)
+                    Text(
+                        'Vulnerabilities: ${monster.damageVulnerabilities.join(', ')}'),
                   if (monster.damageResistances.isNotEmpty)
                     Text(
                         'Resistances: ${monster.damageResistances.join(', ')}'),

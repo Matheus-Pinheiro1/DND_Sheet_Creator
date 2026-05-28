@@ -129,16 +129,18 @@ class _EncounterTurnBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final current = encounter.currentParticipant;
-    final sorted = encounter.sortedParticipants;
-    final nextParticipant = sorted.isEmpty
+    final turnOrder = encounter.turnParticipants;
+    final nextParticipant = turnOrder.isEmpty
         ? null
         : encounter.currentTurnIndex < 0
-            ? sorted.first
-            : sorted.length < 2
+            ? turnOrder.first
+            : turnOrder.length < 2
                 ? null
-                : sorted[(encounter.currentTurnIndex + 1) % sorted.length];
-    final canGoBack =
-        encounter.currentRound > 1 || encounter.currentTurnIndex > 0;
+                : turnOrder[
+                    (encounter.currentTurnIndex + 1) % turnOrder.length];
+    final canUseTurns = turnOrder.isNotEmpty;
+    final canGoBack = canUseTurns &&
+        (encounter.currentRound > 1 || encounter.currentTurnIndex > 0);
     final nextLabel = encounter.isStarted ? 'Next Turn' : 'Start';
 
     return SafeArea(
@@ -206,7 +208,7 @@ class _EncounterTurnBar extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             FilledButton.icon(
-              onPressed: onNext,
+              onPressed: canUseTurns ? onNext : null,
               icon: const Icon(Icons.skip_next_rounded, size: 18),
               label: Text(nextLabel),
               style: FilledButton.styleFrom(

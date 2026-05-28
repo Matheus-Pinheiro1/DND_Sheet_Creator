@@ -95,21 +95,14 @@ final subclassFeatureProgressionProvider = FutureProvider.family
       .getSubclassFeatureProgression(args.subclass, args.level);
 });
 
-// Monster providers
-
-/// Loads the full monster index (no query) once and keeps it alive.
-/// This is the source of truth for the filtered monsters screen.
 final allMonstersProvider = FutureProvider<List<MonsterSummaryDto>>((ref) {
   ref.keepAlive();
   return ref.watch(dndApiRepositoryProvider).getMonsters();
 });
 
-/// Active filter state. Reset to MonsterFilters() to clear.
 final monsterFiltersProvider =
     StateProvider<MonsterFilters>((ref) => const MonsterFilters());
 
-/// Derived provider: [allMonstersProvider] with [monsterFiltersProvider] applied.
-/// Consumers should watch this instead of [allMonstersProvider] directly.
 final filteredMonstersProvider =
     Provider<AsyncValue<List<MonsterSummaryDto>>>((ref) {
   final allAsync = ref.watch(allMonstersProvider);
@@ -117,7 +110,6 @@ final filteredMonstersProvider =
   return allAsync.whenData(filters.apply);
 });
 
-/// Legacy provider kept for compatibility. Prefer [filteredMonstersProvider].
 final monstersProvider =
     FutureProvider.family<List<MonsterSummaryDto>, String>((ref, query) {
   ref.keepAlive();

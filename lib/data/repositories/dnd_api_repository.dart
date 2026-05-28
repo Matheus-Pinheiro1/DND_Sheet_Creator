@@ -18,7 +18,7 @@ import '../services/class_features_service.dart';
 
 class DndApiRepository {
   final Dio _dio;
-  static const _base = '${AppStrings.baseApiUrl}/api/2014';
+  static const _base = '${AppStrings.baseApiUrl}/v1';
   static const _baseNoVersion = AppStrings.baseApiUrl;
 
   DndApiRepository(this._dio);

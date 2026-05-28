@@ -148,6 +148,7 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
             ac: detail.armorClass,
             legendaryActionsCount: legendaryActionsCount,
             legendaryResistancesCount: legendaryResistancesCount,
+            initiative: MonsterCombatHelpers.rollInitiative(detail.dexterity),
           ),
         );
       }

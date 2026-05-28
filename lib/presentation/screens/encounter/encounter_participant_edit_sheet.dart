@@ -140,11 +140,15 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
 
   void _saveAllFields() {
     _saveName();
-    _saveHp();
-    _saveMaxHp();
-    _saveTemporaryHp();
+    if (!widget.participant.isPlayer) {
+      _saveHp();
+      _saveMaxHp();
+      _saveTemporaryHp();
+    }
     _saveInitiative();
-    _saveAc();
+    if (!widget.participant.isPlayer) {
+      _saveAc();
+    }
     _saveLegendaryActions();
     _saveLegendaryResistances();
     _saveNotes();
@@ -290,146 +294,169 @@ class _ParticipantEditSheetState extends ConsumerState<_ParticipantEditSheet> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _SheetSection(
-                    title: 'Hit Points',
-                    child: Column(
-                      children: [
-                        _HpBar(participant: p),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _NumberField(
-                                controller: _damageCtrl,
-                                label: 'Damage',
-                                prefixIcon: Icons.remove_circle_outline,
-                                iconColor: AppTheme.crimson,
-                                onConfirm: () {
-                                  final v = int.tryParse(_damageCtrl.text) ?? 0;
-                                  n.applyDamage(p.id, v);
-                                  _damageCtrl.clear();
-                                },
-                                confirmColor: AppTheme.crimson,
-                                confirmLabel: 'Hit',
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: _NumberField(
-                                controller: _healCtrl,
-                                label: 'Healing',
-                                prefixIcon: Icons.add_circle_outline,
-                                iconColor: const Color(0xFF4CAF50),
-                                onConfirm: () {
-                                  final v = int.tryParse(_healCtrl.text) ?? 0;
-                                  n.applyHealing(p.id, v);
-                                  _healCtrl.clear();
-                                },
-                                confirmColor: const Color(0xFF4CAF50),
-                                confirmLabel: 'Heal',
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                controller: _hpCtrl,
-                                focusNode: _hpFocusNode,
-                                scrollPadding: fieldScrollPadding,
-                                keyboardType:
-                                    const TextInputType.numberWithOptions(
-                                  signed: true,
+                  if (!p.isPlayer) ...[
+                    _SheetSection(
+                      title: 'Hit Points',
+                      child: Column(
+                        children: [
+                          _HpBar(participant: p),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _NumberField(
+                                  controller: _damageCtrl,
+                                  label: 'Damage',
+                                  prefixIcon: Icons.remove_circle_outline,
+                                  iconColor: AppTheme.crimson,
+                                  onConfirm: () {
+                                    final v =
+                                        int.tryParse(_damageCtrl.text) ?? 0;
+                                    n.applyDamage(p.id, v);
+                                    _damageCtrl.clear();
+                                  },
+                                  confirmColor: AppTheme.crimson,
+                                  confirmLabel: 'Hit',
                                 ),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'^-?\d*'))
-                                ],
-                                decoration: const InputDecoration(
-                                  labelText: 'Current HP',
-                                  isDense: true,
-                                ),
-                                onSubmitted: (_) => _saveHp(),
                               ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: TextField(
-                                controller: _maxHpCtrl,
-                                focusNode: _maxHpFocusNode,
-                                scrollPadding: fieldScrollPadding,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                decoration: const InputDecoration(
-                                  labelText: 'Max HP',
-                                  isDense: true,
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: _NumberField(
+                                  controller: _healCtrl,
+                                  label: 'Healing',
+                                  prefixIcon: Icons.add_circle_outline,
+                                  iconColor: const Color(0xFF4CAF50),
+                                  onConfirm: () {
+                                    final v = int.tryParse(_healCtrl.text) ?? 0;
+                                    n.applyHealing(p.id, v);
+                                    _healCtrl.clear();
+                                  },
+                                  confirmColor: const Color(0xFF4CAF50),
+                                  confirmLabel: 'Heal',
                                 ),
-                                onSubmitted: (_) => _saveMaxHp(),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        TextField(
-                          controller: _tempHpCtrl,
-                          focusNode: _tempHpFocusNode,
-                          scrollPadding: fieldScrollPadding,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          decoration: const InputDecoration(
-                            labelText: 'Temporary HP',
-                            isDense: true,
-                          ),
-                          onSubmitted: (_) => _saveTemporaryHp(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _SheetSection(
-                    title: 'Initiative & Armor',
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _initCtrl,
-                            scrollPadding: fieldScrollPadding,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'^-?\d*'))
                             ],
-                            decoration: const InputDecoration(
-                              labelText: 'Initiative',
-                              isDense: true,
-                            ),
-                            onSubmitted: (_) => _saveInitiative(),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: TextField(
-                            controller: _acCtrl,
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: _hpCtrl,
+                                  focusNode: _hpFocusNode,
+                                  scrollPadding: fieldScrollPadding,
+                                  keyboardType:
+                                      const TextInputType.numberWithOptions(
+                                    signed: true,
+                                  ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^-?\d*'))
+                                  ],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Current HP',
+                                    isDense: true,
+                                  ),
+                                  onSubmitted: (_) => _saveHp(),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: TextField(
+                                  controller: _maxHpCtrl,
+                                  focusNode: _maxHpFocusNode,
+                                  scrollPadding: fieldScrollPadding,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Max HP',
+                                    isDense: true,
+                                  ),
+                                  onSubmitted: (_) => _saveMaxHp(),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          TextField(
+                            controller: _tempHpCtrl,
+                            focusNode: _tempHpFocusNode,
                             scrollPadding: fieldScrollPadding,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: const InputDecoration(
-                              labelText: 'Armor Class',
+                              labelText: 'Temporary HP',
                               isDense: true,
                             ),
-                            onSubmitted: (_) => _saveAc(),
+                            onSubmitted: (_) => _saveTemporaryHp(),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    const SizedBox(height: 16),
+                  ],
+                  _SheetSection(
+                    title: p.isPlayer ? 'Initiative' : 'Initiative & Armor',
+                    child: p.isPlayer
+                        ? TextField(
+                            controller: _initCtrl,
+                            scrollPadding: fieldScrollPadding,
+                            keyboardType: const TextInputType.numberWithOptions(
+                              signed: true,
+                            ),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^-?\d*')),
+                            ],
+                            decoration: const InputDecoration(
+                              labelText: 'Initiative',
+                              isDense: true,
+                            ),
+                            onSubmitted: (_) => _saveInitiative(),
+                          )
+                        : Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: _initCtrl,
+                                  scrollPadding: fieldScrollPadding,
+                                  keyboardType:
+                                      const TextInputType.numberWithOptions(
+                                    signed: true,
+                                  ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^-?\d*'))
+                                  ],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Initiative',
+                                    isDense: true,
+                                  ),
+                                  onSubmitted: (_) => _saveInitiative(),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: TextField(
+                                  controller: _acCtrl,
+                                  scrollPadding: fieldScrollPadding,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Armor Class',
+                                    isDense: true,
+                                  ),
+                                  onSubmitted: (_) => _saveAc(),
+                                ),
+                              ),
+                            ],
+                          ),
                   ),
                   const SizedBox(height: 16),
                   _SheetSection(

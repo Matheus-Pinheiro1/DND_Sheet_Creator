@@ -93,6 +93,7 @@ class EncounterParticipant {
     required int ac,
     required int legendaryActionsCount,
     required int legendaryResistancesCount,
+    int initiative = 0,
     String? customName,
   }) {
     return EncounterParticipant(
@@ -106,15 +107,16 @@ class EncounterParticipant {
       maxHp: hp,
       currentHp: hp,
       armorClass: ac,
-      initiative: 0,
+      initiative: initiative,
       legendaryActionsMax: legendaryActionsCount,
       legendaryResistancesMax: legendaryResistancesCount,
     );
   }
   factory EncounterParticipant.player({
     required String name,
-    required int maxHp,
-    required int ac,
+    required int initiative,
+    int maxHp = 1,
+    int ac = 10,
   }) {
     return EncounterParticipant(
       id: const Uuid().v4(),
@@ -127,7 +129,7 @@ class EncounterParticipant {
       maxHp: maxHp,
       currentHp: maxHp,
       armorClass: ac,
-      initiative: 0,
+      initiative: initiative,
     );
   }
 

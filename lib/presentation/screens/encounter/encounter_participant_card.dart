@@ -7,6 +7,7 @@ class _ParticipantCard extends StatelessWidget {
   final VoidCallback onJumpToTurn;
   final void Function(int) onDamage;
   final void Function(int) onHeal;
+  final void Function(int)? onSetInitiative;
 
   const _ParticipantCard({
     required this.participant,
@@ -15,6 +16,7 @@ class _ParticipantCard extends StatelessWidget {
     required this.onJumpToTurn,
     required this.onDamage,
     required this.onHeal,
+    this.onSetInitiative,
   });
 
   @override
@@ -60,7 +62,13 @@ class _ParticipantCard extends StatelessWidget {
                 Row(
                   children: [
                     _InitiativeBadge(
-                        initiative: p.initiative, isActive: isActive),
+                      initiative: p.initiative,
+                      isActive: isActive,
+                      onTap: onSetInitiative != null
+                          ? () => _showInitiativeModal(
+                              context, p.initiative, onSetInitiative!)
+                          : null,
+                    ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(
@@ -186,6 +194,11 @@ class _ParticipantCard extends StatelessWidget {
                     key: ValueKey(p.monsterIndex),
                     monsterIndex: p.monsterIndex,
                   ),
+                  const SizedBox(height: 6),
+                  _MonsterDefenseSummaryCard(
+                    key: ValueKey('defense_${p.monsterIndex}'),
+                    monsterIndex: p.monsterIndex,
+                  ),
                 ],
                 if (_hasStatus(p)) ...[
                   const SizedBox(height: 8),
@@ -255,6 +268,20 @@ class _ParticipantCard extends StatelessWidget {
         confirmLabel: confirmLabel,
         confirmColor: confirmColor,
         onConfirm: onConfirm,
+      ),
+    );
+  }
+
+  void _showInitiativeModal(
+    BuildContext context,
+    int currentInitiative,
+    void Function(int) onSet,
+  ) {
+    showDialog(
+      context: context,
+      builder: (ctx) => _InitiativeEditDialog(
+        currentValue: currentInitiative,
+        onConfirm: onSet,
       ),
     );
   }
@@ -338,6 +365,75 @@ class _QuickInputDialogState extends State<_QuickInputDialog> {
   }
 }
 
+class _InitiativeEditDialog extends StatefulWidget {
+  final int currentValue;
+  final void Function(int) onConfirm;
+
+  const _InitiativeEditDialog({
+    required this.currentValue,
+    required this.onConfirm,
+  });
+
+  @override
+  State<_InitiativeEditDialog> createState() => _InitiativeEditDialogState();
+}
+
+class _InitiativeEditDialogState extends State<_InitiativeEditDialog> {
+  late final TextEditingController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: '${widget.currentValue}');
+    _ctrl.selection = TextSelection(
+      baseOffset: 0,
+      extentOffset: _ctrl.text.length,
+    );
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    final value = int.tryParse(_ctrl.text) ?? widget.currentValue;
+    Navigator.of(context).pop();
+    widget.onConfirm(value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: AppTheme.ashGray,
+      title: Text(
+        'Edit Initiative',
+        style: AppTextStyles.cinzel(color: AppTheme.gold),
+      ),
+      content: TextField(
+        controller: _ctrl,
+        autofocus: true,
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^-?\d*'))],
+        decoration: const InputDecoration(hintText: 'Initiative value'),
+        onSubmitted: (_) => _submit(),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(backgroundColor: AppTheme.gold),
+          onPressed: _submit,
+          child: const Text('Save'),
+        ),
+      ],
+    );
+  }
+}
+
 class _MonsterAbilitySummary extends ConsumerWidget {
   final String monsterIndex;
 
@@ -371,6 +467,105 @@ class _MonsterAbilitySummary extends ConsumerWidget {
               .toList(),
         );
       },
+    );
+  }
+}
+
+class _MonsterDefenseSummaryCard extends ConsumerWidget {
+  final String monsterIndex;
+
+  const _MonsterDefenseSummaryCard({
+    required this.monsterIndex,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final monsterAsync = ref.watch(monsterDetailProvider(monsterIndex));
+
+    return monsterAsync.when(
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
+      data: (monster) {
+        final defenses = <({String label, List<String> values, Color color})>[];
+
+        if (monster.damageVulnerabilities.isNotEmpty) {
+          defenses.add((
+            label: 'Vuln',
+            values: monster.damageVulnerabilities,
+            color: const Color(0xFFFF6B6B),
+          ));
+        }
+
+        if (monster.damageResistances.isNotEmpty) {
+          defenses.add((
+            label: 'Resist',
+            values: monster.damageResistances,
+            color: const Color.fromARGB(255, 190, 65, 34),
+          ));
+        }
+
+        if (monster.damageImmunities.isNotEmpty) {
+          defenses.add((
+            label: 'Immune',
+            values: monster.damageImmunities,
+            color: const Color(0xFF95E1D3),
+          ));
+        }
+
+        if (defenses.isEmpty) return const SizedBox.shrink();
+
+        return Wrap(
+          spacing: 5,
+          runSpacing: 5,
+          children: defenses
+              .map((def) => _DefensePill(
+                    label: def.label,
+                    values: def.values,
+                    color: def.color,
+                  ))
+              .toList(),
+        );
+      },
+    );
+  }
+}
+
+class _DefensePill extends StatelessWidget {
+  final String label;
+  final List<String> values;
+  final Color color;
+
+  const _DefensePill({
+    required this.label,
+    required this.values,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final displayText = values.length == 1
+        ? '${label}: ${values.first}'
+        : '${label}: ${values.length}';
+
+    return Tooltip(
+      message: values.join(', '),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: color.withValues(alpha: 0.4)),
+        ),
+        child: Text(
+          displayText,
+          style: AppTextStyles.lato(
+            color: color,
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }

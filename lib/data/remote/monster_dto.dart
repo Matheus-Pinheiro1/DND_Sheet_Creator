@@ -11,7 +11,7 @@ class MonsterSummaryDto {
 
   factory MonsterSummaryDto.fromJson(Map<String, dynamic> json) =>
       MonsterSummaryDto(
-        index: (json['index'] ?? '').toString(),
+        index: (json['slug'] ?? json['index'] ?? '').toString(),
         name: (json['name'] ?? '').toString(),
         url: (json['url'] ?? '').toString(),
       );
@@ -36,6 +36,7 @@ class MonsterDetailDto {
   final num challengeRating;
   final int? xp;
   final List<String> proficiencies;
+  final List<String> damageVulnerabilities;
   final List<String> damageResistances;
   final List<String> damageImmunities;
   final List<String> conditionImmunities;
@@ -66,6 +67,7 @@ class MonsterDetailDto {
     required this.challengeRating,
     required this.xp,
     required this.proficiencies,
+    required this.damageVulnerabilities,
     required this.damageResistances,
     required this.damageImmunities,
     required this.conditionImmunities,
@@ -136,7 +138,7 @@ class MonsterDetailDto {
 
   factory MonsterDetailDto.fromJson(Map<String, dynamic> json) =>
       MonsterDetailDto(
-        index: (json['index'] ?? '').toString(),
+        index: (json['slug'] ?? json['index'] ?? '').toString(),
         name: (json['name'] ?? '').toString(),
         size: (json['size'] ?? '').toString(),
         type: (json['type'] ?? '').toString(),
@@ -151,7 +153,8 @@ class MonsterDetailDto {
         intelligence: _parseInt(json['intelligence'], fallback: 10),
         wisdom: _parseInt(json['wisdom'], fallback: 10),
         charisma: _parseInt(json['charisma'], fallback: 10),
-        challengeRating: _parseChallengeRating(json['challenge_rating']),
+        challengeRating:
+            _parseChallengeRating(json['challenge_rating'] ?? json['cr']),
         xp: _parseNullableInt(json['xp']),
         proficiencies: (json['proficiencies'] as List? ?? const [])
             .map((e) {
@@ -169,17 +172,11 @@ class MonsterDetailDto {
             })
             .where((e) => e.trim().isNotEmpty)
             .toList(),
-        damageResistances: (json['damage_resistances'] as List? ?? const [])
-            .map((e) => e.toString())
-            .toList(),
-        damageImmunities: (json['damage_immunities'] as List? ?? const [])
-            .map((e) => e.toString())
-            .toList(),
-        conditionImmunities:
-            (json['condition_immunities'] as List? ?? const []).map((e) {
-          if (e is Map<String, dynamic>) return (e['name'] ?? '').toString();
-          return e.toString();
-        }).toList(),
+        damageVulnerabilities:
+            _parseDefensesList(json['damage_vulnerabilities']),
+        damageResistances: _parseDefensesList(json['damage_resistances']),
+        damageImmunities: _parseDefensesList(json['damage_immunities']),
+        conditionImmunities: _parseDefensesList(json['condition_immunities']),
         senses: _map(json['senses']),
         languages: (json['languages'] ?? '')
             .toString()
@@ -213,6 +210,7 @@ class MonsterDetailDto {
         'challenge_rating': challengeRating,
         'xp': xp,
         'proficiencies': proficiencies,
+        'damage_vulnerabilities': damageVulnerabilities,
         'damage_resistances': damageResistances,
         'damage_immunities': damageImmunities,
         'condition_immunities': conditionImmunities,
@@ -283,5 +281,27 @@ class MonsterDetailDto {
         .whereType<Map>()
         .map((entry) => Map<String, dynamic>.from(entry))
         .toList();
+  }
+
+  static List<String> _parseDefensesList(dynamic value) {
+    if (value == null) return const [];
+
+    if (value is List) {
+      return value
+          .map((e) => e.toString().trim())
+          .where((e) => e.isNotEmpty)
+          .toList();
+    }
+
+    final str = value.toString().trim();
+    if (str.isEmpty) return const [];
+
+    final parts = str
+        .split(RegExp(r'[;,]'))
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
+
+    return parts;
   }
 }

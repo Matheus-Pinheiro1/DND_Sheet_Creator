@@ -104,6 +104,8 @@ class _EncounterScreenState extends ConsumerState<EncounterScreen> {
                         onJumpToTurn: () => notifier.jumpToParticipant(p.id),
                         onDamage: (v) => notifier.applyDamage(p.id, v),
                         onHeal: (v) => notifier.applyHealing(p.id, v),
+                        onSetInitiative: (v) =>
+                            notifier.setInitiative(p.id, v),
                       ),
                     );
                   },
@@ -266,16 +268,40 @@ class _EncounterScreenState extends ConsumerState<EncounterScreen> {
   }
 
   void _showAddPlayerSheet(BuildContext context) {
+    final notifier = ref.read(encounterProvider.notifier);
+    final currentEncounter = ref.read(encounterProvider);
+    final currentPlayerNames = currentEncounter.participants
+        .where((participant) => participant.isPlayer)
+        .map((participant) => participant.name.trim().toLowerCase())
+        .where((name) => name.isNotEmpty)
+        .toSet();
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
       backgroundColor: Colors.transparent,
       builder: (ctx) => _AddPlayerSheet(
-        onAdd: (name, hp, ac) {
-          ref.read(encounterProvider.notifier).addPlayerCharacter(
-                EncounterParticipant.player(name: name, maxHp: hp, ac: ac),
-              );
+        savedPlayers: notifier.savedPlayerCharacters,
+        currentPlayerNames: currentPlayerNames,
+        onAdd: (name, initiative) {
+          notifier.addPlayerCharacter(
+            EncounterParticipant.player(
+              name: name,
+              initiative: initiative,
+            ),
+          );
+          if (ctx.mounted) Navigator.of(ctx).pop();
+        },
+        onAddMany: (players) {
+          for (final player in players) {
+            notifier.addPlayerCharacter(
+              EncounterParticipant.player(
+                name: player.name,
+                initiative: player.initiative,
+              ),
+            );
+          }
           if (ctx.mounted) Navigator.of(ctx).pop();
         },
       ),

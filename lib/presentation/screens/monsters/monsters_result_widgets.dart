@@ -106,7 +106,6 @@ class _MonsterCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Quick-add to encounter
               IconButton(
                 onPressed: isAdding ? null : onAddToEncounter,
                 icon: isAdding

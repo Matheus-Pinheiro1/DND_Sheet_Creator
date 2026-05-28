@@ -20,7 +20,7 @@ class EncounterModel {
   });
 
   bool get isEmpty => participants.isEmpty;
-  bool get isStarted => !isEmpty && currentTurnIndex >= 0;
+  bool get isStarted => turnParticipants.isNotEmpty && currentTurnIndex >= 0;
 
   List<EncounterParticipant> get sortedParticipants {
     final list = [
@@ -28,6 +28,17 @@ class EncounterModel {
         _IndexedParticipant(participants[i], i),
     ];
     list.sort((a, b) {
+      final defeatedCmp = a.participant.isDefeated == b.participant.isDefeated
+          ? 0
+          : a.participant.isDefeated
+              ? 1
+              : -1;
+      if (defeatedCmp != 0) return defeatedCmp;
+
+      if (a.participant.isDefeated && b.participant.isDefeated) {
+        return a.index.compareTo(b.index);
+      }
+
       final cmp = b.participant.initiative.compareTo(a.participant.initiative);
       if (cmp != 0) return cmp;
       final acCmp =
@@ -38,11 +49,15 @@ class EncounterModel {
     return list.map((entry) => entry.participant).toList(growable: false);
   }
 
+  List<EncounterParticipant> get turnParticipants => sortedParticipants
+      .where((participant) => !participant.isDefeated)
+      .toList(growable: false);
+
   EncounterParticipant? get currentParticipant {
-    final sorted = sortedParticipants;
-    if (sorted.isEmpty || currentTurnIndex < 0) return null;
-    final idx = currentTurnIndex.clamp(0, sorted.length - 1);
-    return sorted[idx];
+    final turnOrder = turnParticipants;
+    if (turnOrder.isEmpty || currentTurnIndex < 0) return null;
+    final idx = currentTurnIndex.clamp(0, turnOrder.length - 1);
+    return turnOrder[idx];
   }
 
   EncounterModel copyWith({
