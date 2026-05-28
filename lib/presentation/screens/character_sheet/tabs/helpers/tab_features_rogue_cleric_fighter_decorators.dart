@@ -40,7 +40,7 @@ extension _TabFeaturesRogueClericFighterDecorators on _TabFeaturesDecorator {
     );
 
     return entries.map((entry) {
-      final features = entry.features.map((feature) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (character.subclass == RogueChoiceService.arcaneTricksterSubclass &&
             feature.name == 'Spellcasting') {
           return withExtraDescription(
@@ -199,8 +199,8 @@ extension _TabFeaturesRogueClericFighterDecorators on _TabFeaturesDecorator {
       character.levelAdvancements,
     );
 
-    return entries.map((entry) {
-      final features = entry.features.map((feature) {
+    return entries.map<ClassLevelFeatures>((entry) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (character.subclass == FighterChoiceService.eldritchKnightSubclass &&
             feature.name == 'Spellcasting') {
           return withExtraDescription(

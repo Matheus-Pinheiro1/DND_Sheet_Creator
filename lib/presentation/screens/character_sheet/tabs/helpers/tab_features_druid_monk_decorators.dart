@@ -44,8 +44,8 @@ extension _TabFeaturesDruidMonkDecorators on _TabFeaturesDecorator {
     );
     final wisdomModifierText = DiceCalculator.formatModifier(character.wisdom);
 
-    return entries.map((entry) {
-      final features = entry.features.map((feature) {
+    return entries.map<ClassLevelFeatures>((entry) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (character.subclass == DruidChoiceService.landSubclass &&
             feature.name == 'Circle of the Land Spells') {
           return withExtraDescription(
@@ -308,8 +308,8 @@ extension _TabFeaturesDruidMonkDecorators on _TabFeaturesDecorator {
       wisdom: character.wisdom,
     );
 
-    return entries.map((entry) {
-      final features = entry.features.map((feature) {
+    return entries.map<ClassLevelFeatures>((entry) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (character.subclass == MonkChoiceService.mercySubclass &&
             feature.name == 'Implements of Mercy') {
           return withExtraDescription(

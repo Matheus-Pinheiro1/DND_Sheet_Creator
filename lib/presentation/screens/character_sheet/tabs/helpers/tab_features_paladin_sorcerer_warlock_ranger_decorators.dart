@@ -42,8 +42,8 @@ extension _TabFeaturesPaladinSorcererWarlockRangerDecorators
       );
     }
 
-    return entries.map((entry) {
-      final features = entry.features.map((feature) {
+    return entries.map<ClassLevelFeatures>((entry) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (feature.name == "Genie's Splendor") {
           return withExtraDescription(
             feature,
@@ -99,8 +99,8 @@ extension _TabFeaturesPaladinSorcererWarlockRangerDecorators
       );
     }
 
-    return entries.map((entry) {
-      final features = entry.features.map((feature) {
+    return entries.map<ClassLevelFeatures>((entry) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (const {
           'Psionic Spells',
           'Clockwork Spells',
@@ -287,8 +287,8 @@ extension _TabFeaturesPaladinSorcererWarlockRangerDecorators
       );
     }
 
-    return entries.map((entry) {
-      final features = entry.features.map((feature) {
+    return entries.map<ClassLevelFeatures>((entry) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (const {
           'Archfey Spells',
           'Celestial Spells',
@@ -496,8 +496,8 @@ extension _TabFeaturesPaladinSorcererWarlockRangerDecorators
       );
     }
 
-    return entries.map((entry) {
-      final features = entry.features.map((feature) {
+    return entries.map<ClassLevelFeatures>((entry) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (const {
           'Fey Wanderer Spells',
           'Gloom Stalker Spells',

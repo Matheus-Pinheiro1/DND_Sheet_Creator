@@ -224,7 +224,7 @@ extension _TabFeaturesClassChoiceDecorators on _TabFeaturesDecorator {
     }
 
     return entries.map((entry) {
-      final features = entry.features.map((feature) {
+      final features = entry.features.map<ClassFeatureModel>((feature) {
         if (feature.name == 'Divine Order') {
           final pieces = <String>[];
           if (divineOrder.isNotEmpty) {
