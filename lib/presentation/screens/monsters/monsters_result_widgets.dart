@@ -36,17 +36,13 @@ class _ResultCountStrip extends StatelessWidget {
 }
 
 class _MonsterCard extends StatelessWidget {
-  final String name;
-  final String index;
-  final MonsterMeta? meta;
+  final MonsterSummaryDto monster;
   final VoidCallback onTap;
   final VoidCallback onAddToEncounter;
   final bool isAdding;
 
   const _MonsterCard({
-    required this.name,
-    required this.index,
-    required this.meta,
+    required this.monster,
     required this.onTap,
     required this.onAddToEncounter,
     required this.isAdding,
@@ -68,41 +64,34 @@ class _MonsterCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      monster.name,
                       style: AppTextStyles.cinzel(
                         color: Colors.white,
                         fontSize: 15,
                       ),
                     ),
                     const SizedBox(height: 3),
-                    if (meta != null)
-                      Row(
-                        children: [
-                          _MetaBadge(
-                            label: 'CR ${meta!.crLabel}',
-                            color: _crColor(meta!.cr),
+                    Row(
+                      children: [
+                        _MetaBadge(
+                          label: 'CR ${monster.crLabel}',
+                          color: _crColor(monster.challengeRating),
+                        ),
+                        const SizedBox(width: 6),
+                        _MetaBadge(
+                          label: _capitalize(monster.type),
+                          color: _typeColor(monster.type),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          _capitalize(monster.size),
+                          style: AppTextStyles.lato(
+                            color: Colors.white38,
+                            fontSize: 11,
                           ),
-                          const SizedBox(width: 6),
-                          _MetaBadge(
-                            label: _capitalize(meta!.type),
-                            color: _typeColor(meta!.type),
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            _capitalize(meta!.size),
-                            style: AppTextStyles.lato(
-                              color: Colors.white38,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ],
-                      )
-                    else
-                      Text(
-                        index,
-                        style: AppTextStyles.lato(
-                            color: Colors.white38, fontSize: 11),
-                      ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -130,7 +119,7 @@ class _MonsterCard extends StatelessWidget {
   static String _capitalize(String s) =>
       s.isEmpty ? s : '${s[0].toUpperCase()}${s.substring(1)}';
 
-  static Color _crColor(double cr) {
+  static Color _crColor(num cr) {
     if (cr <= 0.5) return const Color(0xFF6DBF6D);
     if (cr <= 4) return const Color(0xFFD4AF37);
     if (cr <= 10) return const Color(0xFFE07A30);

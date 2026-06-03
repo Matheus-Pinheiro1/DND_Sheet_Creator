@@ -544,9 +544,18 @@ class _DefensePill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayText = values.length == 1
-        ? '${label}: ${values.first}'
-        : '${label}: ${values.length}';
+    final capitalized = values
+        .map((v) => v.isEmpty ? v : '${v[0].toUpperCase()}${v.substring(1)}')
+        .toList();
+    const maxVisible = 2;
+    final String displayText;
+    if (capitalized.length <= maxVisible) {
+      displayText = '$label: ${capitalized.join(', ')}';
+    } else {
+      final shown = capitalized.take(maxVisible).join(', ');
+      final extra = capitalized.length - maxVisible;
+      displayText = '$label: $shown +$extra';
+    }
 
     return Tooltip(
       message: values.join(', '),

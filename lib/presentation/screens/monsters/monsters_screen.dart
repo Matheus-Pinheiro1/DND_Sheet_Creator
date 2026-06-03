@@ -6,6 +6,7 @@ import 'package:dnd_character_sheet/core/utils/monster_combat_helpers.dart';
 import 'package:dnd_character_sheet/data/local/monster_metadata.dart';
 import 'package:dnd_character_sheet/data/models/encounter_participant.dart';
 import 'package:dnd_character_sheet/data/models/monster_filters.dart';
+import 'package:dnd_character_sheet/data/remote/monster_dto.dart';
 import 'package:dnd_character_sheet/providers/dnd_api_providers.dart';
 import 'package:dnd_character_sheet/providers/encounter_providers.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +117,7 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
     BuildContext context,
     String monsterIndex,
     String name,
-    MonsterMeta? meta,
+    MonsterSummaryDto monster,
     int quantity,
   ) async {
     if (_addingMonsterIndexes.contains(monsterIndex)) return;
@@ -142,7 +143,7 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
           EncounterParticipant.fromMonster(
             monsterIndex: monsterIndex,
             name: displayName,
-            type: detail.type.isNotEmpty ? detail.type : meta?.type ?? '',
+            type: detail.type.isNotEmpty ? detail.type : monster.type,
             crLabel: detail.challengeRatingLabel,
             hp: detail.hitPoints,
             ac: detail.armorClass,
@@ -172,7 +173,7 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
     BuildContext context,
     String monsterIndex,
     String name,
-    MonsterMeta? meta,
+    MonsterSummaryDto monster,
   ) async {
     if (_addingMonsterIndexes.contains(monsterIndex)) return;
 
@@ -181,11 +182,11 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
       isScrollControlled: true,
       useSafeArea: true,
       backgroundColor: Colors.transparent,
-      builder: (ctx) => _MonsterQuantitySheet(name: name, meta: meta),
+      builder: (ctx) => _MonsterQuantitySheet(name: name, monster: monster),
     );
 
     if (!mounted || !context.mounted || quantity == null) return;
-    await _addToEncounter(context, monsterIndex, name, meta, quantity);
+    await _addToEncounter(context, monsterIndex, name, monster, quantity);
   }
 
   @override
@@ -312,18 +313,15 @@ class _MonstersScreenState extends ConsumerState<MonstersScreen>
                   itemCount: monsters.length,
                   itemBuilder: (context, index) {
                     final m = monsters[index];
-                    final meta = kMonsterMetadata[m.index];
                     return _MonsterCard(
-                      name: m.name,
-                      index: m.index,
-                      meta: meta,
+                      monster: m,
                       onTap: () => context.push('/monsters/${m.index}'),
                       isAdding: _addingMonsterIndexes.contains(m.index),
                       onAddToEncounter: () => _chooseMonsterQuantityAndAdd(
                         context,
                         m.index,
                         m.name,
-                        meta,
+                        m,
                       ),
                     );
                   },

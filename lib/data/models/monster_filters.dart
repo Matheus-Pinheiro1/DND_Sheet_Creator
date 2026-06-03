@@ -1,4 +1,3 @@
-import '../local/monster_metadata.dart';
 import '../remote/monster_dto.dart';
 
 class CrRange {
@@ -53,42 +52,29 @@ class MonsterFilters {
       crMin == preset.min && crMax == preset.max;
 
   MonsterFilters withName(String name) => MonsterFilters(
-        nameQuery: name,
-        crMin: crMin,
-        crMax: crMax,
-        types: types,
-        sizes: sizes,
-      );
+      nameQuery: name, crMin: crMin, crMax: crMax, types: types, sizes: sizes);
 
   MonsterFilters withCrRange(double? min, double? max) => MonsterFilters(
-        nameQuery: nameQuery,
-        crMin: min,
-        crMax: max,
-        types: types,
-        sizes: sizes,
-      );
+      nameQuery: nameQuery, crMin: min, crMax: max, types: types, sizes: sizes);
 
   MonsterFilters withTypes(Set<String> newTypes) => MonsterFilters(
-        nameQuery: nameQuery,
-        crMin: crMin,
-        crMax: crMax,
-        types: newTypes,
-        sizes: sizes,
-      );
+      nameQuery: nameQuery,
+      crMin: crMin,
+      crMax: crMax,
+      types: newTypes,
+      sizes: sizes);
 
   MonsterFilters withSizes(Set<String> newSizes) => MonsterFilters(
-        nameQuery: nameQuery,
-        crMin: crMin,
-        crMax: crMax,
-        types: types,
-        sizes: newSizes,
-      );
+      nameQuery: nameQuery,
+      crMin: crMin,
+      crMax: crMax,
+      types: types,
+      sizes: newSizes);
 
   MonsterFilters clear() => const MonsterFilters();
 
   List<MonsterSummaryDto> apply(List<MonsterSummaryDto> all) {
     if (!hasActiveFilters) return all;
-
     return all.where(_matches).toList();
   }
 
@@ -98,17 +84,12 @@ class MonsterFilters {
       return false;
     }
 
-    if (crMin == null && crMax == null && types.isEmpty && sizes.isEmpty) {
-      return true;
-    }
+    final cr = m.challengeRating.toDouble();
 
-    final meta = kMonsterMetadata[m.index];
-    if (meta == null) return false;
-
-    if (crMin != null && meta.cr < crMin!) return false;
-    if (crMax != null && meta.cr > crMax!) return false;
-    if (types.isNotEmpty && !types.contains(meta.type)) return false;
-    if (sizes.isNotEmpty && !sizes.contains(meta.size)) return false;
+    if (crMin != null && cr < crMin!) return false;
+    if (crMax != null && cr > crMax!) return false;
+    if (types.isNotEmpty && !types.contains(m.type)) return false;
+    if (sizes.isNotEmpty && !sizes.contains(m.size)) return false;
 
     return true;
   }

@@ -2,11 +2,11 @@ part of 'monsters_screen.dart';
 
 class _MonsterQuantitySheet extends StatefulWidget {
   final String name;
-  final MonsterMeta? meta;
+  final MonsterSummaryDto monster;
 
   const _MonsterQuantitySheet({
     required this.name,
-    required this.meta,
+    required this.monster,
   });
 
   @override
@@ -36,7 +36,6 @@ class _MonsterQuantitySheetState extends State<_MonsterQuantitySheet> {
 
   @override
   Widget build(BuildContext context) {
-    final meta = widget.meta;
     final media = MediaQuery.of(context);
     final bottomInset = media.viewInsets.bottom + media.viewPadding.bottom;
 
@@ -73,9 +72,7 @@ class _MonsterQuantitySheetState extends State<_MonsterQuantitySheet> {
             ),
             const SizedBox(height: 8),
             Text(
-              meta == null
-                  ? widget.name
-                  : '${widget.name} - CR ${meta.crLabel} ${_capitalize(meta.type)}',
+              '${widget.name} - CR ${widget.monster.crLabel} ${_capitalize(widget.monster.type)}',
               style: AppTextStyles.lato(
                 color: Colors.white70,
                 fontSize: 13,
