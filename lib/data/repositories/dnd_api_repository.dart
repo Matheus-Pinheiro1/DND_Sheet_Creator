@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../models/item_model.dart';
 import '../../core/constants/app_strings.dart';
 import '../../core/constants/hive_constants.dart';
 import '../local/subclasses_2024_data_expanded.dart';
@@ -20,6 +21,17 @@ class DndApiRepository {
   final Dio _dio;
   static const _base = '${AppStrings.baseApiUrl}/v1';
   static const _baseNoVersion = AppStrings.baseApiUrl;
+  static const _baseV2 = '${AppStrings.baseApiUrl}/v2';
+  static const _itemsCacheKey = 'items_index_open5e_2024_vom_v1';
+  static const _itemPageLimit = 1000;
+  static const _itemSourceFilter = 'document__key__in=srd-2024,vom';
+  static const _itemFields =
+      'fields=key,name,desc,category,weapon,armor,weight,cost,document';
+  static const _magicItemFields =
+      'fields=key,name,desc,category,rarity,weapon,armor,weight,cost,'
+      'requires_attunement,document';
+  static const _documentFields =
+      'document__fields=name,key,display_name,publisher';
 
   DndApiRepository(this._dio);
 
@@ -127,9 +139,10 @@ class DndApiRepository {
         ..sort((a, b) => a.name.compareTo(b.name));
     } catch (_) {
       final cached = _cacheBox.get('spells_${classIndex}_v5');
-      if (cached != null)
+      if (cached != null) {
         return _decodeSpellList(cached)
           ..sort((a, b) => a.name.compareTo(b.name));
+      }
       return const [];
     }
   }
@@ -140,9 +153,10 @@ class DndApiRepository {
         ..sort((a, b) => a.name.compareTo(b.name));
     } catch (_) {
       final cached = _cacheBox.get('spells_all_detailed_v5');
-      if (cached != null)
+      if (cached != null) {
         return _decodeSpellList(cached)
           ..sort((a, b) => a.name.compareTo(b.name));
+      }
       return const [];
     }
   }
@@ -173,6 +187,88 @@ class DndApiRepository {
     'tob3': 5,
     'cc': 6,
   };
+
+  Future<List<ItemModel>> getItems() async {
+    final cached = _cacheBox.get(_itemsCacheKey);
+    if (cached != null) {
+      return (jsonDecode(cached) as List<dynamic>)
+          .map((e) => ItemModel.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList();
+    }
+
+    final results = await Future.wait([
+      _fetchAllOpen5ePages(
+        '$_baseV2/items/?limit=$_itemPageLimit&$_itemSourceFilter&$_itemFields'
+        '&$_documentFields',
+      ),
+      _fetchAllOpen5ePages(
+        '$_baseV2/magicitems/?limit=$_itemPageLimit&$_itemSourceFilter'
+        '&$_magicItemFields'
+        '&$_documentFields',
+      ),
+    ]);
+
+    final normalItems = results[0];
+    final magicItems = results[1];
+
+    final byId = <String, ItemModel>{};
+
+    for (final raw in normalItems) {
+      if (!_isAllowedItemDocument(raw)) continue;
+      final item = ItemModel.fromOpen5e(raw);
+      if (item.id.isNotEmpty) byId[item.id] = item;
+    }
+
+    for (final raw in magicItems) {
+      if (!_isAllowedItemDocument(raw)) continue;
+      final item = ItemModel.fromOpen5e(raw);
+      if (item.id.isNotEmpty) byId[item.id] = item;
+    }
+
+    final items = byId.values.toList()
+      ..sort((a, b) => a.name.compareTo(b.name));
+
+    await _cacheBox.put(
+      _itemsCacheKey,
+      jsonEncode(items.map((e) => e.toJson()).toList()),
+    );
+
+    return items;
+  }
+
+  Future<void> clearItemsCache() async {
+    await _cacheBox.delete(_itemsCacheKey);
+  }
+
+  bool _isAllowedItemDocument(Map<String, dynamic> raw) {
+    final document = raw['document'];
+    if (document is Map) {
+      final key = document['key']?.toString();
+      return key == 'srd-2024' || key == 'vom';
+    }
+    final key = document?.toString();
+    return key == 'srd-2024' || key == 'vom';
+  }
+
+  Future<List<Map<String, dynamic>>> _fetchAllOpen5ePages(
+      String firstUrl) async {
+    final result = <Map<String, dynamic>>[];
+    String? nextUrl = firstUrl;
+
+    while (nextUrl != null) {
+      final res = await _dio.get<Map<String, dynamic>>(nextUrl);
+      final data = res.data ?? const <String, dynamic>{};
+      final list = data['results'] as List<dynamic>? ?? const [];
+
+      result.addAll(
+        list.map((e) => Map<String, dynamic>.from(e as Map)),
+      );
+
+      nextUrl = data['next'] as String?;
+    }
+
+    return result;
+  }
 
   Future<List<MonsterSummaryDto>> getMonsters({String query = ''}) async {
     final q = query.trim().toLowerCase();
@@ -216,7 +312,7 @@ class DndApiRepository {
     String? nextUrl = '$_base/monsters/?limit=100';
 
     while (nextUrl != null) {
-      final res = await _dio.get<Map<String, dynamic>>(nextUrl!);
+      final res = await _dio.get<Map<String, dynamic>>(nextUrl);
       final data = res.data!;
 
       for (final raw in (data['results'] as List<dynamic>? ?? [])) {
@@ -289,8 +385,9 @@ class DndApiRepository {
         if (level <= 0 || level > maxLevel) continue;
         final features = await _mapFeatureRefs(
             raw['features'] as List<dynamic>? ?? const [], level);
-        if (features.isNotEmpty)
+        if (features.isNotEmpty) {
           result.add(ClassLevelFeatures(level: level, features: features));
+        }
       }
       result.sort((a, b) => a.level.compareTo(b.level));
       return result;
@@ -315,8 +412,9 @@ class DndApiRepository {
         final features = await _mapFeatureRefs(
             raw['features'] as List<dynamic>? ?? const [], level,
             source: 'subclass');
-        if (features.isNotEmpty)
+        if (features.isNotEmpty) {
           result.add(ClassLevelFeatures(level: level, features: features));
+        }
       }
       result.sort((a, b) => a.level.compareTo(b.level));
       return result;

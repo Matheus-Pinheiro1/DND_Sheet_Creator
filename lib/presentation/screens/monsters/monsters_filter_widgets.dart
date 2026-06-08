@@ -173,31 +173,6 @@ class _FilterPanel extends StatelessWidget {
                 ),
               ),
             ),
-          if (filters.hasActiveFilters)
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 12, 8),
-                child: TextButton.icon(
-                  onPressed: onClear,
-                  icon:
-                      const Icon(Icons.clear, size: 14, color: Colors.white54),
-                  label: Text(
-                    'Clear filters',
-                    style: AppTextStyles.lato(
-                      color: Colors.white54,
-                      fontSize: 12,
-                    ),
-                  ),
-                  style: TextButton.styleFrom(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    minimumSize: Size.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                ),
-              ),
-            ),
         ],
       ),
     );

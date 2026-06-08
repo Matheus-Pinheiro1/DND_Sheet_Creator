@@ -99,6 +99,7 @@ class _FilterPanel extends StatelessWidget {
     ('legendary', 'Legendary'),
     ('artifact', 'Artifact'),
     ('epic', 'Epic'),
+    ('varies', 'Varies'),
   ];
 
   @override
@@ -114,7 +115,7 @@ class _FilterPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionLabel('Type'),
+          const _SectionLabel('Type'),
           const SizedBox(height: 6),
           Wrap(
             spacing: 6,
@@ -129,7 +130,7 @@ class _FilterPanel extends StatelessWidget {
             }).toList(),
           ),
           const SizedBox(height: 10),
-          _SectionLabel('Rarity'),
+          const _SectionLabel('Rarity'),
           const SizedBox(height: 6),
           Wrap(
             spacing: 6,
@@ -144,7 +145,7 @@ class _FilterPanel extends StatelessWidget {
             }).toList(),
           ),
           const SizedBox(height: 10),
-          _SectionLabel('Attunement'),
+          const _SectionLabel('Attunement'),
           const SizedBox(height: 6),
           _FilterChip(
             label: 'Requires Attunement',
@@ -180,7 +181,8 @@ class _FilterPanel extends StatelessWidget {
         'very rare' => const Color(0xFF9B59B6),
         'legendary' => const Color(0xFFE67E22),
         'artifact' => const Color(0xFFE74C3C),
-        'epic' => const Color(0xFFE91E8C),
+        'epic' => const Color.fromARGB(255, 238, 15, 138),
+        'varies' => const Color.fromARGB(255, 201, 219, 38),
         _ => Colors.white38,
       };
 }

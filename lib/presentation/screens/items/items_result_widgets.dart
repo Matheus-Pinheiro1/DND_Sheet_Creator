@@ -82,9 +82,9 @@ class _ItemCard extends ConsumerWidget {
                           color: rarityColor,
                         ),
                         if (item.requiresAttunement)
-                          _ItemBadge(
+                          const _ItemBadge(
                             label: 'Attunement',
-                            color: const Color(0xFF9B59B6),
+                            color: Color(0xFF9B59B6),
                           ),
                         if (item.damage != null)
                           _ItemBadge(
@@ -180,7 +180,8 @@ class _ItemDetailBody extends ConsumerWidget {
         if (item.range != null ||
             item.weaponProperties != null ||
             item.mastery != null ||
-            item.weight != null)
+            item.weight != null ||
+            item.cost != null)
           _StatsGrid([
             if (item.range != null) ('Range', item.range!),
             if (item.weaponProperties != null)
@@ -188,6 +189,7 @@ class _ItemDetailBody extends ConsumerWidget {
             if (item.mastery != null) ('Mastery', item.mastery!),
             if (item.stealth != null) ('Stealth', item.stealth!),
             if (item.weight != null) ('Weight', '${item.weight} lb'),
+            if (item.cost != null) ('Cost', '${item.cost} GP'),
           ]),
         const SizedBox(height: 8),
         descAsync.when(
