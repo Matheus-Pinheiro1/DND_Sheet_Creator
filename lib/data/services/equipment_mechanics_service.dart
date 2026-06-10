@@ -24,7 +24,10 @@ class EquipmentMechanicsService {
     final activeEquipment = EquipmentEntryService.equippedEntries(equipment);
     final dexMod = DiceCalculator.getModifier(dexterity);
     final shieldBonus = hasShield(activeEquipment) ? 2 : 0;
-    final armor = _bestArmor(activeEquipment, dexMod: dexMod);
+
+    // Usa kDndArmors (armor.json) como fonte única de verdade para CA,
+    // eliminando a duplicação com _armorRules.
+    final armor = armorFromEquipmentEntries(activeEquipment);
 
     if (armor != null) {
       return armor.baseAc + armor.dexBonus(dexMod) + shieldBonus;
@@ -59,14 +62,13 @@ class EquipmentMechanicsService {
 
   static bool affectsArmorClass(List<String> equipment) {
     final activeEquipment = EquipmentEntryService.equippedEntries(equipment);
-    return hasShield(activeEquipment) || _bestArmor(activeEquipment) != null;
+    return hasShield(activeEquipment) ||
+        armorFromEquipmentEntries(activeEquipment) != null;
   }
 
   static String armorClassSourceKey(List<String> equipment) {
     final activeEquipment = EquipmentEntryService.equippedEntries(equipment);
-    final armor = armorFromEquipmentEntries(activeEquipment)?.name ??
-        _bestArmor(activeEquipment)?.name ??
-        '';
+    final armor = armorFromEquipmentEntries(activeEquipment)?.name ?? '';
     final shield = hasShield(activeEquipment) ? 'shield' : '';
     return '$armor|$shield';
   }
@@ -112,33 +114,8 @@ class EquipmentMechanicsService {
         _candidateNames(entry).contains('shield');
   }
 
-  static _ArmorRule? _bestArmor(List<String> equipment, {int? dexMod}) {
-    _ArmorRule? best;
-
-    for (final entry in equipment) {
-      final candidates = _candidateNames(entry);
-      for (final armor in _armorRules) {
-        if (!candidates.any(armor.matches)) continue;
-        if (best == null || _isBetterArmor(armor, best, dexMod)) {
-          best = armor;
-        }
-      }
-    }
-
-    return best;
-  }
-
-  static bool _isBetterArmor(
-    _ArmorRule armor,
-    _ArmorRule best,
-    int? dexMod,
-  ) {
-    if (dexMod == null) return armor.baseAc > best.baseAc;
-    final armorAc = armor.baseAc + armor.dexBonus(dexMod);
-    final bestAc = best.baseAc + best.dexBonus(dexMod);
-    if (armorAc != bestAc) return armorAc > bestAc;
-    return armor.baseAc > best.baseAc;
-  }
+  // armorClassSourceKey e armorFromEquipmentEntries já usam kDndArmors.
+  // Não há mais métodos privados de armadura aqui.
 
   static List<AttackModel> weaponAttacksFromEquipment({
     required List<String> equipment,
@@ -301,53 +278,6 @@ class EquipmentMechanicsService {
         .trim();
   }
 
-  static const List<_ArmorRule> _armorRules = [
-    _ArmorRule(name: 'padded', baseAc: 11, dexMode: _ArmorDexMode.full),
-    _ArmorRule(name: 'leather', baseAc: 11, dexMode: _ArmorDexMode.full),
-    _ArmorRule(
-      name: 'studded leather',
-      baseAc: 12,
-      dexMode: _ArmorDexMode.full,
-    ),
-    _ArmorRule(name: 'hide', baseAc: 12, dexMode: _ArmorDexMode.maxTwo),
-    _ArmorRule(
-      name: 'chain shirt',
-      baseAc: 13,
-      dexMode: _ArmorDexMode.maxTwo,
-    ),
-    _ArmorRule(name: 'scale mail', baseAc: 14, dexMode: _ArmorDexMode.maxTwo),
-    _ArmorRule(name: 'breastplate', baseAc: 14, dexMode: _ArmorDexMode.maxTwo),
-    _ArmorRule(name: 'half plate', baseAc: 15, dexMode: _ArmorDexMode.maxTwo),
-    _ArmorRule(name: 'ring mail', baseAc: 14, dexMode: _ArmorDexMode.none),
-    _ArmorRule(name: 'chain mail', baseAc: 16, dexMode: _ArmorDexMode.none),
-    _ArmorRule(name: 'splint', baseAc: 17, dexMode: _ArmorDexMode.none),
-    _ArmorRule(name: 'plate', baseAc: 18, dexMode: _ArmorDexMode.none),
-  ];
-}
-
-enum _ArmorDexMode { full, maxTwo, none }
-
-class _ArmorRule {
-  final String name;
-  final int baseAc;
-  final _ArmorDexMode dexMode;
-
-  const _ArmorRule({
-    required this.name,
-    required this.baseAc,
-    required this.dexMode,
-  });
-
-  int dexBonus(int dexMod) {
-    return switch (dexMode) {
-      _ArmorDexMode.full => dexMod,
-      _ArmorDexMode.maxTwo => dexMod.clamp(-999, 2).toInt(),
-      _ArmorDexMode.none => 0,
-    };
-  }
-
-  bool matches(String candidate) {
-    final normalized = name;
-    return candidate == normalized || candidate == '$normalized armor';
-  }
+  // _armorRules foi removido: toda lógica de CA usa kDndArmors (armor.json)
+  // via armorFromEquipmentEntries(), eliminando a duplicação de dados.
 }

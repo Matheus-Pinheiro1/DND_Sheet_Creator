@@ -74,25 +74,15 @@ class DndApiRepository {
         .toList();
   }
 
+  /// Retorna subclasses do catálogo local 2024.
+  /// Se a classe não tem subclasses registradas localmente, retorna lista vazia
+  /// (sem fallback para API, que retornaria índices da 5e velha).
   Future<List<Map<String, String>>> getSubclassesForClass(
       String classIndex) async {
     final normalized = classIndex.trim().toLowerCase();
-    final local = List<Map<String, String>>.from(
+    return List<Map<String, String>>.from(
       kLocal2024SubclassOptions[normalized] ?? const <Map<String, String>>[],
     );
-    if (local.isNotEmpty) return local;
-    if (_localOnlyUaClasses.contains(normalized)) return const [];
-    try {
-      final res = await _dio.get('$_base/classes/$classIndex/subclasses');
-      return (res.data['results'] as List<dynamic>)
-          .map((e) => {
-                'index': (e['index'] ?? '').toString(),
-                'name': (e['name'] ?? '').toString(),
-              })
-          .toList();
-    } catch (_) {
-      return const [];
-    }
   }
 
   Future<List<BackgroundDto>> getBackgrounds() async {
@@ -358,14 +348,30 @@ class DndApiRepository {
     }
   }
 
+  /// Retorna a lista local de skills do D&D 2024 (sem chamada de API).
+  /// Todos os índices são idênticos entre 5e e 2024; não há necessidade
+  /// de buscar isso remotamente.
   Future<List<Map<String, String>>> getSkills() async {
-    final res = await _dio.get('$_base/skills');
-    return (res.data['results'] as List<dynamic>)
-        .map((e) => {
-              'index': (e['index'] ?? '').toString(),
-              'name': (e['name'] ?? '').toString(),
-            })
-        .toList();
+    return const [
+      {'index': 'acrobatics', 'name': 'Acrobatics'},
+      {'index': 'animal-handling', 'name': 'Animal Handling'},
+      {'index': 'arcana', 'name': 'Arcana'},
+      {'index': 'athletics', 'name': 'Athletics'},
+      {'index': 'deception', 'name': 'Deception'},
+      {'index': 'history', 'name': 'History'},
+      {'index': 'insight', 'name': 'Insight'},
+      {'index': 'intimidation', 'name': 'Intimidation'},
+      {'index': 'investigation', 'name': 'Investigation'},
+      {'index': 'medicine', 'name': 'Medicine'},
+      {'index': 'nature', 'name': 'Nature'},
+      {'index': 'perception', 'name': 'Perception'},
+      {'index': 'performance', 'name': 'Performance'},
+      {'index': 'persuasion', 'name': 'Persuasion'},
+      {'index': 'religion', 'name': 'Religion'},
+      {'index': 'sleight-of-hand', 'name': 'Sleight of Hand'},
+      {'index': 'stealth', 'name': 'Stealth'},
+      {'index': 'survival', 'name': 'Survival'},
+    ];
   }
 
   Future<List<ClassLevelFeatures>> getClassFeatureProgression(

@@ -58,6 +58,17 @@ class StepBackground extends ConsumerWidget {
                     background: 'custom_${bg.id}',
                     backgroundName: bg.name,
                     skillIndices: bg.skillProficiencyIndices,
+                    // Backgrounds customizados permitem escolher qualquer habilidade
+                    // para o bônus de +2/+1. Sem isso, backgroundBonusChoices ficaria
+                    // vazio e nenhum bônus seria aplicado.
+                    abilityOptions: const [
+                      'str',
+                      'dex',
+                      'con',
+                      'int',
+                      'wis',
+                      'cha',
+                    ],
                   ),
               onEdit: () => Navigator.of(context).push(
                 MaterialPageRoute(

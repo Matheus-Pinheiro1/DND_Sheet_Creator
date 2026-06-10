@@ -4,78 +4,108 @@
     "name": "Padded Armor",
     "base_ac": 11,
     "dex_mode": "full",
-    "aliases": ["Padded"]
+    "aliases": [
+      "Padded"
+    ]
   },
   {
     "id": "leather",
     "name": "Leather Armor",
     "base_ac": 11,
     "dex_mode": "full",
-    "aliases": ["Leather"]
+    "aliases": [
+      "Leather"
+    ]
   },
   {
     "id": "studded-leather",
     "name": "Studded Leather Armor",
     "base_ac": 12,
     "dex_mode": "full",
-    "aliases": ["Studded Leather"]
+    "aliases": [
+      "Studded Leather"
+    ]
   },
   {
     "id": "hide",
     "name": "Hide Armor",
     "base_ac": 12,
     "dex_mode": "max_two",
-    "aliases": ["Hide"]
+    "aliases": [
+      "Hide"
+    ]
   },
   {
     "id": "chain-shirt",
     "name": "Chain Shirt",
     "base_ac": 13,
-    "dex_mode": "max_two"
+    "dex_mode": "max_two",
+    "aliases": [
+      "Chain Shirt Armor"
+    ]
   },
   {
     "id": "scale-mail",
     "name": "Scale Mail",
     "base_ac": 14,
-    "dex_mode": "max_two"
+    "dex_mode": "max_two",
+    "aliases": [
+      "Scale Mail Armor"
+    ]
   },
   {
     "id": "breastplate",
     "name": "Breastplate",
     "base_ac": 14,
-    "dex_mode": "max_two"
+    "dex_mode": "max_two",
+    "aliases": [
+      "Breastplate Armor"
+    ]
   },
   {
     "id": "half-plate",
     "name": "Half Plate",
     "base_ac": 15,
-    "dex_mode": "max_two"
+    "dex_mode": "max_two",
+    "aliases": [
+      "Half Plate Armor"
+    ]
   },
   {
     "id": "ring-mail",
     "name": "Ring Mail",
     "base_ac": 14,
-    "dex_mode": "none"
+    "dex_mode": "none",
+    "aliases": [
+      "Ring Mail Armor"
+    ]
   },
   {
     "id": "chain-mail",
     "name": "Chain Mail",
     "base_ac": 16,
-    "dex_mode": "none"
+    "dex_mode": "none",
+    "aliases": [
+      "Chain Mail Armor"
+    ]
   },
   {
     "id": "splint",
     "name": "Splint Armor",
     "base_ac": 17,
     "dex_mode": "none",
-    "aliases": ["Splint"]
+    "aliases": [
+      "Splint"
+    ]
   },
   {
     "id": "plate",
     "name": "Plate Armor",
     "base_ac": 18,
     "dex_mode": "none",
-    "aliases": ["Plate"]
+    "aliases": [
+      "Plate"
+    ]
   },
   {
     "id": "shield",
